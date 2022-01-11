@@ -2,5 +2,14 @@
     <head>
         <title>{{nom}}</title>
     </head>
-    <body>Noverint universi et singuli</body>
+    <body>
+        <h1>Bienvenue !</h1>
+        <p>
+            {% if lieux %}
+                Il y a {{ lieux|length }} enregistrés , voici le premier : {{lieux[0]}}
+            {% else %}
+                La base de données est en cours de constitution
+            {% endif %}
+    </p>
+    </body>
 </html>
