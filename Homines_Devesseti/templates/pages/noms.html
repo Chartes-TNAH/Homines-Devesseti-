@@ -1,0 +1,21 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+    {%if lieu %}| Lieu : {{lieu.nom}} {% endif %}
+{% endblock %}
+
+{% block corps %}
+        {% if homme %}
+            <h1>{{homme.nom}}</h1>
+            <h2>{{homme.prenom}}</h2>
+            <dl>
+                <dt>localite</dt><dd>{{homme.localite}}</dd>
+                <dt>fonction</dt><dd>{{homme.fonction}}</dd>
+                <dt>date</dt><dd>{{homme.date}}</dd>
+            </dl>
+        {% else %}
+            <p>La base de données est en cours de constitution</p>
+        {% endif %}
+        <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+    </body>
+{% endblock %}
