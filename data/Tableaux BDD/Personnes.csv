@@ -1,0 +1,395 @@
+Id	Id_reconnaissance	Prenom	Nom	Localite	Genre	Precision_sur_origine	Informations_personnelles	Représente_par
+367	142	Girandus	Fayni	Chalmariais	H			
+377	151	Jacobus	Fayni	Chalmariais	H			
+378	151						Liberis Jacobi Fayni	377
+59	161	Johanes	Verilhati	Chalmariais	H		Curatus Devesseti	
+353	162	Michael	Chambonaut	Chalmariais	H			
+354	162	Johaneta			F		Uxor Michael Chambonaut	353
+197	171	Aprila	Marconis	Chalmariais	F		Filia Johanis Marconis de Chalmariais condam	
+342	181	Johanes	De Sancto Anthonio	Chalmariais	H			
+343	181						Liberis Johanes de Sancto Anthonio	
+299	182	Johannes	Giuilloneti	Chalmariais	H			
+40	191	Johaneta	Fabii	Chalmariais	F		Uxor Guillermi Fabii de Chalmariais	
+357	201	Jacobus	Chambonaut	Chalmariais	H		Filius Guillermi Jacobi condam	
+371	211	Laurens	De Calma	Chalmariais	H			
+372	211	Johaneta	Penarde		F		Nepos uxoris Johannis, filli Laurens de Calma	371
+319	221	Thomas	Jacobi	Chalmariais	H			
+320	221	Johanneta			F		Ucor Thomas Jacobi	319
+298	231	Matheus	Segureti del Cosimi	Chalmariais	H			
+207	241	Johaneta	Trona	Chalmariais	F			
+105	251	Agnita	De Sancto Anthonio	Chalmariais	F			
+321	261	Guilloneta	Marconis	Chalmariais	F		Uxor Laurentis Marsonis	
+389	271	Johanes	De Chalmetis	Chalmetis	H			
+379	281	Fransons	De Chalmetis	Chalmetis	H			
+391	291	Peyros	De Chalmetis	Chalmetis	H	Prope Chalmariais		
+113	301	Johane	Raymundi de Macello	Les Reymons	H			
+219	311	Jacobus	Dens Pontetz	Pontetz	H			
+283	321	Guigona	Dens Pontetz	Pontetz	F			
+351	331	Girandus	De la Boscha	La Boscha	H			
+352	331	Martinus	De la Boscha	La Boscha	H			
+48	341	Matheus	Lo Bergeris	La Boscha	H			
+195	351	Matheus	De Flachoco	La Brueyra	H			
+196	351	Guigona			F		Uxor Mathei De Flachoco	195
+120	361	Raymundus	Parayre	La Brueyra	H			
+323	362	Peyruchonus	Paulini	La Brueyra	H			
+384	422	Michael	Tanani	Dens Tenanos	H			
+385	422	Johaneta			F		Nepos Michael Tanani	384
+386	422	Jacineta			F		Nepos Michael Tanani	384
+373	441	Johannes	De Filatrama	Filatrama	H		Filius Jacobi	
+374	441	Petrus	De Filatrama		H		Frater Johannis de Filatrama	373
+338	451	Vitalis	De Mundo	Del Mundo Sancti Martini	H	Parrochie de Tensano		
+250	461	Johanes	De Mundo	Del Mundo Sancti Martini	H	Parrochie de Tensano		
+251	471	Blancheta	Del Mont	Del Mundo Sancti Martini	F			Pro Anthonie Marse eius filiabus
+252	471	Anthonia	Marse		F		Filia Blancheta Del Mont	251
+133	481	Michael	De Sollemniaco	Del Mundo Sancti Martini	H			
+134	481	Andiena			F		Uxor Michael de Sollemniaco	132
+301	482	Johaneta	De Paulhac	Del Mundo Sancti Martini	F		Uxor Johanis Valentis de Paulhac condam	
+302	482	Symundus	De Paulhac		H		Filius Johaneta de Paulhac	301
+303	482	Martetus	De Paulhac		H		Filius Johaneta de Paulhac	301
+304	491	Hugo	De Paulhac	Paulhac	H			
+305	501	Petrus	De Paulhac	Paulhac	H		Filius Poncii de Paulhac	
+306	501	Laurencius	De Paulhac		H		Frater Patri de Paulhac	305
+253	511	Johanes	Pigassii 	Del Mundo Sancti Martini	H			Nomine Johanete uxoris sue + Nomine Johanis et Mathei 
+254	511	Johaneta			F		Uxor Johanis Pigasii	253
+255	511	Johannes	De Mundo		H		Filius Guillermi de Mundo per sancti Martini de Tensano condam	253
+256	511	Matheus	De Mundo		H		Filius Guillermi de Mundo per sancti Martini de Tensano condam	253
+329	521	Gregorius	Berlhonis	Masalibrant	H		Filius Johanis Berlhonis condam	
+330	521	Laurentius	Berlhonis		H		Frater Gregorii Berlhonis	329
+331	521	Martinus	Berlhonis		H		Frater Gregorii Berlhonis	329
+282	531	Johanis	Berlhos	Masalibrant	H		Filius Armandeti Berlhos condam	
+312	541	Michael	Garnerii	Masalibrant	H			
+322	551	Vitalis	Garnerii	Masalibrant	H			
+224	552	Johanne	Garnerii	Masalibrant	H			
+375	561	Petrus	Mola	Masalibrant	H			
+356	571	Perruchos	Mola	Masalibrant	H		Filius Johanis Mola de Masalibrant condam	
+376	581	Gregorius	Albi	Mastortet	H		Filius emansipatus Durandi Albi Del Mastortet	
+279	601	Dompninus	De Las Ruschas	Las Ruschas	H			
+307	611	Petrus	De Las Ruschas	Las Ruschas	H			
+308	611	Petronilla			F		Uxor Petri de Las Ruschas	307
+202	621	Valentinus	De Las Ruschas	Las Ruschas	H			
+212	651	Johannis	De Las Ruschas	Las Ruschas	H		Filius Johanis de Lasruschas condam	
+213	651				H		Fratres Johannis de Las Ruschas	212
+214	651				F		Sorores Johannis de Las Ruschas	212
+315	661	Michael	De Las Ruschas	Las Ruschas	H			
+345	671	Michael	Girardi	Masalibrant	H			
+248	681	Petrus	Girardi	Masalibrant	H			
+217	691	Benedicta	Pastre	Masalibrant	F		Filia Petri Pastre de Msalibrant condam	
+218	691	Aguetis	Pastre		F		Soror Benedicta Pastre	217
+156	701	Blancha	Pastre	Masalibrant	F		Filia Petri Pastre de Msalibrant condam	
+155	711	Marteta	Pastre	Masalibrant	F		Filia Petri Pastre de Msalibrant condam	
+203	721	Petrus	Faureti	Chanclausa	H			
+69	731	Petrus	Aucelli	Chanclausa	H		Filius Guigone Aucelli	
+70	731				F		Uxor Petri Aucelli	69
+211	741	Guillermus	De Ponte	Chanclausa	H		Filius Vitalis de Ponte	
+91	742	Guillermus	De Ponte	Chanclausa	H		Filius Vitalis de Ponte	
+23	743	Aliza	De Ponte	Chanclausa	F			
+24	743						Liberorum Alize de Ponte	23
+127	751	Jacobus	De Molendino	Chanclausa	H		Filius Martini de Molendino de Chanclausa	
+106	761	Bonafides	De Sapeto	Del Sape	H			
+117	771	Matheus	Del Sape	Del Sape	H			
+153	781	Petrus	Samuel de Sapeto	Del Sape	H			
+154	781	Petrus	Blanchardus de Sapeto		H		Nepos Petri Samuel de Sapeto	153
+87	791	Staphanis	Brossardi de Font Moreta	Chanclausa	H			
+88	791				F		Uxor Stephanis Brossardi de Font Moreta	87
+96	792	Johanes	Chanclausus Dorba	Chanclausa	H			
+200	801	Petrus	Chalvents de Mendigolis	Mundo	H	Mendigolas, parrochie de Tensano	Matheus filius Stephani Chalment de Mendigolis	
+201	801	Marheus	Chalvents de Mendigolis	Mundo	H	Mendigolas, parrochie de Tensano	Filius Petri Chalvents de Mendigolis et habens autoritatem a dicto suo patre	
+194	811	Egidus	Blachonis	Masalibrant	H			
+94	821	Johannes	Aucelli Dorba	Chanclausa	H	Parrochie de Chanclausa Aniciensis Diocesis		
+51	822	Poncius	Pastorali Dorba	Chanclausa	H			
+108	831	Johannes	Pelacuer Dorba	Chanclausa	H			
+136	841	Thomas	Servienti de Chanpanhac	Chanclausa	H			
+109	842	Poncius	Servienti de Chanpanhac	Chanclausa	H			
+171	843	Johannes	Servienti de Chanpanhac	Chanclausa	H			
+172	851	Gregorius	Servienti de Chanpanhac	Chanclausa	H			
+110	852	Jacobus	Servienti de Chanpanhac	Chanclausa	H			
+135	861	Guillermus	Lardayrol de Champahnac	Chanclausa	H			
+52	862	Jacobus	Pelacuer Dorba	Chanclausa	H	Parrochie de Chanclausa		
+204	863	Guillometa	Sama	Chanclausa	F	Parrochie de Chanclausa		
+381	871	Johannes	Socherii	Podio Brunent	H			
+382	871	Johannes	Sanhas de Podio Brunent	Podio Brunent	H			
+383	871	Guillerma			F		Uxor et ambo Johannis Socherii	381
+141	873	Jacobus	Boyronis	Chanclausa	H		Filius Guillermus Boyronis de Chanclausa condam	
+142	873				H		Fratres Jacobi Boyronis	141
+358	881	Matheus	Blachonis	Masalibrant	H		Filius Johannis Blachonis de Masalibrant	
+359	881	Johannes	Blachonis	Masalibrant	H		Filius Johannis Blachonis de Masalibrant	
+360	881	Bartholomeus	Blachonis	Masalibrant	H		Filius Johannis Blachonis de Masalibrant	
+57	883	Johannes	Sanhas	Podio Brunent	H	Habite Chantilhac	Al' Cardini de Chantilhac	
+318	1031	Johannes	De Malagayta	Malagayta	H		Filius Nicholaii de Malagayta condam	
+339	1051	Johannes	De Malagayta	Malagayta	H		Filius Stephani de Malagayta	
+340	1051				H		Fratres Johannes de Malagayta	339
+215	1061	Vitalis	De Malagayta	Malagayta	H			
+216	1061	Blancha			F		Uxor Vitalis de Malagayta	215
+369	1071	Clemens	De Malagayta	Malagayta	H			
+370	1071	Viricentius	De Malagayta		H			369
+346	1081	Johannes	De Malagayta	Malagayta	H		Filius Bartholomei de Malagayta	
+347	1081	Poncius			H		Amiculus Johannes de Malagayta	347
+348	1081	Guillermus			H		Amiculus Johannes de Malagayta	347
+349	1091	Petrus	De Malagayta	Malagayta	H		Filius Guillermi de Malagayta condam	
+350	1091	Petrus	De Malagayta		H		Frater Petrus de Malagayta	349
+355	1101	Guillermus	De Malagayta	Malagayta	H		Filius Johannis de Malagayta	
+9	1111	Jacobus	Bonihonis	Gorgoras	H			
+10	1111	Poncius	Bonihonis	Gorgoras	H			
+11	1111	Johannes	Ayglini	Gorgoras	H			
+12	1111	Bertrandus	Ayglini	Gorgoras	H			
+13	1111	Girandus	Ayglini	Gorgoras	H			
+14	1111	Jacobus	Fayoli del Buic	Gorgoras	H			
+15	1111	Michaela			F		Filia Johannis Chanalerii de Gorgoras et uxor Jacobus Fayoli	14
+18	1111	Guillermus	Chanalerii	Gorgoras	H			14
+8	1112	Jacobus	Bonihonis	Gorgoras	H			
+259	1121	Jacobus	Bonihonis	Gorgoras	H			
+260	1121	Poncius	Bonihonis	Gorgoras	H			
+261	1121	Johannes	Ayglini	Gorgoras	H			
+262	1121	Girandis	Ayglini	Gorgoras	H			
+263	1121	Bertrandus	Ayglini	Gorgoras	H			
+264	1121	Guillermus	Giardi	Gorgoras	H			
+265	1121	Michaela	Chanaleira	Gorgoras	F		Filia Johanis Chanalerii condam	
+266	1121	Peyrononus	De Rivo	Gorgoras	H		Filius Guillermi de Rivo de Gorgoras	
+267	1121	Blancha	Diutras	Gorgoras	F			
+268	1121	Johanna			F		Uxor Anthonii Chanaleira filii	265
+269	1121	Petronilla			F		Filia Blancha Diutras	268
+270	1121				F		Filia Johannis Ayglini, maritus condam Blancha Diutras	268
+271	1121	Laurentus	Chanalem		H		Filius Guillermi Chanalem condam	265
+272	1121	Martinus	Chanalem		H		Filius Guillermi Chanalem condam	265
+79	1122	Blancha	Diutras	Gorgoras	F			
+80	1122				F		Filia Blancha Diutras	79
+128	1123	Peyrononus	De Rivo	Gorgoras	H			
+138	1124	Jacobus	Bonihonis	Gorgoras	H			
+114	1125	Poncius	Bonihonis	Gorgoras	H			
+115	1125	Johanna			F		Uxor filii Poncii Bonihonis	114
+129	1126	Johannes	Ayglini	Gorgoras	H			
+93	1127	Guillermus	Girardi	Gorgoras	H			
+81	1131	Girandis	Ayglini	Gorgoras	H			
+100	1132	Bertrandus	Ayglini	Gorgoras	H			
+101	1132	Anthonina			F		Uxor Bertrandi Ayglini	100
+147	1133	Michaela	Chanaleira	Gorgoras	F			
+148	1133						Consanguineis Michaela Chanaleira	147
+137	1141	Thomas	Servienti de Chanpanhac	Champanhac	H			
+122	1142	Stephanus	Austorgonis	Croseto Minoris	H			
+280	1151	Johannes	De Chanils	Chanils	H		Filius Petri de Chanils	
+245	1161	Peyronus et Jacmeta	De Chanils	Chanils	H		Filius Guillermi de Chanils condam	
+246	1161	Jacmeta	De Chanils	Chanils	F		Relicta Jacobi de Chanils condam	
+247	1161						Liberis Jacmeta De Chanils	246
+111	1171	Johannes	Sanhas	Brusco	H		Filius Martonis Sanhas De Brusco	
+161	1172	Johannis	De Curtibus	Montilio	H	Parochie de Lanastres		
+99	1181	Petrus	Rocurliolis	Chantaloba	H			
+139	1182	Johannes	Boscheti	Chaudaralis	H			
+140	1182	Girandus	Boscheti		H		Frater Johannes Boscheti	139
+118	1183	Johannes	Montes	Chantaloba	H			
+119	1183	Guillerma	Monter		F		Soror Johannes Montes	118
+71	1271	Poncius	D'Avenas	Avenas	H			
+72	1272	Martinus	D'Avenas	Avenas	H			
+73	1272	Johannes	D'Avenas	Avenas	H		Filius Michaelis d'Avenas condam et nepos Martini d’Avenas	
+74	1272				H		Fratres Johannis d’Avenas	73
+75	1272				F		Sorores Johannis d’Avenas	73
+82	1281	Johannis	D'Avenas	Avenas	H			
+83	1284	Laurentia	De la Gardeta	Avenas	F		Uxor Michaelis de la Gardeta condam	
+84	1284	Agnetis	De la Gardeta	Avenas	F		Filia Laurentia de la Gardeta	83
+95	1291	Petrus	Aymarii Del Chaylar	Avenas	H			
+168	1292	Martinus	Pelachecha	Arcens	H		Filius Stephani Pelachacha d'Arcens	
+169	1292	Vitalis	Pelachecha		H		Frater Martini Palachecha	168
+49	1293	Petrus	Masoerii de Vina Torto	Del Verne	H			
+85	1301	Matheus et Peyronus	Palaya	Del Chastanheir de Jannac	H			
+86	1301	Peyronus	Palaya	Del Chastanheir de Jannac	H			
+76	1302	Petrus	Del Chastanhier	Del Chastanheir de Jannac	H		Filius Panche del Chastanhier	
+50	1303	Johannes	Masoerii del Mei Plant	Ruotorto	H			
+97	1311	Vitalis	Del Chastanheir de Jannac	Del Chastanheir de Jannac	H		Filius Petri Chastaneir de Jannac	
+92	1312	Petrus	Natalis	Chapons	H		Filius Guillermi Natalis de Chapons condam	
+77	1313	Margarona	Vintentii	Chapons	F		Filia Guillermi Vitentii de Chapius condam	
+78	1313	Ponchonis	Vintentii	Chapons	H		Filius Johannis Vintentii de Chapons	77
+66	1314	Poncius	Terrassa	Chaslario	H			
+67	1314	Hugo	Terrassa	Chaslario	H		Filius Poncius Terrassa	
+65	1315	Johanos	De Molendino	Sancto Juliano in Boteria	H			
+165	1321		De Vilario	Vilario	H	Parrochie de Masthanelha	Heres […] de Vilario condam	
+166	1321		De Vilario	Vilario	H	Parrochie de Masthanelha	Heres […] de Vilario condam	
+297	1322	Johannes	De Vilario	Vilario	H		Filius Guigone de Vilario condam	
+58	1331	Vitalis	Verilha	Ruppe	H			
+335	1332	Petrus	Duneria	Ruppe	H		Frater Laurentii Duneira	
+336	1332	Laurentius	Duneria	Ruela	H		Frater Petri Duneira	
+337	1332	Martina			F		Uxor Petri Duneira	335
+56	1333	Stephanis	Raspant	Ruppe	H			
+278	1341	Guillermus	De Crozo	Ruppe	H			
+291	1342	Johannes	Roerii	Ruppe	H			
+292	1342	Peyruchonis	Roerii	Ruppe	H		Frater Johennes Roerii	291
+293	1342	Bartholomeus	Roerii	Ruppe	H		Frater Johennes Roerii	291
+294	1342	Caterina			F		Uxor Johennes Roerii	291
+144	1343	Jacmeta	Roerii	Ruppe	F		Uxor Peyrochonis Roerii	
+20	1351	Johannes	De Fonte	Fonte	H			
+361	1361	Johannes	Compatoris	Villa Nova Devesseti	H	Sancto Agrippavio		
+362	1361	Caterina	De Villa Nova		F		Uxor Johannes Compatoris	361
+1	1371	Jacobus	Albi	Mastortet	H		Filius Petri Albi del Mastortet	
+222	1381	Vitalis	Brannac	La Vileta	H			
+223	1381	Pastoris			F		Uxor Vitalis Brennac	222
+257	1382	Armandus	De la Chalin	Rilhac	H			
+258	1382	Benssor	Bocharde		F		Uxor Armandus de la Chalin filia condam Vitalis Bochardi	257
+287	1383	Symondus	Bruni de Sancto Agrippano	Rilhac	H			
+288	1383	Symundus	Bruni de Sancto Agrippano		H		Filius Symundi Bruni de Sancto Agrippano	287
+289	1383						Liberis Symundi Bruni de Sancto Agrippano	287
+290	1383	Vitalis	Bochardi		H			287
+284	1391	Bernardus	De Sanna	Sanna	H		Nobilis viri	
+285	1391	Gondomius	De Sanna		H		Filius Bernardus de Sanna	284
+341	1392	Vitalis	Brannac	La Vileta	H			
+225	1401	Guilhermus	De la Rocha	Rilhac	H			
+226	1401	Johannes	De Rilhac	Rilhac	H		Frater Girandi de Rilhac	
+227	1401	Girandus	De Rilhac	Rilhac	H		Frater Johannis de Rilhac	
+228	1401	Michael	Maysonitz	Rilhac	H			
+229	1401	Blancha	Maysonitz	Rilhac	F			
+230	1401	Armandus	De Ruppe	Rilhac	H		Filius Petri de Ruppe	
+231	1401	Durandus	Verilhati	Rilhac	H			
+232	1401	Vitalis	Verilhati	Rilhac	H			
+233	1401	Johanneta	Bartholomei de Ruppe	Rilhac	F		Filia Guillermi de Ruppe	
+234	1401	Guillermus	De Crorum de Ruppe	Rilhac	H			
+235	1401	Johannes	Roerii	Rilhac	H			
+236	1401	Stephanus	Raspaut	Rilhac	H			
+237	1401	Peyruchonus	Roerii		H		Frater Johannes Roerii	235
+238	1401	Bartholomeus	Roerii		H		Frater Johannes Roerii	235
+239	1401	Jacmeta	Duneria		F		Uxor Peyrochonis Roerii	235
+240	1401	Petrus	Duneria		H		Frater Jacmeta Duneria	235
+241	1401	Laurentus	Duneria		H		Frater Jacmeta Duneria	235
+309	1402	Mondonus	De Flossac	Flossac	H		Domicellis	
+390	1411	Guillermus	Beals	Beal	H			
+300	1421	Durandus	De Croseto	Ruela	H			
+296	1431		De Unario	Unario	H		Filius Guigonis Unario condam	
+25	1432	Bartholomeus	De Ruppeta	Del Verne	H			
+26	1432	Bonafides	De Verneto	Del Verne	H			
+27	1432	Peyronetus	De Verneto	Del Verne	H			
+28	1432	Guigo	De Verneto	Del Verne	H			
+29	1432	Vialonus	De Verneto	Del Verne	H			
+30	1432	Matheus	De la Rocha	Del Verne	H			
+31	1432	Johenenus	De la Rocha	Del Verne	H		Filius Guigonis de la Rocheta condam	
+32	1432	Johannis 	De Ruppeta		H		Frater Bartholomei de Rupeta	25
+33	1432	Vitalis	De Ruppeta		H		Frater Bartholomei de Rupeta	25
+34	1432	Johannes	De Verneto		H		Frater Bonafidei de Verneto	26
+35	1432	Petrus	De Verneto		H		Frater Bonafidei de Verneto	26
+36	1432	Catrina	De Verneto		H		Soror Bonafidei de Verneto	26
+37	1432	Guillemerta	De Verneto		F		Soror Peyroneti de Verneto	27
+38	1432	Matheus	De la Rocheta		H			27
+192	1441	Stephanis	De Viriderio	Viriderio	H	Parochie de Juliani in Valcancia		
+193	1442	Girandus	De Viriderio	Viriderio	H	Parrochie Sancti Juliani in Valcanscia		
+173	1443	Beatrix	De Comba Sancta Gitatis	Comba Sancta Gitatis	F		Soror Marieta de Comba Sancta Gitatis	
+174	1443	Marieta	De Comba Sancta Gitatis	Comba Sancta Gitatis	F		Soror Beatrix de Comba Sancta Gitatis	
+205	1451	Petrus	De la Costa	La Costa	H			
+206	1451	Martinus	De la Costa	La Costa	H			
+325	1452	Petronilla	De la Rocha	Ruppe	H		Uxori Guillermonis de la Rocha	
+326	1452						Liberis Patronille de la Rocha	325
+364	1461	Johannis	De Rilhac	Rilhac	H		Frater Girardi de Rilhac	
+365	1461	Girardus	De Rilhac	Rilhac	H		Frater Johannis de Rilhac	
+366	1461	Petronilla	Clerzonessa		F		Uxor Johannes de Rilhac	364
+276	1462	Michael	Maisonitz	Rilhac	H			
+277	1462	Stephanus	Maisonitz		H		Frater Michael Maisonitz	276
+274	1463	Blanchia	Maisonessa	Rilhac	F			
+275	1463	Catarina	Maisonessa		F		Soror Blanchia Maisonessa	274
+60	1471	Durandus	Verilhati	Ruppe	H		Consanguineus Vitalis Verilhati	
+61	1471	Vitalis	Verilhati	Ruppe	H		Consanguineus Durandi Verilhati	
+220	1472	Johanneta	Bartholomei	Ruppe	F		Filia Guillermi Bartholomei de Ruppe	
+221	1472	Mathena			F		Uxor Guillermi Bartholomei de Ruppe	220
+368	1482	Armandus	De Ruppe	Ruppe	H		Filius Petri de Ruppe	
+324	1491	Johannes + Nicholaus et Petris	Turris + Turris Dens Forus	Dens Forcus	H	Parrochie de Lanastres		
+392	1491	Nicholaus	Turris Dens Forus	Dens Forcus	H	Parrochie de Lanastres		
+393	1491	Petrus	Turris Dens Forus	Dens Forcus	H	Parrochie de Lanastres		
+143	1492	Petrus	Curtilis	Villa Longia	H			
+125	1493	Jacobus	Chareira	Villalonia	H			
+126	1493	Matheus	Chareira		H		Frater Jacobi Chareira	125
+183	1501	Johannes	De Villaloma	Villalonia	H		Johannes et Johannes Guigonis consanguinei	
+184	1501	Johannes Guigonis	De Villaloma	Villalonia	H			
+185	1501	Peyrononis	Nigris	Villalonia	H			
+186	1501	Valeria	Nigris		F		Uxor Peyrononis Nigris	185
+98	1502	Luca	Ruelli	Villalonia	F		Filia Petri Ruelli de Villalonia condam	
+145	1503	Andree	Ruelli	Villa Longia	H		Filius Jacobi Ruelli de Villa Longia	
+146	1503	Jacobus	Ruelli		H		Frater Andree Ruelli	145
+4	1511	Johannes	Barerii Dens Chazalet	Del Maset	H			
+5	1511	Johannes	De Chanils		H			
+6	1511	Johenetta	De Las Penas		F			5
+7	1511						Liberorum Bernardi de Las Penas condam	5
+380	1521	Johannes	De Feudo	Feudo	H			
+107	1522	Jacobus	Mundonis	Lanarena	H			
+244	1531	Symondus	De La Valeta	La Valeta	H			
+159	1541	Vitalis	Ambayserii	Villa Nova Devesseti	H	Sive de Las Sanholas		
+102	1542	Vitalis	Ambayserii	Villa Nova Devesseti	H	Sive de Las Sanholas		
+162	1551	Jacobus	De la Valeta Raybrant	La Valeta Raybrant	H			
+209	1561	Peyrononus	De la Valeta Raybrant	La Valeta Raybrant	H		Filius Johannis de La Valeta Raybrant	
+210	1561	Michael	De la Valeta Raybrant		H		Frater Peyrononus de la Valeta Raybrant	209
+187	1571	Guillermis	Fonteti	Villa Nova Devesseti	H			
+188	1571	Jacmeta			F		Uxor Guillermis Fonteti	187
+313	1581	Michael	De la Fontetas	Vunha	H	Habitator mansi de Vunha		
+314	1581	Petrus	De la Fontetas		H		Frater Michael de la Fontetas	313
+163	1582	Bartholomea	De la Vileta	La Vileta	F		Relicta Bartholomei de La Vileta condam	
+164	1582	Petrus	De la Vileta		H		Filius Bartholomea de la Vileta	163
+160	1583	Petronilla	Balbi	La Vileta	F		Filia Staphani Balbi de la Vileta condam	
+387	1591	Petrus 	Palherii	Malgnines	H			
+388	1591	Peyruchonus	Palherii		H		Frater Petri Palherii	387
+191	1601	Poncius	Bruni	Chalmetis	H			
+208	1611	Petrus	Martini	Hereone	H			
+151	1621	Ariberius	De Hereone	Hereone	H		Filius Poncii de Hereone	
+152	1621	Poncius	Bunents de Hereone	Hereone	H			
+116	1622	Petrus	Brunents	Hereone	H			
+90	1623	Ariberius	De Hereone	Hereone	H			
+157	1631	Bartholomeus	Alna	Sancto Agrippavio	H			
+158	1631				H		Fratres Bartholomei Alna	157
+189	1641	Petrus	Picta	Sancto Agrippavio	H			
+190	1641	Bartholomea			F		Uxor Petri Picta et filia Vitalis Mola de Sancto Agrippano condam	189
+178	1651	Vitalis	Comptoris	Lermet	H			
+179	1651	Beatrix	Comptoris		F		Soror Vitalis Comptoris	178
+180	1661	Columbeta	De Hereo	Lermet	F		Filia Guillermi de Hereo condam	
+181	1671	Johanneta	De Hereo	Lermet	F		Filia Peyruchonis de Hereo	
+167	1681	Guillermus	Lo Subs de Hereone	Lermet	H		Filius Nicholay de Hereone condam	
+182	1691	Andrena	De Hereone	Lermet	F		Filia Guillermi de Hereone	
+363	1701	Poncius	De Chanils	Chanils	H			
+281	1711	Johennes	Ruelli	Furnis	H			
+103	1721	Guillermus	De la Fauria de Sancto Agrippano	Ruppe	H			
+121	1722	Petrus	Rouchonis de Sancto Agrippano	La Rocha	H	Habitator loci del Fay		
+170	1731	Matheus	Rochandi	Chalmetis de Sanna	H			
+131	1741	Poncius	Brunii	Chalmetis	H		Filius Guillermus Brunii de Chalmetas condam	
+132	1741	Petronilla	Brunii	Chalmetis	F		Filia Guillermus Brunii de Chalmetas condam	
+295	1751	Caterina	Garaytona	Villa Nova Devesseti	F			
+394	1751						Liberis Caterine Garaytone	295
+327	1761	Petrus	De la Valeta Raybrant	La Valeta Raybrant	H			
+328	1761	Jacmeta	De Gant		F		Uxor Andree, filius Petrus de la Valeta Raybrant	327
+198	1762	Guillermus	Rocheta	Sancto Agrippavio	H		Nobilis + domicelli	
+21	1771	Peyrotus	De Pascalis	La Valeta dens Clotz	H		Frater Johannis de Pascalis	
+22	1771	Johannes	De Pascalis	La Valeta dens Clotz	H		Frater Peyroti de Pascalis	
+62	1772	Peyrotus	Vinati	Malavalle	H			
+63	1772	Johannes	Vinati	Malavalle	H			
+2	1773	Vitalis	Alvernhasso	Devessetum	H			
+46	1781	Johannes	Garaytoni	Malavalle	H	Habitator de Malavalle		
+47	1781	Violeta			F		Uxor Johannis Garaytoni	46
+64	1782	Johannes	Vinati	Malavalle	H			
+130	1791	Johannes	Brunii	Chalmetis de Sanna	H		Filius Martini Brunii	
+286	1792	Vitalis	De la Chalin	Chalma	H			
+316	1801	Petrus	De la Chalin	Chalma	H		Filius Guillermi de la Chalin condam	
+317	1801	Armandus	De la Chalin	Chalma	H		Nepos Guillermi de la Chalin condam	
+310	1802	Peironetus	De Montreont	Montreont	H		Maritus Guigone filie Mathei de Hereone condam	
+311	1802	Guigona			F		Uxor Peironetus de Montreont	310
+16	1803	Petrus	Carbonis	Sancto Agrippavio	H			
+17	1803	Guillermeta			F		filia Vitalis Comptoris de Sancto Agrippano condam et uxor Petrus Carbonis	16
+243	1811	Petrus	Dulcis	Ruppe	H	Habitator Sancti Agrippani		
+39	1812	Peyruchonis	Del Tremole	Ruppe	H			
+123	1813	Stephanis	Brunet	Hereone	H		Filius Johannis Brunet al' Ariberii de Hereone	
+124	1813	Petrus	Brunet		H		Frater Stephanis Brunet	123
+53	1821	Martinus	Pupart	Sancto Agrippavio	H	Habitator Sancti Agrippani	Filius Johannis Pupart	
+54	1821	Michael	Pupart		H		Frater Martini Pupart	53
+55	1821	Guigona	Pupart		F		Soror Martini Pupart	53
+41	1822	Girandus	Fores	Montelhet	H		Filius Stephani Fotes de Montelheto	
+42	1822	Johane	Fores		H		Frater Girandi Fores	41
+43	1822		Fores		F		Soror Girandi Fores	41
+45	1823	Guillerma	Foresa	Montelhet	F			
+44	1824	Johannes	Fores	Montelhet	H			
+344	1831	Johanneta	Ambayseyra	Villa Nova Devesseti	F			
+242	1832	Guillermus	Ariberii	Sancto Agrippavio	H		Magistri notarii regi	
+68	1833	Guillermus	Ariberii	Sancto Agrippavio	H		Magistri notarii regi	
+112	1841	Jacmeta	Blachonis	Masalibrant	F		Filia Jacmonis Blachonis de Masalibrant condam	
+175	1842	Johannes	Blachonis	Masalibrant	H		Filius Jacmonis Blachonis de Masalibrant codam	
+176	1842	Michael	Blachonis		H		Frater Johannes Blachonis	175
+177	1842	Aprila	Blachonis		F		Soror Johannes Blachonis	175
+199	1843	Johanneta	Blachona	Masalibrant	F			
+149	1844	Marteta	Berlhonis	Masalibrant	F		Filia Michaelis Berlhonis de Masalibrant	
+150	1844	Guillerma	Berlhonis	Masalibrant	F		Filia Michaelis Berlhonis de Masalibrant	
+249	1845	Marteta 	Girarda	Masalibrant	F			
+89	1851	Guillermis	Brossonis	Liomas	H	Parrochie Del Posit		
+3	1861	Margaros	Asteyra	Flossac	F			
+332	1862	Bartholomeus	Mola	Raschassac	H	Dit de Sancto Agrippano; Habitator de Raschassac		
+333	1862	Petronilla	Blachonis		F		Filia Gregorii Blachonis de Raschassac condam et uxor Bartholomeus Mola	332
+334	1862	Martinus	Blachonis		H		Conhac' Bartholomei Mola et quod ipsus tenetur ver' a chareis ut alii homies de Raschassac	332
+273	1871	Johanneta	De Frigidis Perietibus	Frigidis Perietibus	F	Habitator de Croseto		
+104	1872	Martinus	De La Vileta	La Vileta	H			
+19	1873	Johannes	Clementis	Socheria	H	Habitator de Romenas	Filius Guillermi Clementis de Socheria	
