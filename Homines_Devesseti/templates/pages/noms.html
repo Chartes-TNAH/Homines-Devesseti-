@@ -1,7 +1,7 @@
 {% extends "conteneur.html" %}
 
 {% block titre %}
-    {%if lieu %}| Lieu : {{lieu.nom}} {% endif %}
+    {%if homme %}| Lieu : {{homme.nom}} {% endif %}
 {% endblock %}
 
 {% block corps %}
@@ -10,8 +10,8 @@
             <h2>{{homme.prenom}}</h2>
             <dl>
                 <dt>localite</dt><dd>{{homme.localite}}</dd>
-                <dt>fonction</dt><dd>{{homme.fonction}}</dd>
-                <dt>date</dt><dd>{{homme.date}}</dd>
+                <dt>Info</dt><dd>{{homme.information_personnelles}}</dd>
+                <dt>genre</dt><dd>{{homme.genre}}</dd>
             </dl>
         {% else %}
             <p>La base de données est en cours de constitution</p>
