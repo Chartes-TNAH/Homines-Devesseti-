@@ -6,12 +6,26 @@
         <title>Homines Devesseti {%block titre %}{%endblock%}</title>
         {% include "partials/css.html" %}
         {% include "partials/metadata.html" %}
+        <style type="text/css">
+            .hero  {
+                background-position: center center;
+                padding:10vh;
+                background-image: url("static/images/gallica_btv1b55007071f.jpeg");
+            }
+            .container .hero {
+                background-image: none;
+            }
+        </style>
     </head>
     <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-between">
+            <a class="navbar-brand" href="{{ url_for('accueil') }}">Homines Devesseti</a>
+            <form class="form-inline" action="{{url_for('recherche')}}" method="GET">
+              <input class="form-control" name="keyword" type="search" placeholder="Recherche rapide" aria-label="Recherche">
+              <button class="btn btn-outline-info" type="submit">Rechercher</button>
+            </form>
+          </nav>
         <div class="container">
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-              <a class="navbar-brand" href="{{ url_for('accueil') }}">Homines Devesseti</a>
-            </nav>
             <div class="row">
                 <div class="col">
                 {% block corps %}{% endblock %}

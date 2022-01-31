@@ -1,11 +1,4 @@
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-
-#Instanciation de ma base de données
-app = Flask("Homines Devesseti")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\virgi\\Desktop\\Master TNAH\\Python\\Devoir_Python\\Homines_Devesseti\\homines_devesseti.db'
-## Chemin du fichier correspondant à sa place dans Windows
-db = SQLAlchemy(app)
+from ..app import db
 
 #Definition de mes classes
 class DetailPossessions(db.Model):
@@ -132,21 +125,3 @@ class Reconnaissances(db.Model):
 class Repertoire(db.Model):
     Id = db.Reconnaissance = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
     Ref_du_terrier = db.Column(db.Integer, nullable=False)
-
-#Mes requêtes
-hommes = Personnes.query.all()
-
-#Mes routes
-@app.route("/")
-def accueil():
-    return render_template("pages/accueil.html", nom="Homines Devesseti", hommes=hommes)
-
-
-@app.route("/name/<int:name_id>")
-def nom(name_id):
-    return render_template("pages/noms.html", nom="Homines Devesseti", homme=hommes[name_id])
-
-
-# Petit tips final pour s'assurer que Python s'est pas perdu en chemin et exécute bien ce fichier
-if __name__ == "__main__":
-    app.run(debug=True)

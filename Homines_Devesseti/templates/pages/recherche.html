@@ -1,0 +1,15 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}| {{titre}}{%endblock%}
+
+{% block corps %}
+<h1>{{titre}}</h1>
+    {% if resultats %}
+    <p>Il y a {{resultats|length}} hommes qui répondent à votre requête :</p>
+        <ul>
+            {% for homme in resultats %}
+                <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.nom}}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
