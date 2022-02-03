@@ -43,13 +43,14 @@ class Personnes(db.Model):
 
 
 class Reconnaissances(db.Model):
-    Id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
-    Annee = db.Column(db.Integer)
-    Mois = db.Column(db.Text)
-    Jour = db.Column(db.Integer)
-    Commandeur = db.Column(db.Text, nullable=False)
-    Statut = db.Column(db.Text)
-    Implication_statut = db.Column(db.Text)
+    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
+    id_reconnaissance = db.Column(db.Integer, unique=True, nullable=False)
+    annee = db.Column(db.Integer)
+    mois = db.Column(db.Text)
+    jour = db.Column(db.Integer)
+    commandeur = db.Column(db.Text, nullable=False)
+    statut = db.Column(db.Text)
+    implication_statut = db.Column(db.Text)
     Venire_ad_comi_et_critu_castri_Devessti_cum_armis = db.Column(db.Text)
     Manobrias = db.Column(db.Text)
     Jornalia = db.Column(db.Text)

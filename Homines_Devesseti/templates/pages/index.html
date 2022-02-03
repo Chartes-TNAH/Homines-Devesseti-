@@ -5,11 +5,11 @@
 {% block corps %}
 <h1><a href="{{url_for('accueil')}}">Retour à l'accueil</a></h1>
         <p>
-            {% if hommes %}
-                Il y a {{hommes|length }} pages enregistrées :
+            {% if recs %}
+                Il y a {{recs|length }} pages enregistrées :
                 <ul>
-                    {% for homme in hommes %}
-                        <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.nom}}</a></li>
+                    {% for rec in recs %}
+                        <li><a href="{{url_for('rec', rec_id=rec.id)}}">{{rec.id_reconnaissance}}</a></li>
                     {% endfor %}
                 </ul>
             {% else %}

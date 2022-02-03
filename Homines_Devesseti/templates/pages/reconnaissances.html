@@ -1,0 +1,21 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+    {%if rec %}| Reconnaissance : {{rec.id_reconnaissance}} {% endif %}
+{% endblock %}
+
+{% block corps %}
+        {% if rec %}
+            <h1>{{rec.id_reconnaissance}}</h1>
+            <h2>{{rec.commandeur}}</h2>
+            <dl>
+                <dt>statut</dt><dd>{{rec.statut}}</dd>
+                <dt>Info</dt><dd>{{rec.implication_statut}}</dd>
+                <dt>Date</dt><dd>{{rec.annee}}</dd>
+            </dl>
+        {% else %}
+            <p>La base de données est en cours de constitution</p>
+        {% endif %}
+        <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+    </body>
+{% endblock %}
