@@ -1,0 +1,19 @@
+{% extends "conteneur.html" %}
+{% block afternav %}
+    {% include "partials/recherche.html" %}
+{%endblock%}
+{% block corps %}
+<h1><a href="{{url_for('accueil')}}">Retour à l'accueil</a></h1>
+        <p>
+            {% if hommes %}
+                Il y a {{hommes|length }} pages enregistrées :
+                <ul>
+                    {% for homme in hommes %}
+                        <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.nom}}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                La base de données est en cours de constitution
+            {% endif %}
+    </p>
+{% endblock %}

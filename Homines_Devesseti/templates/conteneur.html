@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
     <head>
         <meta charset="UTF-8">
         <title>Homines Devesseti {%block titre %}{%endblock%}</title>
         {% include "partials/css.html" %}
         {% include "partials/metadata.html" %}
         <style type="text/css">
-            .hero  {
+            nav  {
                 background-position: center center;
                 padding:10vh;
-                background-image: url("static/images/gallica_btv1b55007071f.jpeg");
+                height : 300px;
+                background-image: url("{{url_for('static', filename='images/20200506_161823.jpg')}}");
+                background-size: 1500px;
+                margin-bottom: 20px;
             }
-            .container .hero {
-                background-image: none;
+            form {
+                position: relative;
+                top: 100px;
+            }
+            a.navbar-brand {
+                bottom: 100px;
+                background-color: #000000c4;
+                display: inline;
+                padding: 2mm;
+                font-style: italic;
+                position: relative;
+                background-position: center;
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .btn-outline-info {
+                color: #ff0000;
+                border-color: #ff0000;
+            }
+            p {
+                text-align: justify;
+            }
+            h1 {margin-bottom: 5%;}
+            figure, a.footer {
+                margin:3%; 
+                display:block;
+                text-align: center;
             }
         </style>
     </head>
