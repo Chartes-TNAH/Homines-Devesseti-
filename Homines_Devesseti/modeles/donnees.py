@@ -31,8 +31,9 @@ class DetailRedevances(db.Model):
 
 
 class Personnes(db.Model):
+    __tablename__ = 'personnes'
     id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
-    id_reconnaissance = db.Column(db.Integer, nullable=False)
+    id_reconnaissance = db.Column(db.Integer, db.ForeignKey('reconnaissances.id_reconnaissance'), nullable=False)
     prenom = db.Column(db.Text)
     nom = db.Column(db.Text)
     localite = db.Column(db.Text)
@@ -40,9 +41,11 @@ class Personnes(db.Model):
     precision_sur_origine = db.Column(db.Text)
     informations_personnelles = db.Column(db.Text)
     represente_par = db.Column(db.Text)
+    reconnaissance = db.relationship("Reconnaissances", back_populates="personne")
 
 
 class Reconnaissances(db.Model):
+    __tablename__ = 'reconnaissances'
     id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
     id_reconnaissance = db.Column(db.Integer, unique=True, nullable=False)
     annee = db.Column(db.Integer)
@@ -121,6 +124,7 @@ class Reconnaissances(db.Model):
     Temoin4 = db.Column(db.Text)
     Temoin5 = db.Column(db.Text)
     Accord = db.Column(db.Text)
+    personne = db.relationship("Personnes", back_populates="reconnaissance")
 
 
 class Repertoire(db.Model):

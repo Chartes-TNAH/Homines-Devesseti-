@@ -4,12 +4,17 @@
 
 {% block corps %}
 <h1>{{titre}}</h1>
-    {% if resultats %}
-    <p>Il y a {{resultats|length}} hommes qui répondent à votre requête :</p>
-        <ul>
-            {% for homme in resultats %}
-                <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.nom}}</a></li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+<div style="float:right">
+    <figure>
+        <img src="{{url_for('static', filename='images/20200506_161738.jpg')}}" width="250px"/>
+    </figure>
+</div>
+{% if resultats %}
+<p>Il y a {{resultats|length}} hommes qui répondent à votre requête :</p>
+<ul>
+    {% for homme in resultats %}
+    <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.nom}}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

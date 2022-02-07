@@ -9,9 +9,10 @@
             <h1>{{homme.nom}}</h1>
             <h2>{{homme.prenom}}</h2>
             <dl>
-                <dt>localite</dt><dd>{{homme.localite}}</dd>
+                <dt>Localite</dt><dd>{{homme.localite}}</dd>
                 <dt>Info</dt><dd>{{homme.information_personnelles}}</dd>
                 <dt>genre</dt><dd>{{homme.genre}}</dd>
+                <dt>Reconnaissance</dt><dd><a href="{{url_for('rec', rec_id=homme.id_reconnaissance)}}">{{homme.id_reconnaissance}}</a></dd>
             </dl>
         {% else %}
             <p>La base de données est en cours de constitution</p>

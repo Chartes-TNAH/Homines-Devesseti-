@@ -12,7 +12,7 @@ def accueil():
 
 @app.route("/index")
 def index():
-    return render_template("pages/index.html", nom="Homines Devesseti", recs=recs)
+    return render_template("pages/index.html", nom="Homines Devesseti", recs=recs, hommes=hommes)
 
 @app.route("/name/<int:name_id>")
 def nom(name_id):
@@ -21,7 +21,13 @@ def nom(name_id):
 
 @app.route("/rec/<int:rec_id>")
 def rec(rec_id):
-    return render_template("pages/reconnaissances.html", nom="Homines Devesseti", rec=recs[rec_id - 1])
+    '''J'ai voulu ici créer mes routes non pas en fonction de l'id de la ligne mais d'un id perso que j'ai réutilisé
+    dans d'autres tables et dont j'ai besoin pour faire des renvois internes.
+    La fonction filter permet de retrouver la ligne dont l'id perso correspond à l'id de la route.
+    La fontion list permet de transformer le résultat en liste.
+    La ligne que je cherche en est donc le premier et seul contenu'''
+    reco = list(filter(lambda rec: rec.id_reconnaissance == rec_id, recs))
+    return render_template("pages/reconnaissances.html", nom="Homines Devesseti", rec=reco[0])
 
 @app.route("/recherche")
 def recherche():

@@ -5,15 +5,27 @@
 {% block corps %}
 <h1><a href="{{url_for('accueil')}}">Retour à l'accueil</a></h1>
         <p>
-            {% if recs %}
-                Il y a {{recs|length }} pages enregistrées :
+            {% if recs and hommes %}
+                Il y a {{recs|length }} reconnaissances enregistrées :
                 <ul>
                     {% for rec in recs %}
-                        <li><a href="{{url_for('rec', rec_id=rec.id)}}">{{rec.id_reconnaissance}}</a></li>
+                        <li><a href="{{url_for('rec', rec_id=rec.id_reconnaissance)}}">{{rec.id_reconnaissance}}</a></li>
                     {% endfor %}
                 </ul>
             {% else %}
                 La base de données est en cours de constitution
             {% endif %}
     </p>
+    <p>
+        {% if hommes %}
+            Il y a {{hommes|length }} dépendants enregistrées :
+            <ul>
+                {% for homme in hommes %}
+                    <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.id}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            La base de données Hommes est en cours de constitution
+        {% endif %}
+</p>
 {% endblock %}
