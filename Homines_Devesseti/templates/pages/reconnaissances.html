@@ -12,6 +12,14 @@
                 <dt>statut</dt><dd>{{rec.statut}}</dd>
                 <dt>Info</dt><dd>{{rec.implication_statut}}</dd>
                 <dt>Date</dt><dd>{{rec.jour}} {{rec.mois}} {{rec.annee}}</dd>
+                <dt>Hommes</dt>
+                {% for rec_homme in rec_hommes %} 
+                <dd><a href="{{url_for('nom', name_id=rec_homme.id)}}">{{rec_homme.prenom}} {{rec_homme.nom}}</a></dd>
+            <!-- Bloc Permettant de créer un lien vers chaque personne concernée par cet reconnaissance --> 
+                {% endfor %}
+                <dt>Page</dt><dd>{{rec.page[0].ref_du_terrier}}</dd>
+            <!-- Chaque Reconnaissance étant associé à une unique page, cette dernière est le premier et seul élément
+            de la liste issu de la jointure entre les tables Reconnaissances et Répertoire -->
             </dl>
         {% else %}
             <p>La base de données est en cours de constitution</p>

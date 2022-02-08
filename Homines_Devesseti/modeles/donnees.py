@@ -41,7 +41,7 @@ class Personnes(db.Model):
     precision_sur_origine = db.Column(db.Text)
     informations_personnelles = db.Column(db.Text)
     represente_par = db.Column(db.Text)
-    reconnaissance = db.relationship("Reconnaissances", back_populates="personne")
+    reconnaissances = db.relationship("Reconnaissances", back_populates="personne")
 
 
 class Reconnaissances(db.Model):
@@ -124,9 +124,12 @@ class Reconnaissances(db.Model):
     Temoin4 = db.Column(db.Text)
     Temoin5 = db.Column(db.Text)
     Accord = db.Column(db.Text)
-    personne = db.relationship("Personnes", back_populates="reconnaissance")
+    personne = db.relationship("Personnes", back_populates="reconnaissances")
+    page = db.relationship("Repertoire", back_populates="reconnaissances")
 
 
 class Repertoire(db.Model):
-    Id = db.Reconnaissance = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
-    Ref_du_terrier = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
+    id_reconnaissance = db.Column(db.Integer, db.ForeignKey("reconnaissances.id_reconnaissance"), nullable=False)
+    ref_du_terrier = db.Column(db.Integer, nullable=False)
+    reconnaissances = db.relationship("Reconnaissances", back_populates="page")
