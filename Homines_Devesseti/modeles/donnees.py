@@ -1,33 +1,36 @@
 from ..app import db
 
-#Definition de mes classes
 class DetailPossessions(db.Model):
-    Id_detail_possession = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
-    Id_reconnaissance = db.Column(db.Integer, nullable=False)
-    Possession = db.Column(db.Text)
-    Nom = db.Column(db.Text)
-    Personne_concernee = db.Column(db.Text)
-    Lieu = db.Column(db.Text)
-    Confront1 = db.Column(db.Text)
-    Confront2 = db.Column(db.Text)
-    Confront3 = db.Column(db.Text)
-    Confront4 = db.Column(db.Text)
-    Confront5 = db.Column(db.Text)
-    Confront6 = db.Column(db.Text)
-    Supplement = db.Column(db.Text)
+    __tablename__ = 'detail_possessions'
+    id_detail_possession = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
+    id_reconnaissance = db.Column(db.Integer, db.ForeignKey('reconnaissances.id_reconnaissance'), nullable=False)
+    possession = db.Column(db.Text)
+    nom = db.Column(db.Text)
+    personne_concernee = db.Column(db.Text)
+    lieu = db.Column(db.Text)
+    confront1 = db.Column(db.Text)
+    confront2 = db.Column(db.Text)
+    confront3 = db.Column(db.Text)
+    confront4 = db.Column(db.Text)
+    confront5 = db.Column(db.Text)
+    confront6 = db.Column(db.Text)
+    supplement = db.Column(db.Text)
+    reconnaissances = db.relationship("Reconnaissances", back_populates="detail_possessions")
 
 
 class DetailRedevances(db.Model):
-    Id_detail_redevance = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
-    Id_detail_reconnaissance = db.Column(db.Integer, nullable=False)
-    Cens_en_poule = db.Column(db.Integer, nullable=False)
-    TotalSeigle = db.Column(db.Integer, nullable=False)
-    TotalAvoine = db.Column(db.Integer, nullable=False)
-    Total_monnaie = db.Column(db.Integer, nullable=False)
-    Pro = db.Column(db.Text)
-    Nom = db.Column(db.Text)
-    Lieu = db.Column(db.Text)
-    Supplement = db.Column(db.Text)
+    __tablename__ = 'detail_redevances'
+    id_detail_redevance = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
+    id_reconnaissance = db.Column(db.Integer, db.ForeignKey('reconnaissances.id_reconnaissance'), nullable=False)
+    cens_en_poule = db.Column(db.Integer, nullable=False)
+    totalSeigle = db.Column(db.Integer, nullable=False)
+    totalAvoine = db.Column(db.Integer, nullable=False)
+    total_monnaie = db.Column(db.Integer, nullable=False)
+    pro = db.Column(db.Text)
+    nom = db.Column(db.Text)
+    lieu = db.Column(db.Text)
+    supplement = db.Column(db.Text)
+    reconnaissances = db.relationship("Reconnaissances", back_populates="detail_redevances")
 
 
 class Personnes(db.Model):
@@ -126,9 +129,12 @@ class Reconnaissances(db.Model):
     Accord = db.Column(db.Text)
     personne = db.relationship("Personnes", back_populates="reconnaissances")
     page = db.relationship("Repertoire", back_populates="reconnaissances")
+    detail_redevances = db.relationship("DetailRedevances", back_populates="reconnaissances")
+    detail_possessions = db.relationship("DetailPossessions", back_populates="reconnaissances")
 
 
 class Repertoire(db.Model):
+    __tablename__ = 'repertoire'
     id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
     id_reconnaissance = db.Column(db.Integer, db.ForeignKey("reconnaissances.id_reconnaissance"), nullable=False)
     ref_du_terrier = db.Column(db.Integer, nullable=False)

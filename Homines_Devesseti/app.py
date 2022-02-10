@@ -14,4 +14,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///homines_devesseti.db?check_sa
 #L'argument check_same_thread permet d'éviter les problèmes de thread au moment des requêtes utilisant des jointures
 db = SQLAlchemy(app)
 
-from .routes import accueil, nom, recherche, index, rec
+from .routes import accueil, nom, recherche, index, rec, det_pos, det_red

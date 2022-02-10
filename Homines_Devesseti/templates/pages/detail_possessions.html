@@ -1,0 +1,22 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+    {%if det_pos %}| Detail sur possession {{det_pos.id_detail_possession}} {% endif %}
+{% endblock %}
+
+{% block corps %}
+        {% if det_pos %}
+            <h1>{{det_pos.id_detail_possession}}</h1>
+            <h2>{{det_pos.id_reconnaissance}}</h2>
+            <dl>
+                <dt>Possession</dt><dd>{{det_pos.possession}}</dd>
+                <dt>Nom</dt><dd>{{det_pos.nom}}</dd>
+                <dt>Lieu</dt><dd>{{det_pos.lieu}}</dd>
+                <dt>Reconnaissance</dt><dd><a href="{{url_for('rec', rec_id=det_pos.id_reconnaissance)}}">{{det_pos.id_reconnaissance}}</a></dd>
+            </dl>
+        {% else %}
+            <p>La base de données est en cours de constitution</p>
+        {% endif %}
+        <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+    </body>
+{% endblock %}

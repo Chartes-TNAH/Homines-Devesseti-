@@ -1,0 +1,23 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+    {%if det_red %}| Détail sur redevance {{det_red.id_detail_redevance}} {% endif %}
+{% endblock %}
+
+{% block corps %}
+        {% if det_red %}
+            <h1>{{det_red.id_detail_redevance}}</h1>
+            <h2>{{det_red.id_reconnaissance}}</h2>
+            <dl>
+                <dt>Poules</dt><dd>{{det_red.cens_en_poule}}</dd>
+                <dt>Seigle</dt><dd>{{det_red.totalSeigle}}</dd>
+                <dt>Avoine</dt><dd>{{det_red.totalAvoine}}</dd>
+                <dt>Monnaie</dt><dd>{{det_red.total_monnaie}}</dd>
+                <dt>Reconnaissance</dt><dd><a href="{{url_for('rec', rec_id=det_red.id_reconnaissance)}}">{{det_red.id_reconnaissance}}</a></dd>
+            </dl>
+        {% else %}
+            <p>La base de données est en cours de constitution</p>
+        {% endif %}
+        <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+    </body>
+{% endblock %}

@@ -5,10 +5,14 @@
 {% block corps %}
 <h1><a href="{{url_for('accueil')}}">Retour à l'accueil</a></h1>
 {% if recs and hommes %}
-<h2>Il y a {{recs|length + hommes|length}} enregistrements dans la base</h2>
-<h4>Sommaire :
-    <div><a href="#recs">Reconnaissances</a></div>
-    <div><a href="#hommes">Dépendants</a></div>
+<h2>Il y a {{recs|length + hommes|length + dets_pos|length + dets_rec|length}} enregistrements dans la base</h2>
+<h4 style="line-height: 140%;"><span style="text-decoration: underline;">Sommaire :</span>
+    <ul>
+    <li><a href="#recs">Reconnaissances</a></li>
+    <li><a href="#hommes">Dépendants</a></li>
+    <li><a href="#dets_pos">Détails sur les possessions</a></li>
+    <li><a href="#dets_red">Détail sur les redevances</a></li>
+</ul>
 </h4>
         <p id="recs">         
                 Il y a {{recs|length }} reconnaissances enregistrées :
@@ -25,6 +29,22 @@
                     <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.prenom}} {{homme.nom}}</a></li>
                 {% endfor %}
             </ul>
+</p>
+<p id="dets_pos">
+    Il y a {{dets_pos|length }} détails sur les possessions enregistrés :
+    <ul>
+        {% for det_pos in dets_pos %}
+            <li><a href="{{url_for('det_pos', dp_id=det_pos.id_detail_possession)}}">{{det_pos.id_detail_possession}}</a></li>
+        {% endfor %}
+    </ul>
+</p>
+<p id="dets_red">
+    Il y a {{dets_red|length }} détails sur les redevances enregistrés :
+    <ul>
+        {% for det_red in dets_red %}
+            <li><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">{{det_red.id_detail_redevance}}</a></li>
+        {% endfor %}
+    </ul>
 </p>
     {% else %}
         <p>La base de données Hommes est en cours de constitution</p>

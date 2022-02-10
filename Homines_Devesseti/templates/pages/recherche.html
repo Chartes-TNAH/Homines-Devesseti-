@@ -10,11 +10,36 @@
     </figure>
 </div>
 {% if resultats %}
-<p>Il y a {{resultats|length}} hommes qui répondent à votre requête :</p>
+<p>Il y a {{resultats.total}} éléments qui répondent à votre requête :</p>
 <ul>
-    {% for homme in resultats %}
-    <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.nom}}</a></li>
+    {% for homme in resultats.items %}
+    <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.prenom}} {{homme.nom}}</a></li>
     {% endfor %}
 </ul>
+<nav aria-label="research-pagination" style="position: absolute; bottom:0; left: 50%; transform: translate(-50%);">
+  <ul class="pagination">
+    {%- for page in resultats.iter_pages() %}
+        {% if page %}
+
+          {% if page != resultats.page %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('recherche', keyword=keyword, page=page) }}">{{page}}</a>
+            </li>
+          {% else %}
+            <li class="page-item active disabled">
+              <a class="page-link">{{page}} <span class="sr-only">(actuelle)</span></a>
+            </li>
+          {% endif %}
+
+        {% else %}
+            <li class="page-item disabled">
+              <a class="page-link">...</a>
+            </li>
+        {% endif %}
+
+    {%- endfor %}
+  </ul>
+</nav>
 {% endif %}
+
 {% endblock %}

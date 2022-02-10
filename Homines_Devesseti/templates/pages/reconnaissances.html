@@ -9,14 +9,28 @@
             <h1>{{rec.id_reconnaissance}}</h1>
             <h2>{{rec.commandeur}}</h2>
             <dl>
-                <dt>statut</dt><dd>{{rec.statut}}</dd>
+                <dt>Statut</dt><dd>{{rec.statut}}</dd>
                 <dt>Info</dt><dd>{{rec.implication_statut}}</dd>
                 <dt>Date</dt><dd>{{rec.jour}} {{rec.mois}} {{rec.annee}}</dd>
+                {% if rec_hommes %}
                 <dt>Hommes</dt>
                 {% for rec_homme in rec_hommes %} 
                 <dd><a href="{{url_for('nom', name_id=rec_homme.id)}}">{{rec_homme.prenom}} {{rec_homme.nom}}</a></dd>
-            <!-- Bloc Permettant de créer un lien vers chaque personne concernée par cet reconnaissance --> 
                 {% endfor %}
+                {% endif %}
+                {% if rec_det_pos %}
+                <dt>Détail sur les possessions</dt>
+                {% for det_pos in rec_det_pos %} 
+                <dd><a href="{{url_for('det_pos', dp_id=det_pos.id_detail_possession)}}">{{det_pos.id_detail_possession}}</a></dd>
+                {% endfor %}
+                {% endif %}
+                {% if rec_det_red %}
+                <dt>Détail sur les redevances</dt>
+                {% for det_red in rec_det_red %} 
+                <dd><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">{{det_red.id_detail_redevance}}</a></dd>
+                {% endfor %}
+                {% endif %}
+            <!-- Bloc Permettant de créer un lien vers chaque élément concerné par cette reconnaissance --> 
                 <dt>Page</dt><dd>{{rec.page[0].ref_du_terrier}}</dd>
             <!-- Chaque Reconnaissance étant associé à une unique page, cette dernière est le premier et seul élément
             de la liste issu de la jointure entre les tables Reconnaissances et Répertoire -->
