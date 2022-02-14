@@ -6,17 +6,49 @@
 
 {% block corps %}
         {% if det_pos %}
-            <h1>{{det_pos.id_detail_possession}}</h1>
-            <h2>{{det_pos.id_reconnaissance}}</h2>
+            <h1>Déclaration de bien n°{{det_pos.id_detail_possession}}</h1>
+            <h2>Reconnaissance <a href="{{url_for('rec', rec_id=det_pos.id_reconnaissance)}}">{{det_pos.id_reconnaissance}}</a> 
+                {% if det_pos.personne_concernee %},
+                déclarée pour <a href="{{url_for('nom', name_id=det_pos.personne_concernee)}}">un proche</a>
+                {% endif %}</h2>
             <dl>
-                <dt>Possession</dt><dd>{{det_pos.possession}}</dd>
-                <dt>Nom</dt><dd>{{det_pos.nom}}</dd>
-                <dt>Lieu</dt><dd>{{det_pos.lieu}}</dd>
-                <dt>Reconnaissance</dt><dd><a href="{{url_for('rec', rec_id=det_pos.id_reconnaissance)}}">{{det_pos.id_reconnaissance}}</a></dd>
+                <dt>Type de bien :</dt><dd>{{det_pos.possession}}</dd>
+                {% if det_pos.nom %}
+                <dt>Nom du bien :</dt><dd>{{det_pos.nom}}</dd>
+                {% endif %}
+                {% if det_pos.lieu %}
+                <dt>Localisation :</dt><dd>{{det_pos.lieu}}</dd>
+                {% endif %}
+                {% if det_pos.supplement %}
+                <dt>Information complémentaire :</dt>
+                <dd>{{det_pos.supplement}}</dd>
+                {% endif %}
+                {% if det_pos.confront1 %}
+                    {% if det_pos.confront1 and det_pos.confront2%}
+                    <dt>Confronts :</dt>
+                    <dd>- {{det_pos.confront1}}</dd>
+                    <dd>- {{det_pos.confront2}}</dd>
+                        {% if det_pos.confront3 %}
+                        <dd>- {{det_pos.confront3}}</dd>
+                            {% if det_pos.confront4 %}
+                            <dd>- {{det_pos.confront4}}</dd>
+                                {% if det_pos.confront5 %}
+                                <dd>- {{det_pos.confront5}}</dd>
+                                    {% if det_pos.confront6 %}
+                                    <dd>- {{det_pos.confront6}}</dd>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                    <dt>Confront :</dt>
+                    <dd>{{det_pos.confront1}}</dd>
+                    {% endif %}
+                {% endif %}
             </dl>
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}
-        <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+        <p class="retour_accueil"><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
     </body>
 {% endblock %}

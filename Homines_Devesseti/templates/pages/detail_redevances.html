@@ -6,18 +6,45 @@
 
 {% block corps %}
         {% if det_red %}
-            <h1>{{det_red.id_detail_redevance}}</h1>
-            <h2>{{det_red.id_reconnaissance}}</h2>
+            <h1>Redevance n°{{det_red.id_detail_redevance}}</h1>
+            <h2>Reconnaissance <a href="{{url_for('rec', rec_id=det_red.id_reconnaissance)}}">{{det_red.id_reconnaissance}}</a></h2>
             <dl>
-                <dt>Poules</dt><dd>{{det_red.cens_en_poule}}</dd>
-                <dt>Seigle</dt><dd>{{det_red.totalSeigle}}</dd>
-                <dt>Avoine</dt><dd>{{det_red.totalAvoine}}</dd>
-                <dt>Monnaie</dt><dd>{{det_red.total_monnaie}}</dd>
-                <dt>Reconnaissance</dt><dd><a href="{{url_for('rec', rec_id=det_red.id_reconnaissance)}}">{{det_red.id_reconnaissance}}</a></dd>
-            </dl>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Poules</th>
+                        <th>Seigle (setiers)</th>
+                        <th>Avoine (setiers)</th>
+                        <th>Monnaie (sous tournois)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>{{det_red.cens_en_poule}}</td>
+                <td>{{det_red.totalSeigle}}</td>
+                <td>{{det_red.totalAvoine}}</td>
+                <td>{{det_red.total_monnaie}}</td>
+            </tr>
+            </tbody>
+            </table>
+            </dl><d2>
+                {% if det_red.pro %}
+            <dt>Bien associé :</dt>
+            <dd>{{det_red.pro.replace('+', 'et').replace('�', 'à')}}</dd>
+                {% endif %}
+            {% if det_red.nom.replace %}
+            <dt>Nom :</dt>
+            <dd>{{det_red.nom}}{% endif %}</dd>
+                {% if det_red.lieu %}
+            <dt>Emplacement :</dt>
+            <dd>{{det_red.lieu}}</dd>{% endif %}
+                {% if det_red.supplement %}
+            <dt>Information complémentaire :</dt>
+            <dd>{{det_red.supplement}}{% endif %}</dd>
+            </d2>
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}
-        <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+        <p class="retour_accueil"><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
     </body>
 {% endblock %}

@@ -10,15 +10,15 @@
     <ul>
     <li><a href="#recs">Reconnaissances</a></li>
     <li><a href="#hommes">Dépendants</a></li>
-    <li><a href="#dets_pos">Détails sur les possessions</a></li>
-    <li><a href="#dets_red">Détail sur les redevances</a></li>
+    <li><a href="#dets_pos">Déclarations de biens</a></li>
+    <li><a href="#dets_red">Déclarations de redevances</a></li>
 </ul>
 </h4>
         <p id="recs">         
                 Il y a {{recs|length }} reconnaissances enregistrées :
                 <ul>
                     {% for rec in recs %}
-                        <li><a href="{{url_for('rec', rec_id=rec.id_reconnaissance)}}">{{rec.id_reconnaissance}}</a></li>
+                        <li><a href="{{url_for('rec', rec_id=rec.id_reconnaissance)}}">Reconnaissance {{rec.id_reconnaissance}}</a></li>
                     {% endfor %}
                 </ul>
     </p>
@@ -31,18 +31,18 @@
             </ul>
 </p>
 <p id="dets_pos">
-    Il y a {{dets_pos|length }} détails sur les possessions enregistrés :
+    Il y a {{dets_pos|length }} déclarations de biens enregistrées :
     <ul>
         {% for det_pos in dets_pos %}
-            <li><a href="{{url_for('det_pos', dp_id=det_pos.id_detail_possession)}}">{{det_pos.id_detail_possession}}</a></li>
+            <li><a href="{{url_for('det_pos', dp_id=det_pos.id_detail_possession)}}">Déclaration de bien n°{{det_pos.id_detail_possession}}</a></li>
         {% endfor %}
     </ul>
 </p>
 <p id="dets_red">
-    Il y a {{dets_red|length }} détails sur les redevances enregistrés :
+    Il y a {{dets_red|length }} déclarations de redevances enregistrées :
     <ul>
         {% for det_red in dets_red %}
-            <li><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">{{det_red.id_detail_redevance}}</a></li>
+            <li><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">Redevance n°{{det_red.id_detail_redevance}}</a></li>
         {% endfor %}
     </ul>
 </p>

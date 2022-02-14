@@ -6,38 +6,510 @@
 
 {% block corps %}
         {% if rec %}
-            <h1>{{rec.id_reconnaissance}}</h1>
-            <h2>{{rec.commandeur}}</h2>
-            <dl>
-                <dt>Statut</dt><dd>{{rec.statut}}</dd>
-                <dt>Info</dt><dd>{{rec.implication_statut}}</dd>
-                <dt>Date</dt><dd>{{rec.jour}} {{rec.mois}} {{rec.annee}}</dd>
-                {% if rec_hommes %}
-                <dt>Hommes</dt>
+            <h1>Reconnaissance {{rec.id_reconnaissance}}</h1>
+            <h2>Page {{(rec.page[0].ref_du_terrier|string).split()[0][:-1]}}</h2>
+        <!-- Chaque Reconnaissance étant associé à une unique page, cette dernière est le premier et seul élément
+        de la liste issu de la jointure entre les tables Reconnaissances et Répertoire 
+        Le code page que j'ai utilisé associe le numéro de la page et la position de la reconnaissance dans la page.
+        Il faut donc transformé le code-page en chaîne de caractère pour en extraire le numéro de la page-->
+            <dl style="border: solid rgb(48, 4, 4); padding: 1%;">
+                <dt>Réalisée devant {{rec.commandeur}} par :</dt>
                 {% for rec_homme in rec_hommes %} 
                 <dd><a href="{{url_for('nom', name_id=rec_homme.id)}}">{{rec_homme.prenom}} {{rec_homme.nom}}</a></dd>
                 {% endfor %}
+                {% if rec.notaire %}
+                <dt>Notaire présent :</dt>
+                <dd>{{rec.notaire}}</dd>
+                {% endif %}
+                {% if rec.temoin1 %}
+                {% if rec.temoin1 and rec.temoin2 %}
+                <dt>Témoins :</dt>
+                <dd>- {{rec.temoin1}}</dd>
+                <dd>- {{rec.temoin2}}</dd>
+                    {% if rec.temoin3 %}
+                    <dd>- {{rec.temoin3}}</dd>
+                        {% if rec.temoin4 %}
+                        <dd>- {{rec.temoin4}}</dd>
+                            {% if rec.temoin5 %}
+                            <dd>- {{rec.temoin5}}</dd>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                <dt>Témoin :</dt>
+                <dd>{{rec.temoin1}}</dd>
+                {% endif %}
+                <dt>Fait{% if rec.annee %} le {{rec.jour}} {{rec.mois}} {{rec.annee}}{% if rec.fait_a %},
+                    à {{rec.fait_a.replace('�', 'è')}}{% endif %}
+                {% endif %}</dt>
+
+            </dl>
+            <d2>
+                {% if rec.statut %}
+                    <dt>Statut :</dt>
+                    {% if rec.implication_statut %}
+                    <dd>{{rec.statut.replace(" et ", ", ")}} et {{rec.implication_statut.lower()}}</dd>
+                    {% else %}
+                    <dd>{{rec.statut}}</dd>
+                    {% endif %}
+                {% endif %}
+                {% if rec.manobrias=="Oui" or rec.jornalia == "Oui" or rec.chareis=="Oui" %}
+                    <dt>Corvées {% if rec.complement_sur_Corvees %}({{rec.complement_sur_Corvees.replace('�', 'oe').lower()}}){% endif %} :
+                    </dt>
+                        {% if rec.manobrias=="Oui" %}
+                        <dd>Manobrias</dd>
+                        {% endif %}                    
+                        {% if rec.jornalia=="Oui" %}
+                        <dd>Jornalia</dd>
+                        {% endif %}
+                        {% if rec.chareis=="Oui" %}
+                        <dd>Chareis</dd>
+                        {% endif %}
+                {% endif %}
+                {% if rec.statut_terre %}
+                <dt>Statut des terres :</dt>
+                <dd>{{rec.statut_terre}}</dd>
+                {% endif %}
+                {% if rec.domus %}
+                    <dt>Biens déclarés :</dt>
+                    {% if rec.domus!="Non" %}
+                        {% if rec.domus=="Oui" %}
+                        <dd>Domus</dd>
+                        {% else %}
+                        <dd>{{rec.domus}} domus</dd>
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.orti!="Non" %}
+                        {% if rec.orti=="Oui" %}
+                        <dd>Orti</dd>
+                        {% else %}
+                            {% if rec.orti<="1" %}
+                            <dd>{{rec.orti}} ortus</dd>
+                            {% else %}
+                            <dd>{{rec.orti}} orti</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.prata!="Non" %}
+                        {% if rec.prata=="Oui" %}
+                        <dd>Parta</dd>
+                        {% else %}
+                            {% if rec.prata<="1" %}
+                            <dd>{{rec.prata}} pratum</dd>
+                            {% else %}
+                            <dd>{{rec.prata.lower()}} prata</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.compos!="Non" %}
+                        {% if rec.compos=="Oui" %}
+                        <dd>Compos</dd>
+                        {% else %}
+                            {% if rec.prata<="1" %}
+                            <dd>{{rec.compos}} compus</dd>
+                            {% else %}
+                            <dd>{{rec.compos}} compos</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.nemora!="Non" %}
+                        {% if rec.nemora=="Oui" %}
+                        <dd>Nemora</dd>
+                        {% else %}
+                            {% if rec.nemora<="1" %}
+                            <dd>{{rec.nemora}} nemus</dd>
+                            {% else %}
+                            <dd>{{rec.nempora}} nemora</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.pascua!="Non" %}
+                        {% if rec.pascua=="Oui" %}
+                        <dd>Pascua</dd>
+                        {% else %}
+                            {% if rec.pascua<="1" %}
+                            <dd>{{rec.pascua}} pascuus</dd>
+                            {% else %}
+                            <dd>{{rec.pascua}} pascua</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.pasturalia!="Non" %}
+                        {% if rec.pasturalia=="Oui" %}
+                        <dd>Pasturalia</dd>
+                        {% else %}
+                        <dd>{{rec.pasturalia}} pasturalia</dd>
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.terrae!="Non" %}
+                        {% if rec.terrae=="Oui" %}
+                        <dd>Terrae</dd>
+                        {% else %}
+                        {% if rec.pascua<="1" %}
+                            <dd>{{rec.terrae}} terra</dd>
+                            {% else %}
+                            <dd>{{rec.terrae}} terrae</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.casalia!="Non" %}
+                        {% if rec.casalia=="Oui" %}
+                        <dd>Casalia</dd>
+                        {% else %}
+                        {% if rec.casalia<="1" %}
+                            <dd>{{rec.casalia}} casale</dd>
+                            {% else %}
+                            <dd>{{rec.casalia}} casalia</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.casamenta!="Non" %}
+                        <dd>Casamenta</dd>
+                    {% endif %}
+                    {% if rec.grangiae!="Non" %}
+                        {% if rec.grangiae=="Oui" %}
+                        <dd>Grangiae</dd>
+                        {% else %}
+                            {% if rec.grangiae<="1" %}
+                            <dd>{{rec.grangiae}} grangia</dd>
+                            {% else %}
+                            <dd>{{rec.grangiae}} grangiae</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.denesia!="Non" %}
+                        <dd>Denesia</dd>
+                    {% endif %}
+                    {% if rec.calma!="Non" %}
+                        {% if rec.calma=="Oui" %}
+                        <dd>Calma</dd>
+                        {% else %}
+                        <dd>{{rec.calma}} calma</dd>
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.assensa!="Non" %}
+                        {% if rec.assensa=="Oui" %}
+                        <dd>Assensa</dd>
+                        {% else %}
+                        <dd>{{rec.assensa}} assensa</dd>
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.molendinus!="Non" %}
+                        {% if rec.molendinus=="Oui" %}
+                        <dd>Molendinus</dd>
+                        {% else %}
+                        <dd>{{rec.assensa}} molendinus</dd>
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.ouchias!="Non" %}
+                        {% if rec.ouchias=="Oui" %}
+                        <dd>Ouchias</dd>
+                        {% else %}
+                            {% if rec.ouchias<="1" %}
+                            <dd>{{rec.ouchias}} ouchia</dd>
+                            {% else %}
+                            <dd>{{rec.ouchias}} ouchias</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.garaitum!="Non" %}
+                        {% if rec.garaitum=="Oui" %}
+                        <dd>Garaitum</dd>
+                        {% else %}
+                            {% if rec.garaitum<="1" %}
+                            <dd>{{rec.garaitum}} garaitum</dd>
+                            {% else %}
+                            <dd>{{rec.garaitum}} garaita</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.patile!="Non" %}
+                        <dd>Patile</dd>
+                    {% endif %}
+                    {% if rec.hospicii!="Non" %}
+                        {% if rec.hospicii=="Oui" %}
+                        <dd>Hospicii</dd>
+                        {% else %}
+                            {% if rec.hospicii<="1" %}
+                            <dd>{{rec.hospicii}} hospicium</dd>
+                            {% else %}
+                            <dd>{{rec.hospicii}} hospicii</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.petiae!="Non" %}
+                        {% if rec.petiae=="Oui" %}
+                        <dd>Petiae</dd>
+                        {% else %}
+                            {% if rec.petiae<="1" %}
+                            <dd>{{rec.petiae}} petia</dd>
+                            {% else %}
+                            <dd>{{rec.petiae}} petiae</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.esclausae!="Non" %}
+                        {% if rec.esclausae=="Oui" %}
+                        <dd>Esclausae</dd>
+                        {% else %}
+                            {% if rec.esclausae<="1" %}
+                            <dd>{{rec.esclausae}} esclausa</dd>
+                            {% else %}
+                            <dd>{{rec.esclausae}} esclausae</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.terminus!="Non" %}
+                        {% if rec.terminus=="Oui" %}
+                        <dd>Termini</dd>
+                        {% else %}
+                            {% if rec.terminus<="1" %}
+                            <dd>{{rec.terminus}} terminus</dd>
+                            {% else %}
+                            <dd>{{rec.terminus}} termini</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.costam!="Non" %}
+                        {% if rec.costam=="Oui" %}
+                        <dd>Costae</dd>
+                        {% else %}
+                            {% if rec.costam<="1" %}
+                            <dd>{{rec.costam}} costam</dd>
+                            {% else %}
+                            <dd>{{rec.costam}} costae</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.sana!="Non" %}
+                        {% if rec.sana=="Oui" %}
+                        <dd>Sana</dd>
+                        {% else %}
+                            {% if rec.sana<="1" %}
+                            <dd>{{rec.sana}} sana</dd>
+                            {% else %}
+                            <dd>{{rec.sana}} sanae</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.tenementum!="Non" %}
+                        {% if rec.tenementum=="Oui" %}
+                        <dd>Tenementa</dd>
+                        {% else %}
+                            {% if rec.tenementum<="1" %}
+                            <dd>{{rec.tenementum}} tenementum</dd>
+                            {% else %}
+                            <dd>{{rec.tenementum}} tenementa</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.versana!="Non" %}
+                        {% if rec.versana=="Oui" %}
+                        <dd>Versanae</dd>
+                        {% else %}
+                            {% if rec.versana<="1" %}
+                            <dd>{{rec.versana}} versana</dd>
+                            {% else %}
+                            <dd>{{rec.versana}} versanae</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.masacgio!="Non" %}
+                        {% if rec.masacgio=="Oui" %}
+                        <dd>Masacgiis</dd>
+                        {% else %}
+                            {% if rec.masacgio<="1" %}
+                            <dd>{{rec.masacgio}} masacgio</dd>
+                            {% else %}
+                            <dd>{{rec.masacgio}} masacgiis</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.vineae!="Non" %}
+                        {% if rec.vineae=="Oui" %}
+                        <dd>Vineae</dd>
+                        {% else %}
+                            {% if rec.vineae<="1" %}
+                            <dd>{{rec.vineae}} vinea</dd>
+                            {% else %}
+                            <dd>{{rec.vineae}} vineae</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.blachia!="Non" %}
+                        {% if rec.blachia=="Oui" %}
+                        <dd>Blachia</dd>
+                        {% else %}
+                            {% if rec.blachia<="1" %}
+                            <dd>{{rec.blachia}} blachiae</dd>
+                            {% else %}
+                            <dd>{{rec.blachia}} blachia</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.arbores!="Non" %}
+                        <dd>Arbores</dd>
+                    {% endif %}
+                    {% if rec.passetae!="Non" %}
+                        {% if rec.passetae=="Oui" %}
+                        <dd>Passetae</dd>
+                        {% else %}
+                            {% if rec.passetae<="1" %}
+                            <dd>{{rec.passetae}} passeta</dd>
+                            {% else %}
+                            <dd>{{rec.passetae}} passetae</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.chastanerii!="Non" %}
+                        {% if rec.chastanerii=="Oui" %}
+                        <dd>Chastanerii</dd>
+                        {% else %}
+                            {% if rec.chastanerii<="1" %}
+                            <dd>{{rec.chastanerii}} chastanerius</dd>
+                            {% else %}
+                            <dd>{{rec.chastanerii}} chastanerii</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.levata!="Non" %}
+                        {% if rec.levata=="Oui" %}
+                        <dd>Levata</dd>
+                        {% else %}
+                            {% if rec.levata<="1" %}
+                            <dd>{{rec.levata}} levatum</dd>
+                            {% else %}
+                            <dd>{{rec.levata}} levata</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.creysementum!="Non" %}
+                        {% if rec.creysementum=="Oui" %}
+                        <dd>Creysementa</dd>
+                        {% else %}
+                            {% if rec.creysementum<="1" %}
+                            <dd>{{rec.creysementum}} creysementum</dd>
+                            {% else %}
+                            <dd>{{rec.creysementum}} creysementa</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.bessaa!="Non" %}
+                        {% if rec.bessaa=="Oui" %}
+                        <dd>Bessaa</dd>
+                        {% else %}
+                        <dd>{{rec.bessaa}} bessaa</dd>
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.besseta!="Non" %}
+                        {% if rec.besseta=="Oui" %}
+                        <dd>Besseta</dd>
+                        {% else %}
+                        <dd>{{rec.besseta}} besseta</dd>
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.lameytenchada!="Non" %}
+                        {% if rec.lameytenchada=="Oui" %}
+                        <dd>Lameytenchada</dd>
+                        {% else %}
+                        <dd>{{rec.lameytenchada}} lameytenchada</dd>
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.bealis!="Non" %}
+                        {% if rec.bealis=="Oui" %}
+                        <dd>Bealis</dd>
+                        {% else %}
+                        <dd>{{rec.bealis}} bealis</dd>
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.mansum!="Non" %}
+                        {% if rec.mansum=="Oui" %}
+                        <dd>Mansa</dd>
+                        {% else %}
+                            {% if rec.manum<="1" %}
+                            <dd>{{rec.mansum}} mansum</dd>
+                            {% else %}
+                            <dd>{{rec.mansum}} mansa</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.sanhassium!="Non" %}
+                        {% if rec.sanhassium=="Oui" %}
+                        <dd>Sanhassia</dd>
+                        {% else %}
+                            {% if rec.sanhassium<="1" %}
+                            <dd>{{rec.sanhassium}} sanhassium</dd>
+                            {% else %}
+                            <dd>{{rec.sanhassium}} sanhassia</dd>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if rec.autres_possessions!="Non" %}
+                        <dd>Autres possessions</dd>
+                    {% endif %}
+                {% endif %}
+                {% if rec.lieux_terres %}
+                <dt>Emplacement :</dt>
+                <dd>{{rec.lieux_terres}}</dd>
                 {% endif %}
                 {% if rec_det_pos %}
-                <dt>Détail sur les possessions</dt>
+                <dt>Détails sur les biens :</dt>
                 {% for det_pos in rec_det_pos %} 
-                <dd><a href="{{url_for('det_pos', dp_id=det_pos.id_detail_possession)}}">{{det_pos.id_detail_possession}}</a></dd>
+                <dd><a href="{{url_for('det_pos', dp_id=det_pos.id_detail_possession)}}">Déclaration de bien n°{{det_pos.id_detail_possession}}</a></dd>
                 {% endfor %}
+            <!-- Blocs Permettant de créer un lien vers chaque déclaration de biens concernée par cette reconnaissance -->
+                {% endif %}
+                {% if rec.cens_en_poule or rec.totalSeigle or rec.totalAvoine or rec.total_sous_tournois %}
+                <dt>Redevances :</dt>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Poules</th>
+                            <th>Seigle (setiers)</th>
+                            <th>Avoine (setiers)</th>
+                            <th>Monnaie (sous tournois)</th>
+                            {% if rec.pour %}<th>Taxe(s) comprise(s)</th>{% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                    <td>{{rec.cens_en_poule}}</td>
+                    <td>{{rec.totalSeigle}}</td>
+                    <td>{{rec.totalAvoine}}</td>
+                    <td>{{rec.total_sous_tournois}}</td>
+                    {% if rec.pour %}<td>{{rec.pour}}</td>{% endif %}
+                </tr>
+                </tbody>
+                </table>
+                {% endif %}
+                {% if rec.mesure_de_cereale_utilisee %}
+                <dt>Mesure de céréales utilisée :</dt>
+                <dd>{{rec.mesure_de_cereale_utilisee.replace('�', 'è')}}</dd>
+                {% endif %}
+                {% if rec.jour_paiement %}
+                <dt>Jour de paiement :</dt>
+                <dd>{{rec.jour_paiement}}</dd>
+                {% endif %}
+                {% if rec.type_de_Juridiction or rec.mandement %}
+                    <dt>Juridiction :</dt>
+                    {% if rec.type_de_Juridiction and rec.mandement %}
+                    <dd>{{rec.type_de_Juridiction}} {{rec.mandement.lower()}}</dd>
+                    {% else %}
+                    <dd>{{rec.type_de_Juridiction}} {{rec.mandement}}</dd>
+                    {% endif %}
                 {% endif %}
                 {% if rec_det_red %}
-                <dt>Détail sur les redevances</dt>
+                <dt>Détails sur les redevances :</dt>
                 {% for det_red in rec_det_red %} 
-                <dd><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">{{det_red.id_detail_redevance}}</a></dd>
+                <dd><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">Redevance n°{{det_red.id_detail_redevance}}</a></dd>
                 {% endfor %}
-                {% endif %}
-            <!-- Bloc Permettant de créer un lien vers chaque élément concerné par cette reconnaissance --> 
-                <dt>Page</dt><dd>{{rec.page[0].ref_du_terrier}}</dd>
-            <!-- Chaque Reconnaissance étant associé à une unique page, cette dernière est le premier et seul élément
-            de la liste issu de la jointure entre les tables Reconnaissances et Répertoire -->
-            </dl>
+                {% endif %}                
+            <!-- Blocs Permettant de créer un lien vers chaque redevance concernée par cette reconnaissance -->
+            </d2>
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}
-        <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+        <p class="retour_accueil"><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
     </body>
 {% endblock %}

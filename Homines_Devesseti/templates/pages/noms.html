@@ -6,17 +6,25 @@
 
 {% block corps %}
         {% if homme %}
-            <h1>{{homme.nom}}</h1>
-            <h2>{{homme.prenom}}</h2>
+            <h1>{{homme.prenom}} {{homme.nom}}</h1>
             <dl>
-                <dt>Localite</dt><dd>{{homme.localite}}</dd>
-                <dt>Info</dt><dd>{{homme.information_personnelles}}</dd>
-                <dt>Genre</dt><dd>{{homme.genre}}</dd>
-                <dt>Reconnaissance</dt><dd><a href="{{url_for('rec', rec_id=homme.id_reconnaissance)}}">{{homme.id_reconnaissance}}</a></dd>
+                <dt>Sexe :</dt>
+                {% if homme.genre=="H" %}
+                <dd>Homme</dd>
+                {% endif %}
+                {% if homme.genre=="F" %}
+                <dd>Femme</dd>
+                {% endif %}
+                <dt>Lieu d'habitation :</dt><dd>{{homme.localite}}{% if homme.precision_sur_origine %}{{homme.precision_sur_origine}}{% endif %}</dd>
+                {% if homme.informations_personnelles %}
+                <dt>Information personnelle :</dt><dd>{{homme.informations_personnelles.replace("�", "'")}}</dd>
+                {% endif %}     
+                <dt>Reconnaissance :</dt><dd><a href="{{url_for('rec', rec_id=homme.id_reconnaissance)}}">{{homme.id_reconnaissance}}</a>{% if homme.represente_par %} 
+                    (représenté par <a href="{{url_for('nom', name_id=homme.represente_par)}}">un proche</a>){% endif %}</dd>
             </dl>
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}
-        <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+        <p class="retour_accueil"><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
     </body>
 {% endblock %}
