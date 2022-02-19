@@ -29,7 +29,7 @@
             </table>
             </dl><d2>
                 {% if det_red.pro %}
-            <dt>Bien associé :</dt>
+            <dt>Biens ou taxes associés :</dt>
             <dd>{{det_red.pro.replace('+', 'et').replace('�', 'à')}}</dd>
                 {% endif %}
             {% if det_red.nom.replace %}
@@ -45,6 +45,16 @@
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}
-        <p class="retour_accueil"><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+        <p class="retour_accueil">
+            {% if det_red.id_detail_redevance > 1 %}
+            <a href="{{url_for('det_red', dr_id=(det_red.id_detail_redevance - 1))}}">Page précédente</a>
+            <-------------
+            {% endif %}
+            <a href="{{url_for('accueil')}}">Retour à l'accueil</a>
+            {% if det_red.id_detail_redevance < nbr %}
+            ------------->
+        <a href="{{url_for('det_red', dr_id=(det_red.id_detail_redevance + 1))}}">Page suivante</a>
+            {% endif %}
+        </p>
     </body>
 {% endblock %}

@@ -7,11 +7,12 @@
 {% block corps %}
         {% if det_pos %}
             <h1>Déclaration de bien n°{{det_pos.id_detail_possession}}</h1>
-            <h2>Reconnaissance <a href="{{url_for('rec', rec_id=det_pos.id_reconnaissance)}}">{{det_pos.id_reconnaissance}}</a> 
-                {% if det_pos.personne_concernee %},
-                déclarée pour <a href="{{url_for('nom', name_id=det_pos.personne_concernee)}}">un proche</a>
-                {% endif %}</h2>
+            <h2>Reconnaissance <a href="{{url_for('rec', rec_id=det_pos.id_reconnaissance)}}">{{det_pos.id_reconnaissance}}</a></h2>
             <dl>
+                {% if det_pos.personne_concernee %}
+                <dt>Personne concernée :<dt>
+                <dd><a href="{{url_for('nom', name_id=det_pos.personne_concernee)}}">Proche du déclarant</a></h3>
+                {% endif %}
                 <dt>Type de bien :</dt><dd>{{det_pos.possession}}</dd>
                 {% if det_pos.nom %}
                 <dt>Nom du bien :</dt><dd>{{det_pos.nom}}</dd>
@@ -49,6 +50,16 @@
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}
-        <p class="retour_accueil"><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+        <p class="retour_accueil">
+            {% if det_pos.id_detail_possession > 1 %}
+            <a href="{{url_for('det_pos', dp_id=(det_pos.id_detail_possession - 1))}}">Page précédente</a>
+            <-------------
+            {% endif %}
+            <a href="{{url_for('accueil')}}">Retour à l'accueil</a>
+            {% if det_pos.id_detail_possession < nbr %}
+            ------------->
+        <a href="{{url_for('det_pos', dp_id=(det_pos.id_detail_possession + 1))}}">Page suivante</a>
+            {% endif %}
+        </p>
     </body>
 {% endblock %}

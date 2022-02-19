@@ -1,4 +1,21 @@
+from flask import url_for
+import datetime
 from ..app import db
+
+class Authorship(db.Model):
+    __tablename__ = "authorship"
+    authorship_id = db.Column(db.Integer, nullable=True, autoincrement=True, primary_key=True)
+    authorship_place_id = db.Column(db.Integer, db.ForeignKey('personnes.id'))
+    authorship_user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    authorship_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    user = db.relationship("User", back_populates="authorships")
+    personnes = db.relationship("Personnes", back_populates="authorships")
+
+    def author_to_json(self):
+        return {
+            "author": self.user.to_jsonapi_dict(),
+            "on": self.authorship_date
+        }
 
 class DetailPossessions(db.Model):
     __tablename__ = 'detail_possessions'
@@ -45,7 +62,34 @@ class Personnes(db.Model):
     informations_personnelles = db.Column(db.Text)
     represente_par = db.Column(db.Text)
     reconnaissances = db.relationship("Reconnaissances", back_populates="personne")
+    authorships = db.relationship("Authorship", back_populates="personnes")
 
+    def to_jsonapi_dict(self):
+        """ It ressembles a little JSON API format but it is not completely compatible
+
+        :return:
+        """
+        return {
+            "type": "personne",
+            "id": self.id,
+            "attributes": {
+                "nom": self.nom,
+                "sexe": self.genre,
+                "loacalite": self.localite,
+                "informations_personnelles": self.informations_personnelles,
+                "reconnaissance": self.id_reconnaissance,
+            },
+            "links": {
+                "self": url_for("nom", name_id=self.id, _external=True),
+                "json": url_for("api_places_single", name_id=self.id, _external=True)
+            },
+            "relationships": {
+                 "editions": [
+                     author.author_to_json()
+                     for author in self.authorships
+                 ]
+            }
+        }
 
 class Reconnaissances(db.Model):
     __tablename__ = 'reconnaissances'

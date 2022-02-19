@@ -6,7 +6,22 @@
 
 {% block corps %}
         {% if homme %}
-            <h1>{{homme.prenom}} {{homme.nom}}</h1>
+            <h1>
+                {% if homme.prenom or homme.nom %}
+                    {% if homme.prenom %}    
+                    {{homme.prenom}}
+                    {% else %}
+                    (?)
+                    {% endif %}
+                    {% if homme.nom %}
+                    {{homme.nom}}
+                    {% else %}
+                    (?)
+                    {% endif %}
+                {% else %}
+                Nom(s) Inconnu(s)
+                {% endif %}
+            </h1>
             <dl>
                 <dt>Sexe :</dt>
                 {% if homme.genre=="H" %}
@@ -15,7 +30,7 @@
                 {% if homme.genre=="F" %}
                 <dd>Femme</dd>
                 {% endif %}
-                <dt>Lieu d'habitation :</dt><dd>{{homme.localite}}{% if homme.precision_sur_origine %}{{homme.precision_sur_origine}}{% endif %}</dd>
+                <dt>Lieu d'habitation :</dt><dd>{{homme.localite}}{% if homme.precision_sur_origine %}, {{homme.precision_sur_origine}}{% endif %}</dd>
                 {% if homme.informations_personnelles %}
                 <dt>Information personnelle :</dt><dd>{{homme.informations_personnelles.replace("�", "'")}}</dd>
                 {% endif %}     
@@ -25,6 +40,16 @@
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}
-        <p class="retour_accueil"><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+        <p class="retour_accueil">
+        {% if homme.id > 1 %}
+        <a href="{{url_for('nom', name_id=(homme.id - 1))}}">Page précédente</a>
+        <-------------
+        {% endif %}
+        <a href="{{url_for('accueil')}}">Retour à l'accueil</a>
+        {% if homme.id < nbr %}
+        ------------->
+    <a href="{{url_for('nom', name_id=(homme.id + 1))}}">Page suivante</a>
+        {% endif %}
+        </p>
     </body>
 {% endblock %}

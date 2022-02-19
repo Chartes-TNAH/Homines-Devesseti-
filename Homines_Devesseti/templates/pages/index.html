@@ -26,7 +26,21 @@
             Il y a {{hommes|length }} dépendants enregistrées :
             <ul>
                 {% for homme in hommes %}
-                    <li><a href="{{url_for('nom', name_id=homme.id)}}">{{homme.prenom}} {{homme.nom}}</a></li>
+                    <li><a href="{{url_for('nom', name_id=homme.id)}}">                
+                    {% if homme.prenom or homme.nom %}
+                    {% if homme.prenom %}    
+                    {{homme.prenom}}
+                    {% else %}
+                    (?)
+                    {% endif %}
+                    {% if homme.nom %}
+                    {{homme.nom}}
+                    {% else %}
+                    (?)
+                    {% endif %}
+                    {% else %}
+                    Inconnu
+                    {% endif %}</a></li>
                 {% endfor %}
             </ul>
 </p>

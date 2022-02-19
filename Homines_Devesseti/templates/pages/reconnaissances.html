@@ -15,7 +15,21 @@
             <dl style="border: solid rgb(48, 4, 4); padding: 1%;">
                 <dt>Réalisée devant {{rec.commandeur}} par :</dt>
                 {% for rec_homme in rec_hommes %} 
-                <dd><a href="{{url_for('nom', name_id=rec_homme.id)}}">{{rec_homme.prenom}} {{rec_homme.nom}}</a></dd>
+                <dd><a href="{{url_for('nom', name_id=rec_homme.id)}}">                
+                    {% if rec_homme.prenom or rec_homme.nom %}
+                        {% if rec_homme.prenom %}    
+                        {{rec_homme.prenom}}
+                        {% else %}
+                        (?)
+                        {% endif %}
+                        {% if rec_homme.nom %}
+                        {{rec_homme.nom}}
+                        {% else %}
+                        (?)
+                        {% endif %}
+                    {% else %}
+                    Nom(s) Inconnu(s)
+                    {% endif %}</a></dd>
                 {% endfor %}
                 {% if rec.notaire %}
                 <dt>Notaire présent :</dt>
@@ -461,7 +475,7 @@
             <!-- Blocs Permettant de créer un lien vers chaque déclaration de biens concernée par cette reconnaissance -->
                 {% endif %}
                 {% if rec.cens_en_poule or rec.totalSeigle or rec.totalAvoine or rec.total_sous_tournois %}
-                <dt>Redevances :</dt>
+                <dt>Redevances à payer :</dt>
                 <table>
                     <thead>
                         <tr>
@@ -491,6 +505,12 @@
                 <dt>Jour de paiement :</dt>
                 <dd>{{rec.jour_paiement}}</dd>
                 {% endif %}
+                <dt>Détails sur les redevances :</dt>
+                {% if rec_det_red %}   
+                {% for det_red in rec_det_red %} 
+                <dd><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">Redevance n°{{det_red.id_detail_redevance}}</a></dd>
+                {% endfor %}
+                {% endif %}  
                 {% if rec.type_de_Juridiction or rec.mandement %}
                     <dt>Juridiction :</dt>
                     {% if rec.type_de_Juridiction and rec.mandement %}
@@ -498,18 +518,14 @@
                     {% else %}
                     <dd>{{rec.type_de_Juridiction}} {{rec.mandement}}</dd>
                     {% endif %}
-                {% endif %}
-                {% if rec_det_red %}
-                <dt>Détails sur les redevances :</dt>
-                {% for det_red in rec_det_red %} 
-                <dd><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">Redevance n°{{det_red.id_detail_redevance}}</a></dd>
-                {% endfor %}
-                {% endif %}                
+                {% endif %}           
             <!-- Blocs Permettant de créer un lien vers chaque redevance concernée par cette reconnaissance -->
             </d2>
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}
-        <p class="retour_accueil"><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+        <p class="retour_accueil">
+        <a href="{{url_for('accueil')}}">Retour à l'accueil</a>
+        </p>
     </body>
 {% endblock %}
