@@ -32,9 +32,10 @@
             <dt>Biens ou taxes associés :</dt>
             <dd>{{det_red.pro.replace('+', 'et').replace('�', 'à')}}</dd>
                 {% endif %}
-            {% if det_red.nom.replace %}
+            {% if det_red.nom %}
             <dt>Nom :</dt>
-            <dd>{{det_red.nom}}{% endif %}</dd>
+            <dd>{{det_red.nom}}</dd>
+            {% endif %}
                 {% if det_red.lieu %}
             <dt>Emplacement :</dt>
             <dd>{{det_red.lieu}}</dd>{% endif %}

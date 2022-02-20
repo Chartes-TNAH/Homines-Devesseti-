@@ -25,22 +25,24 @@
                 <dd>{{det_pos.supplement}}</dd>
                 {% endif %}
                 {% if det_pos.confront1 %}
-                    {% if det_pos.confront1 and det_pos.confront2%}
+                    {% if det_pos.confront2%}
                     <dt>Confronts :</dt>
-                    <dd>- {{det_pos.confront1}}</dd>
-                    <dd>- {{det_pos.confront2}}</dd>
+                    <ul>
+                    <li>{{det_pos.confront1}}</li>
+                    <li>{{det_pos.confront2}}</li>
                         {% if det_pos.confront3 %}
-                        <dd>- {{det_pos.confront3}}</dd>
+                        <li>{{det_pos.confront3}}</li>
                             {% if det_pos.confront4 %}
-                            <dd>- {{det_pos.confront4}}</dd>
+                            <li>{{det_pos.confront4}}</li>
                                 {% if det_pos.confront5 %}
-                                <dd>- {{det_pos.confront5}}</dd>
+                                <li>{{det_pos.confront5}}</li>
                                     {% if det_pos.confront6 %}
-                                    <dd>- {{det_pos.confront6}}</dd>
+                                    <li>{{det_pos.confront6}}</li>
                                     {% endif %}
                                 {% endif %}
                             {% endif %}
                         {% endif %}
+                        </ul>
                     {% else %}
                     <dt>Confront :</dt>
                     <dd>{{det_pos.confront1}}</dd>

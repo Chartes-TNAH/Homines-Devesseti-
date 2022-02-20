@@ -10,8 +10,8 @@
             <h2>Page {{(rec.page[0].ref_du_terrier|string).split()[0][:-1]}}</h2>
         <!-- Chaque Reconnaissance étant associé à une unique page, cette dernière est le premier et seul élément
         de la liste issu de la jointure entre les tables Reconnaissances et Répertoire 
-        Le code page que j'ai utilisé associe le numéro de la page et la position de la reconnaissance dans la page.
-        Il faut donc transformé le code-page en chaîne de caractère pour en extraire le numéro de la page-->
+        Le code page que j'ai utilisé associe le numéro de la page du terrier et la position de la reconnaissance dans la page.
+        Il faut donc transformer le code-page en chaîne de caractère pour en extraire le numéro de la page-->
             <dl style="border: solid rgb(48, 4, 4); padding: 1%;">
                 <dt>Réalisée devant {{rec.commandeur}} par :</dt>
                 {% for rec_homme in rec_hommes %} 
@@ -160,7 +160,7 @@
                         {% if rec.terrae=="Oui" %}
                         <dd>Terrae</dd>
                         {% else %}
-                        {% if rec.pascua<="1" %}
+                        {% if rec.terrae<="1" %}
                             <dd>{{rec.terrae}} terra</dd>
                             {% else %}
                             <dd>{{rec.terrae}} terrae</dd>

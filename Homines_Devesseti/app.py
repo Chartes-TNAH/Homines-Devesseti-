@@ -14,7 +14,9 @@ app = Flask("Homines_Devesseti",
 #Le premier argument de la fonction Flask correspond au nom du répertoire dans lequel sont situés les éléments utilisés
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///homines_devesseti.db?check_same_thread=False'
-#L'argument check_same_thread permet d'éviter les problèmes de thread au moment des requêtes utilisant des jointures
+'''L'argument check_same_thread permet d'éviter les problèmes de thread au moment des requêtes utilisant des jointures
+Nous avons ici veillé à placer le fichier sqlite dans le même dossier que celui-ci afin d'éviter toute problème de path
+lié à un changement d'os'''
 db = SQLAlchemy(app)
 
 # Mise en place de la gestion d'utilisateurs
