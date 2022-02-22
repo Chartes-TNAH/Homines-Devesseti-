@@ -21,7 +21,7 @@ class Authorship(db.Model):
 
     def author_to_json(self):
         return {
-            "author": self.user.to_jsonapi_dict(),
+            "author": self.user.to_jsonapi_user(),
             "on": self.authorship_date
         }
 
