@@ -63,6 +63,8 @@ def rec(rec_id):
 @login_required
 def rec_update(rec_id):
     reco = list(filter(lambda rec: rec.id_reconnaissance == rec_id, Reconnaissances.query.all()))[0]
+    page = list(filter(lambda p: p.id_reconnaissance == rec_id, Repertoire.query.all()))[0]
+    #La logique des variables de cette route suit celle de la route précédente
     mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août',
             'Septembre', 'Octobre', 'Novembre', 'Décembre']
     corvees = [
@@ -71,6 +73,8 @@ def rec_update(rec_id):
     erreurs = []
     updated = False
     if request.method == "POST":
+        if not request.form.get("recPage", "").strip():
+            erreurs.append("recPage")
         if not request.form.get("recNotaire", "").strip():
             erreurs.append("recNotaire")
         if not request.form.get("recTemoin1", "").strip():
@@ -212,6 +216,7 @@ def rec_update(rec_id):
         if not request.form.get("recMandement", "").strip():
             erreurs.append("recMandement")
         if not erreurs:
+            page.ref_du_terrier = request.form["recPage"]
             if request.form["recNotaire"] != "None":
                 reco.notaire = request.form["recNotaire"]
             if request.form["recTemoin1"] != "None":
@@ -346,6 +351,7 @@ def rec_update(rec_id):
                 reco.mandement = request.form["recMandement"]
             #Mise à jour des tables :
             db.session.add(reco)
+            db.session.add(page)
             db.session.add(Authorship(reconnaissances=reco, user=current_user))
             db.session.commit()
             updated = True
@@ -357,7 +363,8 @@ def rec_update(rec_id):
         rec=reco,
         mois=mois,
         corvees=corvees,
-        updated=updated
+        updated=updated,
+        page=page
     )
 
 @app.route("/dp/<int:dp_id>/update", methods=["GET", "POST"])

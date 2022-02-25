@@ -22,6 +22,9 @@
                 Nom(s) Inconnu(s)
                 {% endif %}
             </h1>
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('name_update', name_id=homme.id)}}">Modifier la page</a>
+            {% endif %}
             <dl>
                 <dt>Sexe :</dt>
                 {% if homme.genre=="H" %}
@@ -37,6 +40,18 @@
                 <dt>Reconnaissance :</dt><dd><a href="{{url_for('rec', rec_id=homme.id_reconnaissance)}}">{{homme.id_reconnaissance}}</a>{% if homme.represente_par %} 
                     (représenté par <a href="{{url_for('nom', name_id=homme.represente_par)}}">un proche</a>){% endif %}</dd>
             </dl>
+            <d2>
+                {% if homme.authorships %}
+                <dt>Historique des modifications :</dt>
+                <dd>
+                    <ul>
+                        {% for modification in homme.authorships %}
+                            <li>[{{modification.authorship_date}}] {{modification.user.user_nom}}</li>
+                        {% endfor %}
+                    </ul>
+                </dd>
+                {% endif %}
+            </d2>
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}

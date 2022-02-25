@@ -8,6 +8,9 @@
         {% if det_pos %}
             <h1>Déclaration de bien n°{{det_pos.id_detail_possession}}</h1>
             <h2>Reconnaissance <a href="{{url_for('rec', rec_id=det_pos.id_reconnaissance)}}">{{det_pos.id_reconnaissance}}</a></h2>
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('det_pos_update', dp_id=det_pos.id_detail_possession)}}">Modifier la page</a>
+            {% endif %}
             <dl>
                 {% if det_pos.personne_concernee %}
                 <dt>Personne concernée :<dt>
@@ -49,6 +52,18 @@
                     {% endif %}
                 {% endif %}
             </dl>
+            <d2>
+                {% if det_pos.authorships %}
+            <dt>Historique des modifications :</dt>
+                <dd>
+                    <ul>
+                        {% for modification in det_pos.authorships %}
+                            <li>[{{modification.authorship_date}}] {{modification.user.user_nom}}</li>
+                        {% endfor %}
+                    </ul>
+                </dd>
+                {% endif %}
+            </d2>
         {% else %}
             <p>La base de données est en cours de constitution</p>
         {% endif %}

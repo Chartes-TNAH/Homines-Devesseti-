@@ -6,6 +6,7 @@ from ..constantes import LIEUX_PAR_PAGE, API_ROUTE
 from ..modeles.donnees import Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire
 from .generic import hommes, dets_pos, dets_red, recs
 
+#Fonctions prédéfinies pour l'affichage des données en JSON:
 
 def Json_404():
     response = jsonify({"erreur": "Unable to perform the query"})
@@ -43,7 +44,7 @@ def api_dr_single(dr_id):
 def api_rec_single(rec_id):
     try:
         query_rec = list(filter(lambda rec: rec.id_reconnaissance == rec_id, recs))[0]
-        return jsonify(query_rec.to_jsonapi_rec())
+        return jsonify(reconnaissance=query_rec.to_jsonapi_rec())
     except:
         return Json_404()
 

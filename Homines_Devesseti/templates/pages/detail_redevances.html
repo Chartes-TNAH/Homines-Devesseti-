@@ -7,6 +7,9 @@
 {% block corps %}
         {% if det_red %}
             <h1>Redevance n°{{det_red.id_detail_redevance}}</h1>
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('det_red_update', dr_id=det_red.id_detail_redevance)}}">Modifier la page</a>
+            {% endif %}
             <h2>Reconnaissance <a href="{{url_for('rec', rec_id=det_red.id_reconnaissance)}}">{{det_red.id_reconnaissance}}</a></h2>
             <dl>
             <table>
@@ -42,6 +45,18 @@
                 {% if det_red.supplement %}
             <dt>Information complémentaire :</dt>
             <dd>{{det_red.supplement}}{% endif %}</dd>
+            </d2>
+            <d2>
+                {% if det_red.authorships %}
+            <dt>Historique des modifications :</dt>
+                <dd>
+                    <ul>
+                        {% for modification in det_red.authorships %}
+                            <li>[{{modification.authorship_date}}] {{modification.user.user_nom}}</li>
+                        {% endfor %}
+                    </ul>
+                </dd>
+                {% endif %}
             </d2>
         {% else %}
             <p>La base de données est en cours de constitution</p>

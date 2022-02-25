@@ -48,7 +48,13 @@ class DetailPossessions(db.Model):
             "type": "Déclaration de bien",
             "id": self.id_detail_possession,
             "attributes": {
-                "reconnaissance": self.id_reconnaissance,
+                "reconnaissance": {
+                    "id": self.id_reconnaissance,
+                    "links": {
+                        "page": url_for("rec", rec_id=self.id_reconnaissance, _external=True),
+                        "json": url_for("api_rec_single", rec_id=self.id_reconnaissance, _external=True)
+                    }
+                },
                 "personne_concernee": self.personne_concernee,
                 "type_de_bien": self.possession,
                 "nom": self.nom,
@@ -95,7 +101,13 @@ class DetailRedevances(db.Model):
             "type": "Redevance",
             "id": self.id_detail_redevance,
             "attributes": {
-                "reconnaissance": self.id_reconnaissance,
+                "reconnaissance": {
+                    "id": self.id_reconnaissance,
+                    "links": {
+                        "page": url_for("rec", rec_id=self.id_reconnaissance, _external=True),
+                        "json": url_for("api_rec_single", rec_id=self.id_reconnaissance, _external=True)
+                    }
+                },
                 "redevances_a_payer" :{
                     "poules": self.cens_en_poule,
                     "seigle":{
@@ -147,11 +159,18 @@ class Personnes(db.Model):
             "type": "Personne",
             "id": self.id,
             "attributes": {
+                "prenom": self.prenom,
                 "nom": self.nom,
                 "sexe": self.genre,
                 "loacalite": self.localite,
                 "informations_personnelles": self.informations_personnelles,
-                "reconnaissance": self.id_reconnaissance,
+                "reconnaissance": {
+                    "id": self.id_reconnaissance,
+                    "links": {
+                        "page": url_for("rec", rec_id=self.id_reconnaissance, _external=True),
+                        "json": url_for("api_rec_single", rec_id=self.id_reconnaissance, _external=True)
+                    }
+                }
             },
              "links": {
                 "self": url_for("nom", name_id=self.id, _external=True),
@@ -257,6 +276,7 @@ class Reconnaissances(db.Model):
             "id": self.id,
             "attributes": {
                 "id_reconnaissance": self.id_reconnaissance,
+                "localisation_dans_le_terrier": self.page[0].repertoire_to_json(),
                 "commandeur": self.commandeur,
                 "notaire": self.notaire,
                 "temoins": [
@@ -359,9 +379,27 @@ class Reconnaissances(db.Model):
             }
         }
 
+    def rec_hommes_to_json(self):
+        return {
+            "prenom": self.prenom,
+            "nom": self.nom,
+            "id": self.id,
+            "link": {
+                "page": "r",
+                "json": "r"
+            }
+        }
+
 class Repertoire(db.Model):
     __tablename__ = 'repertoire'
     id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
     id_reconnaissance = db.Column(db.Integer, db.ForeignKey("reconnaissances.id_reconnaissance"), nullable=False)
     ref_du_terrier = db.Column(db.Integer, nullable=False)
     reconnaissances = db.relationship("Reconnaissances", back_populates="page")
+
+    def repertoire_to_json(self):
+        return {
+            "page": int(str(self.ref_du_terrier).split()[0][:-1]),
+            "position_dans_la_page": int(str(self.ref_du_terrier).split()[0][-1])
+            #Méthode similaire à celle de la page générique pour extraire les éléments du code utilisé
+        }
