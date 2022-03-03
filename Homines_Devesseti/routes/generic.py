@@ -6,16 +6,6 @@ from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRede
 from ..modeles.utilisateurs import User
 from ..constantes import LIEUX_PAR_PAGE
 
-#Requêtes :
-recs = Reconnaissances.query.join(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
-'''Les éléments issus de la jointure forment une liste dans Reconnaissances.page'''
-hommes = Personnes.query.order_by(Personnes.id).all()
-dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
-dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
-nbr_rec = recs[-1].id
-nbr_hommes = hommes[-1].id
-nbr_det_red = dets_red[-1].id_detail_redevance
-nbr_det_pos = dets_pos[-1].id_detail_possession
 REPONSES_PAR_PAGES = 18
 
 #Routes de base :
@@ -25,31 +15,49 @@ def accueil():
 
 @app.route("/index")
 def index():
+    hommes = Personnes.query.order_by(Personnes.id).all()
+    dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
+    dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
+    recs = Reconnaissances.query.join(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
+    '''Pour une raison que j'ignore, il est impossible de factoriser les requêtes au début de cette page.
+    Il faut donc les répéter à chaque usage'''
     return render_template("pages/index.html", nom="Homines Devesseti",
         recs=recs, hommes=hommes, dets_pos=dets_pos, dets_red=dets_red)
 
 #Routes permettant l'affichage des données du terrier :
 @app.route("/name/<int:name_id>")
 def nom(name_id):
+    hommes = Personnes.query.order_by(Personnes.id).all()
+    nbr_hommes = hommes[-1].id
     return render_template("pages/noms.html", nom="Homines Devesseti", homme=hommes[name_id - 1], nbr=nbr_hommes)
 #On enlève systématiquement 1 à l'index car Python fait commencer le sien à 0
 
 @app.route("/dp/<int:dp_id>")
 def det_pos(dp_id):
+    dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
+    nbr_det_pos = dets_pos[-1].id_detail_possession
     return render_template("pages/detail_possessions.html", nom="Homines Devesseti", det_pos=dets_pos[dp_id - 1], nbr=nbr_det_pos)
 
 @app.route("/dr/<int:dr_id>")
 def det_red(dr_id):
+    dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
+    nbr_det_red = dets_red[-1].id_detail_redevance
     return render_template("pages/detail_redevances.html", nom="Homines Devesseti", det_red=dets_red[dr_id - 1], nbr=nbr_det_red)
 
 @app.route("/rec/<int:rec_id>")
 def rec(rec_id):
+    recs = Reconnaissances.query.join(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
+    # Les éléments issus de la jointure forment une liste dans Reconnaissances.page
     reco = list(filter(lambda rec: rec.id_reconnaissance == rec_id, recs))
     '''J'ai voulu ici créer mes routes non pas en fonction de l'id de la ligne mais d'un id perso que j'ai réutilisé
     dans d'autres tables et dont j'ai besoin pour faire des renvois internes.
     La fonction filter permet de retrouver la ligne dont l'id perso correspond à l'id de la route.
     La fontion list permet de transformer le résultat en liste.
     La ligne que je cherche en est donc le premier et seul contenu'''
+    nbr_rec = recs[-1].id
+    hommes = Personnes.query.order_by(Personnes.id).all()
+    dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
+    dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
     rec_hommes = list(filter(lambda homme: homme.id_reconnaissance == rec_id, hommes))
     rec_det_pos = list(filter(lambda det_pos: det_pos.id_reconnaissance == rec_id, dets_pos))
     rec_det_red = list(filter(lambda det_red: det_red.id_reconnaissance == rec_id, dets_red))
