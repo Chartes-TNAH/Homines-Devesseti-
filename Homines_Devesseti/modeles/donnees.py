@@ -45,7 +45,7 @@ class DetailPossessions(db.Model):
 
     def to_jsonapi_dp(self):
         return {
-            "type": "Déclaration de bien",
+            "type": "déclaration de bien",
             "id": self.id_detail_possession,
             "attributes": {
                 "reconnaissance": {
@@ -98,7 +98,7 @@ class DetailRedevances(db.Model):
 
     def to_jsonapi_dr(self):
         return {
-            "type": "Redevance",
+            "type": "redevance",
             "id": self.id_detail_redevance,
             "attributes": {
                 "reconnaissance": {
@@ -156,7 +156,7 @@ class Personnes(db.Model):
 
     def to_jsonapi_name(self):
         return {
-            "type": "Personne",
+            "type": "personne",
             "id": self.id,
             "attributes": {
                 "prenom": self.prenom,
@@ -272,7 +272,7 @@ class Reconnaissances(db.Model):
 
     def to_jsonapi_rec(self):
         return {
-            "type": "Reconnaissance",
+            "type": "reconnaissance",
             "id": self.id,
             "attributes": {
                 "id_reconnaissance": self.id_reconnaissance,
