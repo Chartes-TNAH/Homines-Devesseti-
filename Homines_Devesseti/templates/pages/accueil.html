@@ -1,16 +1,41 @@
 {% extends "conteneur.html" %}
+{% block afternav %}
+{% include "partials/recherche.html" %}
+{%endblock%}
 {% block corps %}
-<h1>Bienvenue !</h1>
-        <p>
-            {% if hommes %}
-                Il y a {{ hommes|length }} enregistrés :
-                <ul>
-                    {% for nom_id, homme in hommes.items() %}
-                        <li><a href="{{url_for('nom', name_id=nom_id)}}">{{homme.nom}}</a></li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                La base de données est en cours de constitution
-            {% endif %}
-    </p>
+<h1>Bienvenue à Devesset !</h1>
+<div>
+    La commanderie de Devesset est un établissement religieux fondé au cours
+    du Moyen Âge par l'ordre de l'Hôpital de Saint-Jean de Jérusalem à la frontière entre le Vivarais et le Velay.
+    Les archives de cet établissement ont été la base d'un mémoire de recherche en histoire médiévale soutenu en juin
+    2020. Les données utilisées pour ce site sont toutes issues des documents étudiés dans le cadre de ce travail.
+</div>
+<figure>
+    <img src="{{url_for('static', filename='images/IMG_6228.jpg')}}" width="400px" />
+    <figcaption>Source : <a href="https://devesset.com/">site de la commanderie</a></figcaption>
+</figure>
+<p>On ne sait que peu de choses sur la fondation de la commanderie. En effet, le document le plus ancien que l'on
+    connaisse date de 1246 mais il est probable que la fondation remonte au début du XIIIème siècle, voire à la fin du
+    XIIème siècle. Une chose semble certaine : l'établissement connaît un développement conséquent qui se manifeste au
+    début du XIVème siècle par l'apparition d'une paroisse gérée par les Hospitaliers, d'un mandement centré sur la
+    commanderie et d'une villeneuve établie à proximité.</p>
+<p>Les archives de la commanderie ont par la suite été rassemblées avec celle du Grand-Prieuré d'Auvergne au sein de
+    la commanderie Saint-Georges à Lyon, d'où elles ont rejoint leur dépôt actuel au moment de la confiscation des biens
+    de
+    l'ordre à la Révolution. Quant à la commanderie, elle est devenue au même moment un bâtiment public avant d'être
+    abandonnée au milieu du XIXème siècle à la suite d'un incendie. Elle est depuis devenue une propriété privée,
+    partiellement
+    inscrite au titre des monuments historiques depuis 1980.</p>
+<p>Cette application a pour but de permettre de faciliter la consultation des données collectées pendant ce travail de
+    recherche, et plus particulièrement celle contenue dans le terrier de Devesset, conservé aux AD du Rhône à la cote
+    48 H 1669. Le tableau ayant servi à collecter les données du terrier est disponible <a
+        href="https://github.com/virgile-reignier/memoire.git">ici</a>. Le travail a aussi et surtout pour objectif de
+    fournir un prototype d'application permettant l'exploitation, la consultation et la réutilisation de données issues
+    d'archives sérielles anciennes.</p>
+<p>Pour plus d'information sur l'histoire de cet établissement, se référer à : Virgile REIGNIER, « Aux origines de la
+    commanderie de Devesset », Revue du Vivarais, CXXV, 2021, pp. 81-105</p>
+<figure>
+    <img src="{{url_for('static', filename='images/20200506_160748.jpg')}}" width="600px" />
+</figure>
+<p><a class="footer" href="{{url_for('index')}}">Consulter l'index du site</a></p>
 {% endblock %}

@@ -1,0 +1,66 @@
+{% extends "conteneur.html" %}
+{% block afternav %}
+    {% include "partials/recherche.html" %}
+{%endblock%}
+{% block corps %}
+<h1><a href="{{url_for('accueil')}}">Retour à l'accueil</a></h1>
+{% if recs and hommes %}
+<h2>Il y a {{recs|length + hommes|length + dets_pos|length + dets_rec|length}} enregistrements dans la base</h2>
+<h4 style="line-height: 140%;"><span style="text-decoration: underline;">Sommaire :</span>
+    <ul>
+    <li><a href="#recs">Reconnaissances</a></li>
+    <li><a href="#hommes">Dépendants</a></li>
+    <li><a href="#dets_pos">Déclarations de biens</a></li>
+    <li><a href="#dets_red">Déclarations de redevances</a></li>
+</ul>
+</h4>
+        <p id="recs">         
+                Il y a {{recs|length }} reconnaissances enregistrées :
+                <ul>
+                    {% for rec in recs %}
+                        <li><a href="{{url_for('rec', rec_id=rec.id_reconnaissance)}}">Reconnaissance {{rec.id_reconnaissance}}</a></li>
+                    {% endfor %}
+                </ul>
+    </p>
+    <p id="hommes">
+            Il y a {{hommes|length }} dépendants enregistrées :
+            <ul>
+                {% for homme in hommes %}
+                    <li><a href="{{url_for('nom', name_id=homme.id)}}">                
+                    {% if homme.prenom or homme.nom %}
+                    {% if homme.prenom %}    
+                    {{homme.prenom}}
+                    {% else %}
+                    (?)
+                    {% endif %}
+                    {% if homme.nom %}
+                    {{homme.nom}}
+                    {% else %}
+                    (?)
+                    {% endif %}
+                    {% else %}
+                    Inconnu
+                    {% endif %}</a></li>
+                {% endfor %}
+            </ul>
+</p>
+<p id="dets_pos">
+    Il y a {{dets_pos|length }} déclarations de biens enregistrées :
+    <ul>
+        {% for det_pos in dets_pos %}
+            <li><a href="{{url_for('det_pos', dp_id=det_pos.id_detail_possession)}}">Déclaration de bien n°{{det_pos.id_detail_possession}}</a></li>
+        {% endfor %}
+    </ul>
+</p>
+<p id="dets_red">
+    Il y a {{dets_red|length }} déclarations de redevances enregistrées :
+    <ul>
+        {% for det_red in dets_red %}
+            <li><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">Redevance n°{{det_red.id_detail_redevance}}</a></li>
+        {% endfor %}
+    </ul>
+</p>
+    {% else %}
+        <p>La base de données Hommes est en cours de constitution</p>
+    {% endif %}
+{% endblock %}
