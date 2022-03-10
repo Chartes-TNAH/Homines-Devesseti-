@@ -18,7 +18,7 @@ def index():
     hommes = Personnes.query.order_by(Personnes.id).all()
     dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
     dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
-    recs = Reconnaissances.query.join(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
+    recs = Reconnaissances.query.outerjoin(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
     '''Pour une raison que j'ignore, il est impossible de factoriser les requêtes au début de cette page.
     Il faut donc les répéter à chaque usage'''
     return render_template("pages/index.html", nom="Homines Devesseti",
@@ -46,7 +46,7 @@ def det_red(dr_id):
 
 @app.route("/rec/<int:rec_id>")
 def rec(rec_id):
-    recs = Reconnaissances.query.join(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
+    recs = Reconnaissances.query.outerjoin(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
     # Les éléments issus de la jointure forment une liste dans Reconnaissances.page
     reco = list(filter(lambda rec: rec.id_reconnaissance == rec_id, recs))
     '''J'ai voulu ici créer mes routes non pas en fonction de l'id de la ligne mais d'un id perso que j'ai réutilisé
@@ -71,7 +71,9 @@ def rec(rec_id):
 @login_required
 def rec_update(rec_id):
     reco = list(filter(lambda rec: rec.id_reconnaissance == rec_id, Reconnaissances.query.all()))[0]
-    page = list(filter(lambda p: p.id_reconnaissance == rec_id, Repertoire.query.all()))[0]
+    page = []
+    if reco.page:
+        page = list(filter(lambda p: p.id_reconnaissance == rec_id, Repertoire.query.all()))[0]
     #La logique des variables de cette route suit celle de la route précédente
     mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août',
             'Septembre', 'Octobre', 'Novembre', 'Décembre']
@@ -81,8 +83,9 @@ def rec_update(rec_id):
     erreurs = []
     updated = False
     if request.method == "POST":
-        if not request.form.get("recPage", "").strip():
-            erreurs.append("recPage")
+        if reco.page:
+            if not request.form.get("recPage", "").strip():
+                erreurs.append("recPage")
         if not request.form.get("recNotaire", "").strip():
             erreurs.append("recNotaire")
         if not request.form.get("recTemoin1", "").strip():
@@ -224,7 +227,8 @@ def rec_update(rec_id):
         if not request.form.get("recMandement", "").strip():
             erreurs.append("recMandement")
         if not erreurs:
-            page.ref_du_terrier = request.form["recPage"]
+            if reco.page:
+                page.ref_du_terrier = request.form["recPage"]
             if request.form["recNotaire"] != "None":
                 reco.notaire = request.form["recNotaire"]
             if request.form["recTemoin1"] != "None":
@@ -359,7 +363,8 @@ def rec_update(rec_id):
                 reco.mandement = request.form["recMandement"]
             #Mise à jour des tables :
             db.session.add(reco)
-            db.session.add(page)
+            if rec.page:
+                db.session.add(page)
             db.session.add(Authorship(reconnaissances=reco, user=current_user))
             db.session.commit()
             updated = True

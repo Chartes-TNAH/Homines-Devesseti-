@@ -4,9 +4,8 @@ from urllib.parse import urlencode
 from ..app import app
 from ..constantes import LIEUX_PAR_PAGE, API_ROUTE
 from ..modeles.donnees import Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire
-#from .generic import hommes, dets_pos, dets_red, recs
 
-#Fonctions prédéfinies pour l'affichage des données en JSON:
+#Fonction prédéfinie pour l'affichage des données en JSON:
 
 def Json_404():
     response = jsonify({"erreur": "Unable to perform the query"})
@@ -46,8 +45,14 @@ def api_dr_single(dr_id):
 @app.route(API_ROUTE + "/rec/<int:rec_id>")
 def api_rec_single(rec_id):
     try:
-        recs = Reconnaissances.query.join(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
+        recs = Reconnaissances.query.outerjoin(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
         query_rec = list(filter(lambda rec: rec.id_reconnaissance == rec_id, recs))[0]
+        #Code pour injecter des données lorsque la jointure ne se fait pas avec la table Répertoire:
+        if not query_rec.page:
+            query_rec.page = [Repertoire(
+            id_reconnaissance="Inconnue",
+            ref_du_terrier="Inconnue"
+        )]
         return jsonify(reconnaissance=query_rec.to_jsonapi_rec())
     except:
         return Json_404()

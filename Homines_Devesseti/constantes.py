@@ -7,7 +7,7 @@ API_ROUTE = "/api"
 if SECRET_KEY == "JE SUIS UN SECRET !":
     warn("Le secret par défaut n'a pas été changé, vous devriez le faire", Warning)
 
-#COnfiguration des bases
+#Configuration des bases :
 class _TEST:
     SECRET_KEY = SECRET_KEY
     SQLALCHEMY_DATABASE_URI = 'sqlite:///test_db.sqlite'

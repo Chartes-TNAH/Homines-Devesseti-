@@ -276,7 +276,7 @@ class Reconnaissances(db.Model):
             "id": self.id,
             "attributes": {
                 "id_reconnaissance": self.id_reconnaissance,
-                "localisation_dans_le_terrier": self.page[0].repertoire_to_json(),
+#                "localisation_dans_le_terrier": self.page[0].repertoire_to_json(),
                 "commandeur": self.commandeur,
                 "notaire": self.notaire,
                 "temoins": [
@@ -301,7 +301,7 @@ class Reconnaissances(db.Model):
                     "chareis": self.chareis
                 },
                 "statut_terres": self.statut_terre,
-                "biens_déclares": {
+                "biens_declares": {
                     "domus": self.domus,
                     "orti": self.orti,
                     "prata": self.prata,
@@ -398,8 +398,12 @@ class Repertoire(db.Model):
     reconnaissances = db.relationship("Reconnaissances", back_populates="page")
 
     def repertoire_to_json(self):
-        return {
-            "page": int(str(self.ref_du_terrier).split()[0][:-1]),
-            "position_dans_la_page": int(str(self.ref_du_terrier).split()[0][-1])
-            #Méthode similaire à celle de la page générique pour extraire les éléments du code utilisé
-        }
+        if self.ref_du_terrier == "Inconnue":
+            return {"page": "Inconnue",
+                    "position_dans_la_page": "Inconnue"}
+        else:
+            return {
+                "page": int(str(self.ref_du_terrier).split()[0][:-1]),
+                "position_dans_la_page": int(str(self.ref_du_terrier).split()[0][-1])
+                #Méthode similaire à celle de la page générique pour extraire les éléments du code utilisé
+            }

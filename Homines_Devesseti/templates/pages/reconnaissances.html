@@ -7,7 +7,9 @@
 {% block corps %}
         {% if rec %}
             <h1>Reconnaissance {{rec.id_reconnaissance}}</h1>
+            {% if rec.page %}
             <h2>Page {{(rec.page[0].ref_du_terrier|string).split()[0][:-1]}}</h2>
+            {% endif %}
         <!-- Chaque Reconnaissance étant associé à une unique page, cette dernière est le premier et seul élément
         de la liste issu de la jointure entre les tables Reconnaissances et Répertoire 
         Le code page que j'ai utilisé associe le numéro de la page du terrier et la position de la reconnaissance dans la page.
