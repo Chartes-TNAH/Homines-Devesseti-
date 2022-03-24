@@ -13,7 +13,7 @@
 {% endif %}
 	<h1>Reconnaissance {{rec.id_reconnaissance}}</h1>
     <form method="POST" action="{{ url_for('rec_update', rec_id=rec.id_reconnaissance)}}">
-    	{% if rec.page %}
+    	{% if page %}
 		<div class="mb-3">
 		    <label for="recPage" class="form-label">Page (numéro + position) :</label>
 		    <input type="integer" name="recPage" class="form-control" id="recPage" aria-describedby="recPageHelp" value="{{page.ref_du_terrier}}" />

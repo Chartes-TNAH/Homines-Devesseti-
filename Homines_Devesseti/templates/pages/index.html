@@ -6,7 +6,7 @@
 <h1><a href="{{url_for('accueil')}}">Retour à l'accueil</a></h1>
 {% if recs and hommes %}
 <h2>Il y a {{recs|length + hommes|length + dets_pos|length + dets_rec|length}} enregistrements dans la base</h2>
-<h4 style="line-height: 140%;"><span style="text-decoration: underline;">Sommaire :</span>
+<h4 class="index" style="line-height: 140%;"><span style="text-decoration: underline;">Sommaire :</span>
     <ul>
     <li><a href="#recs">Reconnaissances</a></li>
     <li><a href="#hommes">Dépendants</a></li>

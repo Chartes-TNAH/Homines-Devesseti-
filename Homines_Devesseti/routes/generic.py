@@ -652,3 +652,20 @@ def deconnexion():
         logout_user()
     flash("Vous êtes déconnecté-e", "info")
     return redirect("/")
+
+#Intégration de la charte de Devesset
+@app.route("/charte")
+def charte():
+    return render_template("charte/Devoir_charte_Devesset_python_accueil.html", nom="Homines Devesseti")
+
+@app.route("/charte/paleo")
+def charte_paleo():
+    return render_template("charte/Devoir_charte_Devesset_python_allograph.html", nom="Homines Devesseti")
+
+@app.route("/charte/norm")
+def charte_norm():
+    return render_template("charte/Devoir_charte_Devesset_python_norm.html", nom="Homines Devesseti")
+
+@app.route("/charte/index")
+def charte_index():
+    return render_template("charte/Devoir_charte_Devesset_python_index.html", nom="Homines Devesseti")
