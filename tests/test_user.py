@@ -4,7 +4,6 @@ from Homines_Devesseti.modeles.utilisateurs import User
 
 
 class TestUser(Base):
-    """ Unit tests for Users """
     def test_creation(self):
         with self.app.app_context():
             statut, utilisateur = User.creer("joh", "johanna.johanna@enc-sorbonne.fr", "Johanna", "azerty")
@@ -18,6 +17,5 @@ class TestUser(Base):
         with self.app.app_context():
             statut, cree = User.creer("joh", "johanna.johanna@enc-sorbonne.fr", "Johanna", "azerty")
             connecte = User.identification("joh", "azerty")
-
         self.assertEqual(cree, connecte)
         self.assertTrue(statut)
