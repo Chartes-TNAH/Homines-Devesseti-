@@ -4,9 +4,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from ..app import app, login, db
 from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, DetailPossessions, Authorship
 from ..modeles.utilisateurs import User
-from ..constantes import LIEUX_PAR_PAGE
-
-REPONSES_PAR_PAGES = 18
+from ..constantes import PERSONNES_PAR_PAGE
 
 #Routes de base :
 @app.route("/")
@@ -564,44 +562,21 @@ def name_update(name_id):
         updated=updated
     )
 
-#Routes pour les recherches:
+#Route pour les recherches:
 @app.route("/recherche")
 def recherche():
     motclef = request.args.get("keyword", None)
     page = request.args.get("page", 1)
-
     if isinstance(page, str) and page.isdigit():
         page = int(page)
     else:
         page = 1
-
     resultats = []
-    titre = "Recherche"
     if motclef:
         resultats = Personnes.query.filter(Personnes.nom.like("%{}%".format(motclef)))
-        resultats = resultats.paginate(page=page, per_page=REPONSES_PAR_PAGES)
+        resultats = resultats.paginate(page=page, per_page=PERSONNES_PAR_PAGE)
         titre = "Résultat pour la recherche `" + motclef + "`"
     return render_template("pages/recherche.html", resultats=resultats, titre=titre, keyword=motclef)
-
-
-@app.route("/browse")
-def browse():
-    """ Route permettant la recherche plein-texte"""
-    # On préfèrera l'utilisation de .get() ici
-    #   qui nous permet d'éviter un if long (if "clef" in dictionnaire and dictonnaire["clef"])
-    page = request.args.get("page", 1)
-
-    if isinstance(page, str) and page.isdigit():
-        page = int(page)
-    else:
-        page = 1
-
-    resultats = Personnes.query.paginate(page=page, per_page=LIEUX_PAR_PAGE)
-
-    return render_template(
-        "pages/browse.html",
-        resultats=resultats
-    )
 
 #Routes concernant les comptes utilisateur
 @app.route("/register", methods=["GET", "POST"])
@@ -669,3 +644,66 @@ def charte_norm():
 @app.route("/charte/index")
 def charte_index():
     return render_template("charte/Devoir_charte_Devesset_python_index.html", nom="Homines Devesseti")
+'''
+from whoosh import query
+import whoosh.index as index
+import os.path
+from ..models_whoosh import PageWhoosh
+from whoosh.index import create_in
+from whoosh.qparser import QueryParser
+@app.route("/search")
+def search():
+#    motclef = request.args.get("keyword", None)
+    page = request.args.get("page", 1)
+
+    if isinstance(page, str) and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+
+#    os.makedirs(app.config["WHOOSH_SCHEMA_DIR"], exist_ok=True)
+#    ix = create_in(app.config["WHOOSH_SCHEMA_DIR"], PageWhoosh)
+    ix = index.open_dir(app.config["WHOOSH_SCHEMA_DIR"])
+    writer = ix.writer()
+    hommes = Personnes.query.order_by(Personnes.id).all()
+    for homme in hommes:
+        writer.add_document(
+            nom=u'aa',
+            prenom=u'ababa'
+        )
+    writer.commit()
+    p = u'a'
+    q = query.Term('nom', u'a')
+    titre = "Résultat pour la recherche `" + p + "`"
+
+
+#    qp = QueryParser("content", schema=ix.schema)
+#    q = qp.parse(request.args.get("q", "a"))
+
+    with ix.searcher() as s:
+        results = s.search(q, terms=True)
+        print([r for r in results])
+        # hit.matched_terms()
+        return render_template("pages/recherche.html", resultats=results, titre=titre, keyword=q)'''
+
+#Recommençons ces histoires de whoosh depuis le début !!!!
+from whoosh import index, query
+import os
+from whoosh.qparser import QueryParser
+@app.route("/search")
+def search():
+    ix = index.open_dir(app.config["WHOOSH_SCHEMA_DIR"])
+    writer = ix.writer()
+    hommes = Personnes.query.order_by(Personnes.id).all()
+    for homme in hommes:
+        writer.add_document(
+            content=homme.nom,
+            prenom=homme.prenom
+        )
+    writer.commit()
+    with ix.searcher() as s:
+        q = QueryParser("content", ix.schema).parse("Verilhati")
+        results = s.search(q)
+        print([r for r in results])
+        titre = "Résultat pour la recherche `" + "a" + "`"
+        return render_template("pages/recherche.html", resultats=results, titre=titre, keyword=q)
