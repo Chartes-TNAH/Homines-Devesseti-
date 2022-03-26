@@ -15,7 +15,7 @@ app = Flask(__name__,
     template_folder=templates,
     static_folder=statics)
 
-from .routes import generic, api
+from .routes import generic, api, updates
 
 def config_app(config_name="test"):
     app.config.from_object(CONFIG[config_name])
