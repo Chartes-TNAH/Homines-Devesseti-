@@ -561,23 +561,7 @@ def name_update(name_id):
         sexes=sexes,
         updated=updated
     )
-'''
-#Route pour les recherches:
-@app.route("/recherche")
-def recherche():
-    motclef = request.args.get("keyword", None)
-    page = request.args.get("page", 1)
-    if isinstance(page, str) and page.isdigit():
-        page = int(page)
-    else:
-        page = 1
-    resultats = []
-    if motclef:
-        resultats = Personnes.query.filter(Personnes.nom.like("%{}%".format(motclef)))
-        resultats = resultats.paginate(page=page, per_page=PERSONNES_PAR_PAGE)
-        titre = "Résultat pour la recherche `" + motclef + "`"
-    return render_template("pages/recherche.html", resultats=resultats, titre=titre, keyword=motclef)
-'''
+
 #Routes concernant les comptes utilisateur
 @app.route("/register", methods=["GET", "POST"])
 def inscription():
@@ -646,23 +630,17 @@ def charte_index():
 
 @app.route("/formulaire")
 def formulaire():
-    attributs = ["nom", "prenom"]
+    attributs = ["nom", "prenom", "localité"]
     return render_template("pages/formulaire_recherche.html", nom="Homines Devesseti", attributs=attributs)
 
-#Route pour mes recherches à facettes
+#Route pour mes recherches à facettes :
 from whoosh import index, query
 from whoosh.index import create_in
 from whoosh.qparser import QueryParser
 from ..models_whoosh import PageWhoosh
-@app.route("/recherche")
-def recherche():
-    attribut = request.args.get("class", "nom")
-    motclef = request.args.get("keyword", None)
-    page = request.args.get("page", 1)
-    if isinstance(page, str) and page.isdigit():
-        page = int(page)
-    else:
-        page = 1
+
+@app.route("/generate_index")
+def generate_index():
     ix = create_in(app.config["WHOOSH_SCHEMA_DIR"], PageWhoosh)
     writer = ix.writer()
     hommes = Personnes.query.order_by(Personnes.id).all()
@@ -670,18 +648,32 @@ def recherche():
         writer.add_document(
             id=homme.id,
             nom=homme.nom,
-            prenom=homme.prenom
+            prenom=homme.prenom,
+            localité=homme.localite
         )
     writer.commit()
+    flash("Index régénéré", "info")
+    return redirect("/formulaire")
+
+@app.route("/recherche")
+def recherche():
+    attribut = request.args.get("class", "nom")
+    motclef = "*" + request.args.get("keyword", None) + "*"
+    page = request.args.get("page", 1)
+    if isinstance(page, str) and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+    ix = index.open_dir(app.config["WHOOSH_SCHEMA_DIR"])
     q = QueryParser(attribut, ix.schema).parse(motclef)
     with ix.searcher() as s:
-        results = s.search_page(q, page, pagelen=PERSONNES_PAR_PAGE)
+        results = s.search_page(q, page, pagelen=PERSONNES_PAR_PAGE, terms=True)
         #La pagination est un peu artisanale, mais je n'ai pas trouvé comment naviguer dans des éléments whoosh
         prev, next = False, False
         if page > 1:
             prev = True
         if page <= len(results)/PERSONNES_PAR_PAGE:
             next = True
-        titre = "Résultat pour la recherche `" + motclef + "` dans la classe " + attribut
+        titre = "Résultat pour la recherche `" + motclef.replace('*', '') + "` dans la classe " + attribut
         return render_template("pages/recherche.html", nom="Homines Devesseti", resultats=results, titre=titre,
                                keyword=motclef, next=next, prev=prev, page=page, attribut=attribut)

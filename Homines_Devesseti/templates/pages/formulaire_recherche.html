@@ -1,11 +1,15 @@
 {% extends "conteneur.html" %}
 {% block corps %}
 <h1>Formulaire de recherche</h1>
-<div class="hero jumbotron">
+<div>
+    <p>Ce formulaire permet de chercher parmis les déclarants du terrier de Devesset</p>
+    <p>Vous avez la possibilité de modifier des données via votre compte utilisateur, si vous le faites merci de régénérer l'index en cliquant <a href="{{url_for('generate_index')}}">ici</a></p>
+</div>
+<div class="hero jumbotron" style="margin-bottom:5%">
     <div class="container">
       <form class="form" action="{{url_for('recherche')}}" method="GET">
         <div class="mb-3">
-            <label for="class" class="form-label">Je cherche un :</label>
+            <label for="class" class="form-label">Je cherche un(e) :</label>
             <select name="class" id="class">
                 {% for attribut in attributs %}
                     <option value="{{attribut}}" {% if attribut == nom %}selected{% endif %}>
@@ -13,19 +17,18 @@
                     </option>
                 {% endfor %}
             </select>
-          </div>
+        </div>
       <div class="input-group">
         <input type="search" name="keyword" class="form-control form-control-lg" type="text" placeholder="Faire une recherche"/>
         <span class="input-group-btn">
           <button class="btn btn-primary btn-lg" href="#" role="button">Rechercher</button>
         </span>
       </div>
-  
       </form>
     </div>
   </div>
-  <nav aria-label="research-pagination" style="position: absolute; bottom:0; left: 50%; transform: translate(-50%);">
-    <p class="retour_accueil">
+  <nav aria-label="research-pagination" class="center-link">
+    <p>
         <a href="{{url_for('accueil')}}">Retour à l'accueil</a>
     </p>
     </nav>

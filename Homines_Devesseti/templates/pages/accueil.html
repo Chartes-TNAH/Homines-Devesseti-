@@ -3,6 +3,12 @@
 {% include "partials/recherche.html" %}
 {%endblock%}
 {% block corps %}
+<nav aria-label="research-pagination">
+    <p>
+        <a class="btn-nav" href="{{ url_for('formulaire') }}">Recherche avancée</a>
+        <a class="btn-nav" href="{{ url_for('charte') }}">Charte de Devesset</a>
+    </p>
+</nav>
 <h1>Bienvenue à Devesset !</h1>
 <div>
     La commanderie de Devesset est un établissement religieux fondé au cours

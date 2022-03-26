@@ -56,8 +56,8 @@ def api_rec_single(rec_id):
     except:
         return Json_404()
 
-@app.route(API_ROUTE + "/name")
-def api_name_browse():
+@app.route(API_ROUTE + "/search")
+def api_name_search():
     motclef = request.args.get("q", None)
     page = request.args.get("page", 1)
     if isinstance(page, str) and page.isdigit():
@@ -89,13 +89,13 @@ def api_name_browse():
         }
         if motclef:
             arguments["q"] = motclef
-        dict_resultats["links"]["next"] = url_for("api_name_browse", _external=True) + "?" + urlencode(arguments)
+        dict_resultats["links"]["next"] = url_for("api_name_search", _external=True) + "?" + urlencode(arguments)
     if resultats.has_prev:
         arguments = {
             "page": resultats.prev_num
         }
         if motclef:
             arguments["q"] = motclef
-        dict_resultats["links"]["prev"] = url_for("api_name_browse", _external=True) + "?" + urlencode(arguments)
+        dict_resultats["links"]["prev"] = url_for("api_name_search", _external=True) + "?" + urlencode(arguments)
     response = jsonify(dict_resultats)
     return response
