@@ -10,9 +10,9 @@
     </figure>
 </div>
 {% if resultats %}
-<p>Il y a {{resultats.total}} éléments qui répondent à votre requête :</p>
+<p>Il y a {{resultats.total}} éléments qui répondent à votre requête (page {{page}}) :</p>
 <ul>
-    {% for homme in resultats.items %}
+    {% for homme in resultats %}
     <li><a href="{{url_for('nom', name_id=homme.id)}}">                    
         {% if homme.prenom or homme.nom %}
           {% if homme.prenom %}    
@@ -30,29 +30,19 @@
       {% endif %}</a></li>
     {% endfor %}
 </ul>
+
 <nav aria-label="research-pagination" style="position: absolute; bottom:0; left: 50%; transform: translate(-50%);">
-  <ul class="pagination">
-    {%- for page in resultats %}
-        {% if page %}
-
-          {% if page != resultats.page %}
-            <li class="page-item">
-                <a class="page-link" href="{{ url_for('recherche', keyword=keyword, page=page) }}">{{page}}</a>
-            </li>
-          {% else %}
-            <li class="page-item active disabled">
-              <a class="page-link">{{page}} <span class="sr-only">(actuelle)</span></a>
-            </li>
-          {% endif %}
-
-        {% else %}
-            <li class="page-item disabled">
-              <a class="page-link">...</a>
-            </li>
-        {% endif %}
-
-    {%- endfor %}
-  </ul>
+    <p class="retour_accueil">
+      {% if prev==True %}
+      <a href="{{url_for('recherche', class=attribut, keyword=keyword, page=page - 1)}}">Page précédente</a>
+      <-------------
+      {% endif %}
+      <a href="{{url_for('accueil')}}">Retour à l'accueil</a>
+      {% if next==True %}
+      ------------->
+  <a href="{{url_for('recherche', class=attribut, keyword=keyword, page=page + 1)}}">Page suivante</a>
+      {% endif %}
+      </p>
 </nav>
 {% endif %}
 

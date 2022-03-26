@@ -561,7 +561,7 @@ def name_update(name_id):
         sexes=sexes,
         updated=updated
     )
-
+'''
 #Route pour les recherches:
 @app.route("/recherche")
 def recherche():
@@ -577,7 +577,7 @@ def recherche():
         resultats = resultats.paginate(page=page, per_page=PERSONNES_PAR_PAGE)
         titre = "Résultat pour la recherche `" + motclef + "`"
     return render_template("pages/recherche.html", resultats=resultats, titre=titre, keyword=motclef)
-
+'''
 #Routes concernant les comptes utilisateur
 @app.route("/register", methods=["GET", "POST"])
 def inscription():
@@ -597,7 +597,6 @@ def inscription():
             return render_template("pages/inscription.html")
     else:
         return render_template("pages/inscription.html")
-
 
 @app.route("/connexion", methods=["POST", "GET"])
 def connexion():
@@ -644,66 +643,45 @@ def charte_norm():
 @app.route("/charte/index")
 def charte_index():
     return render_template("charte/Devoir_charte_Devesset_python_index.html", nom="Homines Devesseti")
-'''
-from whoosh import query
-import whoosh.index as index
-import os.path
-from ..models_whoosh import PageWhoosh
+
+@app.route("/formulaire")
+def formulaire():
+    attributs = ["nom", "prenom"]
+    return render_template("pages/formulaire_recherche.html", nom="Homines Devesseti", attributs=attributs)
+
+#Route pour mes recherches à facettes
+from whoosh import index, query
 from whoosh.index import create_in
 from whoosh.qparser import QueryParser
-@app.route("/search")
-def search():
-#    motclef = request.args.get("keyword", None)
+from ..models_whoosh import PageWhoosh
+@app.route("/recherche")
+def recherche():
+    attribut = request.args.get("class", "nom")
+    motclef = request.args.get("keyword", None)
     page = request.args.get("page", 1)
-
     if isinstance(page, str) and page.isdigit():
         page = int(page)
     else:
         page = 1
-
-#    os.makedirs(app.config["WHOOSH_SCHEMA_DIR"], exist_ok=True)
-#    ix = create_in(app.config["WHOOSH_SCHEMA_DIR"], PageWhoosh)
-    ix = index.open_dir(app.config["WHOOSH_SCHEMA_DIR"])
+    ix = create_in(app.config["WHOOSH_SCHEMA_DIR"], PageWhoosh)
     writer = ix.writer()
     hommes = Personnes.query.order_by(Personnes.id).all()
     for homme in hommes:
         writer.add_document(
-            nom=u'aa',
-            prenom=u'ababa'
-        )
-    writer.commit()
-    p = u'a'
-    q = query.Term('nom', u'a')
-    titre = "Résultat pour la recherche `" + p + "`"
-
-
-#    qp = QueryParser("content", schema=ix.schema)
-#    q = qp.parse(request.args.get("q", "a"))
-
-    with ix.searcher() as s:
-        results = s.search(q, terms=True)
-        print([r for r in results])
-        # hit.matched_terms()
-        return render_template("pages/recherche.html", resultats=results, titre=titre, keyword=q)'''
-
-#Recommençons ces histoires de whoosh depuis le début !!!!
-from whoosh import index, query
-import os
-from whoosh.qparser import QueryParser
-@app.route("/search")
-def search():
-    ix = index.open_dir(app.config["WHOOSH_SCHEMA_DIR"])
-    writer = ix.writer()
-    hommes = Personnes.query.order_by(Personnes.id).all()
-    for homme in hommes:
-        writer.add_document(
-            content=homme.nom,
+            id=homme.id,
+            nom=homme.nom,
             prenom=homme.prenom
         )
     writer.commit()
+    q = QueryParser(attribut, ix.schema).parse(motclef)
     with ix.searcher() as s:
-        q = QueryParser("content", ix.schema).parse("Verilhati")
-        results = s.search(q)
-        print([r for r in results])
-        titre = "Résultat pour la recherche `" + "a" + "`"
-        return render_template("pages/recherche.html", resultats=results, titre=titre, keyword=q)
+        results = s.search_page(q, page, pagelen=PERSONNES_PAR_PAGE)
+        #La pagination est un peu artisanale, mais je n'ai pas trouvé comment naviguer dans des éléments whoosh
+        prev, next = False, False
+        if page > 1:
+            prev = True
+        if page <= len(results)/PERSONNES_PAR_PAGE:
+            next = True
+        titre = "Résultat pour la recherche `" + motclef + "` dans la classe " + attribut
+        return render_template("pages/recherche.html", nom="Homines Devesseti", resultats=results, titre=titre,
+                               keyword=motclef, next=next, prev=prev, page=page, attribut=attribut)

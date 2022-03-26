@@ -1,7 +1,4 @@
 {% extends "conteneur.html" %}
-{% block afternav %}
-    {% include "partials/recherche.html" %}
-{%endblock%}
 {% block corps %}
 <h1><a href="{{url_for('accueil')}}">Retour à l'accueil</a></h1>
 {% if recs and hommes and dets_pos and dets_rec %}
