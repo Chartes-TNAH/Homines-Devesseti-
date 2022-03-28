@@ -1,9 +1,13 @@
 {% extends "conteneur.html" %}
 {% block corps %}
+{% if updated %}
+<div class="alert alert-success">
+  <p>Modification enregistrée</p>
+</div>
+{% endif %}
 <h1>Formulaire de recherche</h1>
 <div>
-    <p>Ce formulaire permet de chercher parmis les déclarants du terrier de Devesset</p>
-    <p>Vous avez la possibilité de modifier des données via votre compte utilisateur, si vous le faites merci de régénérer l'index en cliquant <a href="{{url_for('generate_index')}}">ici</a></p>
+    <p>Ce formulaire permet de chercher parmis les noms, prénoms et localités des déclarants du terrier de Devesset</p>
 </div>
 <div class="hero jumbotron" style="margin-bottom:5%">
     <div class="container">

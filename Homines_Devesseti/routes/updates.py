@@ -1,8 +1,10 @@
-from flask import render_template, request, flash
+from flask import render_template, request, flash, url_for, redirect
 from flask_login import login_required, current_user
+from .generic import generate_index
 from ..app import app, login, db
 from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, DetailPossessions, Authorship
 
+#Mise à jour :
 @app.route("/rec/<int:rec_id>/update", methods=["GET", "POST"])
 @login_required
 def rec_update(rec_id):
@@ -286,7 +288,7 @@ def rec_update(rec_id):
             if request.form["recSeigle"] != "None":
                 reco.totalSeigle = request.form["recSeigle"]
             if request.form["recAvoine"] != "None":
-                reco.Avoine = request.form["recAvoine"]
+                reco.totalAvoine = request.form["recAvoine"]
             if request.form["recMonnaie"] != "None":
                 reco.total_sous_tournois = request.form["recMonnaie"]
             if request.form["recMesure"] != "None":
@@ -306,15 +308,16 @@ def rec_update(rec_id):
             updated = True
         else:
             print(erreurs)
+
     return render_template(
-        "pages/reconnaissances_update.html",
-        nom="Gazetteer",
-        rec=reco,
-        mois=mois,
-        corvees=corvees,
-        updated=updated,
-        page=page
-    )
+            "pages/update/reconnaissances_update.html",
+            nom="Gazetteer",
+            rec=reco,
+            mois=mois,
+            corvees=corvees,
+            updated=updated,
+            page=page
+        )
 
 @app.route("/dp/<int:dp_id>/update", methods=["GET", "POST"])
 @login_required
@@ -380,7 +383,7 @@ def det_pos_update(dp_id):
         else:
             print(erreurs)
     return render_template(
-        "pages/detail_possessions_update.html",
+        "pages/update/detail_possessions_update.html",
         nom="Gazetteer",
         det_pos=dp,
         updated=updated
@@ -438,7 +441,7 @@ def det_red_update(dr_id):
         else:
             print(erreurs)
     return render_template(
-        "pages/detail_redevances_update.html",
+        "pages/update/detail_redevances_update.html",
         nom="Gazetteer",
         det_red=dr,
         updated=updated
@@ -485,17 +488,318 @@ def name_update(name_id):
                 homme.precision_sur_origine = request.form["hommePrecisionLieu"]
             if request.form["hommeInfo"] != "None":
                 homme.informations_personnelles = request.form["hommeInfo"]
-            #Mise à jour des tables :
+            # Mise à jour des tables :
             db.session.add(homme)
             db.session.add(Authorship(personnes=homme, user=current_user))
             db.session.commit()
             updated = True
         else:
             print(erreurs)
+    if updated == False:
+        return render_template(
+            "pages/update/noms_update.html",
+            nom="Gazetteer",
+            homme=homme,
+            sexes=sexes,
+            updated=updated
+        )
+    else:
+        return generate_index(updated=updated)  # permet de maj l'index automatiquement à chaque modification
+
+#Création données :
+@app.route("/name/create", methods=["GET", "POST"])
+@login_required
+def name_create():
+    sexes = [
+        x for (x, *_) in db.session.query(Personnes.genre).distinct()
+    ]
+    erreurs = []
+    updated = False
+    if request.method == "POST":
+        if request.form["hommeSexe"] not in sexes:
+            erreurs.append("hommeSexe")
+        if not erreurs:
+            prenom = request.form["hommePrenom"]
+            nom = request.form["hommeNom"]
+            genre = request.form["hommeSexe"]
+            id_reconnaissance = request.form["hommeReco"]
+            localite = request.form["hommeLieu"]
+            precision_sur_origine = request.form["hommePrecisionLieu"]
+            informations_personnelles = request.form["hommeInfo"]
+            #Mise à jour des tables :
+            homme = Personnes(
+                prenom=prenom,
+                nom=nom,
+                genre=genre,
+                id_reconnaissance=id_reconnaissance,
+                localite=localite,
+                precision_sur_origine=precision_sur_origine,
+                informations_personnelles=informations_personnelles
+            )
+            db.session.add(homme)
+            db.session.add(Authorship(personnes=homme, user=current_user))
+            db.session.commit()
+            updated = True
+        else:
+            print(erreurs)
+    if updated == False:
+        return render_template(
+            "pages/update/noms_create.html",
+            nom="Gazetteer",
+            sexes=sexes,
+            updated=updated
+        )
+    else:
+        return generate_index(updated=updated) #permet de maj l'index automatiquement à chaque modification
+
+@app.route("/dr/create", methods=["GET", "POST"])
+@login_required
+def det_red_create():
+    updated = False
+    if request.method == "POST":
+        id_reconnaissance = request.form["drReco"]
+        cens_en_poules = request.form["drPoules"]
+        totalSeigle = request.form["drSeigle"]
+        totalAvoine = request.form["drAvoine"]
+        total_monnaie = request.form["drMonnaie"]
+        pro = request.form["drBien"]
+        nom = request.form["drNom"]
+        lieu = request.form["drLieu"]
+        supplement = request.form["drInfo"]
+        # Mise à jour des tables :
+        dr = DetailRedevances(
+            id_reconnaissance=id_reconnaissance,
+            cens_en_poules=cens_en_poules,
+            totalSeigle=totalSeigle,
+            totalAvoine=totalAvoine,
+            total_monnaie=total_monnaie,
+            pro=pro,
+            nom=nom,
+            lieu=lieu,
+            supplement=supplement
+        )
+        db.session.add(dr)
+        db.session.add(Authorship(detail_redevances=dr, user=current_user))
+        db.session.commit()
+        updated = True
     return render_template(
-        "pages/noms_update.html",
+        "pages/update/detail_redevances_create.html",
         nom="Gazetteer",
-        homme=homme,
-        sexes=sexes,
         updated=updated
     )
+
+@app.route("/dp/create", methods=["GET", "POST"])
+@login_required
+def det_pos_create():
+    updated = False
+    if request.method == "POST":
+        id_reconnaissance = request.form["dpReco"]
+        personne_concernee = request.form["dpPersonne"]
+        possession = request.form["dpPossession"]
+        nom = request.form["dpNom"]
+        lieu = request.form["dpLieu"]
+        supplement = request.form["dpInfo"]
+        confront1 = request.form["dpConfront1"]
+        confront2 = request.form["dpConfront2"]
+        confront3 = request.form["dpConfront3"]
+        confront4 = request.form["dpConfront4"]
+        confront5 = request.form["dpConfront5"]
+        confront6 = request.form["dpConfront6"]
+        #Mise à jour des tables :
+        dp = DetailPossessions(
+            id_reconnaissance=id_reconnaissance,
+            personne_concernee=personne_concernee,
+            possession=possession,
+            nom=nom,
+            lieu=lieu,
+            supplement=supplement,
+            confront1=confront1,
+            confront2=confront2,
+            confront3=confront3,
+            confront4=confront4,
+            confront5=confront5,
+            confront6=confront6,
+        )
+        db.session.add(dp)
+        db.session.add(Authorship(detail_possessions=dp, user=current_user))
+        db.session.commit()
+        updated = True
+    return render_template(
+        "pages/update/detail_possessions_create.html",
+        nom="Gazetteer",
+        updated=updated
+    )
+
+@app.route("/rec/create", methods=["GET", "POST"])
+@login_required
+def rec_create():
+    #La logique des variables de cette route suit celle de la route précédente
+    mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août',
+            'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    corvees = [
+        x for (x, *_) in db.session.query(Reconnaissances.manobrias).distinct()
+    ]
+    erreurs = []
+    updated = False
+    if request.method == "POST":
+        if request.form["recMois"] not in mois:
+            erreurs.append("recMois")
+        if request.form["recManobrias"] not in corvees:
+            erreurs.append("recManobrias")
+        if request.form["recJornalia"] not in corvees:
+            erreurs.append("recJornalia")
+        if request.form["recChareis"] not in corvees:
+            erreurs.append("recChareis")
+        if not erreurs:
+            ref_du_terrier = request.form["recPage"]
+            notaire = request.form["recNotaire"]
+            temoin1 = request.form["recTemoin1"]
+            temoin2 = request.form["recTemoin2"]
+            temoin3 = request.form["recTemoin3"]
+            temoin4 = request.form["recTemoin4"]
+            temoin5 = request.form["recTemoin5"]
+            annee = request.form["recAnnee"]
+            mois = request.form["recMois"]
+            jour = request.form["recJour"]
+            statut = request.form["recStatut"]
+            implication_statut = request.form["recDetStatut"]
+            manobrias = request.form["recManobrias"]
+            jornalia = request.form["recJornalia"]
+            chareis = request.form["recChareis"]
+            complement_sur_corvees = request.form["recComplementCorvees"]
+            statut_terre = request.form["recStatutTerres"]
+            domus = request.form["recDomus"]
+            orti = request.form["recOrti"]
+            prata = request.form["recPrata"]
+            compos = request.form["recCompos"]
+            nemora = request.form["recNemora"]
+            pascua = request.form["recPascua"]
+            pasturalia = request.form["recPasturalia"]
+            terrae = request.form["recTerrae"]
+            casalia = request.form["recCasalia"]
+            casamenta = request.form["recCasamenta"]
+            grangiae = request.form["recGrangiae"]
+            denesia = request.form["recDenesia"]
+            calma = request.form["recCalma"]
+            assensa = request.form["recAssensa"]
+            molendinus = request.form["recMolendinus"]
+            ouchias = request.form["recOuchias"]
+            garaitum = request.form["recGaraitum"]
+            patile = request.form["recPatile"]
+            hospicii = request.form["recHospicii"]
+            petiae = request.form["recPetiae"]
+            esclausae = request.form["recEsclausae"]
+            terminus = request.form["recTerminus"]
+            costam = request.form["recCostam"]
+            sana = request.form["recSana"]
+            tenementum = request.form["recTenementum"]
+            versana = request.form["recVersana"]
+            masacgio = request.form["recMasacgio"]
+            vineae = request.form["recVineae"]
+            blachia = request.form["recBlachia"]
+            arbores = request.form["recArbores"]
+            passetae = request.form["recPassetae"]
+            chastanerii = request.form["recChastanerii"]
+            levata = request.form["recLevata"]
+            creysementum = request.form["recCreysementum"]
+            bessaa = request.form["recBessaa"]
+            besseta = request.form["recBesseta"]
+            lameytenchada = request.form["recLameytenchada"]
+            bealis = request.form["recBealis"]
+            mansum = request.form["recMansum"]
+            sanhassium = request.form["recSanhassium"]
+            autres_possessions = request.form["recAutres"]
+            lieux_terres = request.form["recLieu"]
+            cens_en_poule = request.form["recPoules"]
+            totalSeigle = request.form["recSeigle"]
+            Avoine = request.form["recAvoine"]
+            total_sous_tournois = request.form["recMonnaie"]
+            mesure_de_cereale_utilisee = request.form["recMesure"]
+            jour_paiement = request.form["recJourPaiement"]
+            juridiction = request.form["recJuridiction"]
+            mandement = request.form["recMandement"]
+            #Mise à jour des tables :
+            reco = Reconnaissances(
+            notaire = notaire,
+            temoin1 = temoin1,
+            temoin2 = temoin2,
+            temoin3 = temoin3,
+            temoin4 = temoin4,
+            temoin5 = temoin5,
+            annee = annee,
+            mois = mois,
+            jour = jour,
+            statut = statut,
+            implication_statut = implication_statut,
+            manobrias = manobrias,
+            jornalia = jornalia,
+            chareis = chareis,
+            complement_sur_corvees = complement_sur_corvees,
+            statut_terre = statut_terre,
+            domus = domus,
+            orti = orti,
+            prata = prata,
+            compos = compos,
+            nemora = nemora,
+            pascua = pascua,
+            pasturalia = pasturalia,
+            terrae = terrae,
+            casalia = casalia,
+            casamenta = casamenta,
+            grangiae = grangiae,
+            denesia = denesia,
+            calma = calma,
+            assensa = assensa,
+            molendinus = molendinus,
+            ouchias = ouchias,
+            garaitum = garaitum,
+            patile = patile,
+            hospicii = hospicii,
+            petiae = petiae,
+            esclausae = esclausae,
+            terminus = terminus,
+            costam = costam,
+            sana = sana,
+            tenementum = tenementum,
+            versana = versana,
+            masacgio = masacgio,
+            vineae = vineae,
+            blachia = blachia,
+            arbores = arbores,
+            passetae = passetae,
+            chastanerii = chastanerii,
+            levata = levata,
+            creysementum = creysementum,
+            bessaa = bessaa,
+            besseta = besseta,
+            lameytenchada = lameytenchada,
+            bealis = bealis,
+            mansum = mansum,
+            sanhassium = sanhassium,
+            autres_possessions = autres_possessions,
+            lieux_terres = lieux_terres,
+            cens_en_poule = cens_en_poule,
+            totalSeigle = totalSeigle,
+            totalAvoine = Avoine,
+            total_sous_tournois = total_sous_tournois,
+            mesure_de_cereale_utilisee = mesure_de_cereale_utilisee,
+            jour_paiement = jour_paiement,
+            juridiction = juridiction,
+            mandement = mandement
+            )
+            db.session.add(reco)
+            if ref_du_terrier:
+                db.session.add(page, ref_du_terrier=ref_du_terrier)
+            db.session.add(Authorship(reconnaissances=reco, user=current_user))
+            db.session.commit()
+            updated = True
+        else:
+            print(erreurs)
+
+    return render_template(
+            "pages/update/reconnaissances_create.html",
+            nom="Gazetteer",
+            mois=mois,
+            corvees=corvees,
+            updated=updated,
+        )

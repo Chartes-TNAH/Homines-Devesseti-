@@ -1,9 +1,25 @@
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import login_user, current_user, logout_user
-from ..app import app, login, db
+import os
+from ..app import app, login, db, chemin_actuel
 from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, DetailPossessions, Authorship
 from ..modeles.utilisateurs import User
 from ..constantes import PERSONNES_PAR_PAGE
+
+#On va tenter de faire un truc avec lxml
+from lxml import etree as ET
+@app.route("/charte_hommes")
+def charte_hommes():
+    NAMESPACES = {
+        "tei": "http://www.tei-c.org/ns/1.0"
+    }
+    path = os.path.join(chemin_actuel, "templates/charte", "Devoir_charte_Devesset.xml")
+    file = ET.parse(path)
+    root = file.xpath("//tei:personGrp[@role = 'Ratifiants']//tei:persName//text()", namespaces=NAMESPACES)
+    #Là l'idée c'est à partir de ça d'essayer de récupérer des noeud txt en entier en les reconstituant pour en faire
+    #une classe SQLAlchemy. Question à 1000 francs : comment reconstituer des noeuds ?
+    for element in root:
+        print(element)
 
 
 # Routes de base :
@@ -126,12 +142,12 @@ def deconnexion():
 
 
 # Intégration de la charte de Devesset :
-import os
-from ..app import chemin_actuel
 from bs4 import BeautifulSoup
 
 
 def transfo_charte(path):
+    #Programme un peu artisanal permettant de parser le html obtenu par la transfo de la charte utilisé pour le devoir
+    # de XSLT et l'intégrer dans l'appli
     with open(path, 'r', encoding="ISO-8859-1") as f:
         html_doc = f.read()
     soup = BeautifulSoup(html_doc)
@@ -147,7 +163,6 @@ def transfo_charte(path):
         "{{url_for('static', filename='images/charte/Page_" + str(x) + ".jpg')}}")
     debut = "{% extends 'conteneur.html' %} {% block corps %}"
     fin = "<nav aria-label=\"research-pagination\" class=\"center-link\"><p><a href=\"{{url_for('accueil')}}\">Retour accueil</a></p></nav>{% endblock %}"
-    # Tout ça est un peu artisanal, mais ça me permet d'inclure mes pages html dans mon site sans modifier le xslt
     with open(path, "w", encoding="ISO-8859-1") as f:
         f.write(debut)
         f.write(body)
@@ -190,7 +205,7 @@ def charte_images():
     return render_template("charte/Devoir_charte_Devesset_images.html", nom="Homines Devesseti")
 
 
-# Route pour mes recherches :
+# Routes pour mes recherches :
 from whoosh import index, query
 from whoosh.index import create_in
 from whoosh.qparser import QueryParser
@@ -198,17 +213,18 @@ from ..models_whoosh import PageWhoosh
 
 
 @app.route("/formulaire")
-def formulaire():
+def formulaire(updated=False):
     try:
         index.open_dir(app.config["WHOOSH_SCHEMA_DIR"])
         attributs = ["nom", "prenom", "localité"]
-        return render_template("pages/formulaire_recherche.html", nom="Homines Devesseti", attributs=attributs)
+        return render_template("pages/formulaire_recherche.html", nom="Homines Devesseti", attributs=attributs,
+                               updated=updated)
     except:
         return redirect("/generate_index")
 
 
 @app.route("/generate_index")
-def generate_index():
+def generate_index(updated=False):
     ix = create_in(app.config["WHOOSH_SCHEMA_DIR"], PageWhoosh)
     writer = ix.writer()
     hommes = Personnes.query.order_by(Personnes.id).all()
@@ -221,7 +237,7 @@ def generate_index():
         )
     writer.commit()
     flash("Index mis à jour", "info")
-    return redirect("/formulaire")
+    return formulaire(updated=updated)
 
 
 @app.route("/recherche")
