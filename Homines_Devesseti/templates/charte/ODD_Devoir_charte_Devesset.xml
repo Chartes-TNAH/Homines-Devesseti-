@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:s="http://purl.oclc.org/dsdl/schematron"
+   xml:lang="en">
+   <teiHeader xml:lang="fr">
+      <fileDesc>
+         <titleStmt>
+            <title>Charte régulant le passage des hommes et biens de Devesset par
+               Saint-Agrève</title>
+            <respStmt>
+               <resp>Etudiant - Titulaire d'un master Mondes Médiévaux</resp>
+               <persName>Virgile Reignier</persName>
+               <orgName>Ecole Nationale des Chartes</orgName>
+            </respStmt>
+         </titleStmt>
+         <publicationStmt>
+            <publisher>Virgile Reignier</publisher>
+            <pubPlace>
+               <region>France</region>
+               <name>Ecole Nationale des Chartes - Paris</name>
+            </pubPlace>
+            <date when="2021"/>
+            <authority>Ségolène Albouy</authority>
+         </publicationStmt>
+         <sourceDesc>
+            <p/>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <div1>
+            <head>Guide de l'encodage de l'édition numérique de la charte régulant le passage des
+               hommes et biens de Devesset par Saint-Agrève, réalisée à partir d'un rouleau de
+               parchemin coté 48 H 1669 et conservé aux Archives départementales du Rhône et de la
+               Métropole de Lyon</head>
+            <p>Ce guide vise à détailler la manière dont a été encodée cette charte. Des principes
+               stricts d'encodage ont été utilisés, en vue de la production de données pérennes,
+               interopérables et facilitant leur transformation.</p>
+            <p>Les lacunes du texte original ont été complétées à partir de deux copies, l'une
+               contemporaine et l'autre plus récente, conservées dans le même dépôt aux cotes 48 H
+               1671-3 et 1671-4.</p>
+            <p>Cette édition est composé d'un document XML et de son ODD (document présent).
+               L'encodage a été réalisé en vue d'une visualisation du texte sous forme de fac-similé
+               interactif afin de donner accès en même temps au document originel, à sa
+               transcription visuelle et à sa transcription intellectuelle.</p>
+            <div2>
+               <head>Structure du fichier XML</head>
+               <p>Le document XML est entièrement contenu dans un élément racine <gi>TEI</gi>,
+                  lui-même divisé en trois parties : une première dans un élément
+                  <gi>teiHeader</gi>, une deuxième dans un élément <gi>facsimile</gi> et une
+                  dernière dans un élément <gi>text</gi>.</p>
+               <p>Le <gi>teiHeader</gi> rassemble les métadonnées concernant le manuscrit original.
+                  Il se compose notamment d'une descritpion des circonstances dans lesquelles ont
+                  été réalisée la présente édition, des sources utilisées, d'un résumé des
+                  différentes partie du texte et d'un index des personnes et lieux mentionnés.</p>
+               <p>L'élément <gi>facsimile</gi> contient toutes les données à propos des images
+                  permettant la visualisation en fac-similé de l'édition. Il est associé à un
+                  attribut <att>corresp</att> dont la valeur renvoit vers le document source dont
+                  ces images sont issues. Les informations concernant chaque image sont contenues
+                  dans des balises <gi>surface</gi> qui référencent le chemin d'accès à l'image en
+                  question à l'aide d'un élément <gi>graphic</gi> ainsi que les coordonnées de
+                  chacune des zones correspondant au découpage intellectuel du texte dans des
+                  élémént <gi>zone</gi>, chacune de ces derniers étant associé à un attribut
+                     <att>corresp</att> permettant de renvoyer vers les différentes parties du
+                  texte.</p>
+               <p>Enfin, l'élément <gi>text</gi> englobe l'intégralité de la transcription du
+                  document. Il est associé à l'attribut <att>type</att> de valeur <val>edition</val>
+                  ainsi qu'à l'attribut <att>corresp</att> permettant de renvoyer vers la source
+                  principale à partir de laquelle est réalisée cette transcription. La majeure
+                  partie du texte est ensuite encapsulé dans un élément <gi>body</gi>, puis dans des
+                  éléments <gi>div1</gi> correspondant aux parties du texte et des éléments
+                     <gi>div2</gi> correspondant aux sous-parties. Ces deux derniers éléments
+                  disposent chacun d'un attribut <att>xml:id</att> permettant d'identifier ces
+                  parties et sous-parties et de renvoyer vers elles dans les méta-données de
+                  l'édition. L'édition se termine par un element <gi>back</gi> encapsulant les
+                  informations laissées par le scribe à l'origine du document physique. Cet élément
+                  étant différent dans les deux versions médiévales du texte, il contient un élément
+                     <gi>app</gi> permettant de comparer la version originale (contenue dans
+                  l'élément <gi>lem</gi>) et la version alternative présente dans la copie (contenue
+                  dans l'élément <gi>rdg</gi>). Chacun des éléments renvoyant vers une version du
+                  texte est associé à un attribut <att>wit</att> permettant de renvoyer vers le
+                  manuscrit concerné décrit dans le <gi>sourceDesc</gi>. Le texte contenu dans ces
+                  balises reprend les éléments utilisés dans le corps de l'édition, en ajoutant un
+                  élément handShift permettant de décrire un changement d'écriture dont la
+                  correspondance avec un autre acte est spécifié en valeur de l'attribut
+                     <att>sameAs</att></p>
+               <div3>
+                  <head>Structure du <hi rend="italic">teiHeader</hi></head>
+                  <p>Le <gi>teiHeader</gi> se composé de trois sections : <specList>
+                        <specDesc key="fileDesc"/>
+                        <specDesc key="profileDesc"/>
+                        <specDesc key="encodingDesc"/>
+                     </specList>Le <gi>fileDesc</gi> décrit les informations relatives à
+                     l'établissement de la présente édition tandis que le <gi>profileDesc</gi>
+                     décrit le contenu intellectuel du texte. Quand à l'<gi>encodingDesc</gi>, il
+                     contient un élément <gi>variantEncoding</gi> dont l'attribut <att>method</att>
+                     permet de déclarer la méthode <val>parallel-segmentation</val> utilisée pour
+                     décrire les quelques variantes constatées entre le texte et ses copies.</p>
+                  <div4>
+                     <head>Le <hi rend="italic>">fileDesc</hi></head>
+                     <p>Le <gi>fileDesc</gi> contient à son tour 4 sections :<specList>
+                           <specDesc key="titleStmt"/>
+                           <specDesc key="editionStmt"/>
+                           <specDesc key="publicationStmt"/>
+                           <specDesc key="sourceDesc"/>
+                        </specList>
+                        <gi>titleStmt</gi>, <gi>editionStmt</gi> et <gi>publicationStmt</gi>
+                        permettent de décrire la présente édition du texte, tandis que que le
+                           <gi>sourceDesc</gi> contient des informations concernant les documents
+                        sources utilisés pour l'édition et les publications utiles pour des
+                        informations complémentaires sur le contenu du texte.</p>
+                     <div5>
+                        <head>Les éléments du <hi rend="italic">titleStmt</hi></head>
+                        <p>Le <gi>titleStmt</gi> contient les éléments principaux permettant de
+                           décrire la présente édition : son titre est indiqué dans un élément
+                              <gi>title</gi> et le contexte d'encodage par un élément
+                              <gi>respStmt</gi>. Ce dernier élément contient à son tour un élément
+                              <gi>resp</gi> permettant de qualifier la personne à l'origine de
+                           l'édition, un élément <gi>persName</gi> permettant d'indiquer son nom, un
+                           élément <gi>orgName</gi> permettant d'indiquer l'établissement dont il
+                           relève et un élément <gi>note</gi> permettant de donner des éléments
+                           supplémentaires sur les circonstances de réalisation de l'édition.</p>
+                     </div5>
+                     <div5>
+                        <head>Les éléments de l'<hi rend="italic">editionStmt</hi></head>
+                        <p>L'<gi>editionStmt</gi> se compose d'un élément <gi>p</gi> qui contient
+                           une description de la démarche utilisée pour fournir une transcription la
+                           plus complète possible à partir des trois témoins disponible du texte.
+                           Chacun de ses témoins est encapsulé par une balise <gi>ref</gi> dont la
+                           valeur de l'attribut <att>corresp</att> renvoit vers le manuscrit
+                           concerné décrit dans le <gi>sourceDesc</gi>.</p>
+                     </div5>
+                     <div5>
+                        <head>Les éléments du <hi rend="italic">publicationStmt</hi></head>
+                        <p>Le <gi>publicationStmt</gi> décrit les circonstances de publication de
+                           cette édition : l'élement <gi>publisher</gi> a été rempli avec le nom du
+                           responsable de la présente édition, le <gi>pubPlace</gi> contient le lieu
+                           de production (la pays a été renseigné par une balise <gi>region</gi> et
+                           le lieu par une balise <gi>name</gi>), la date de réalisation comme
+                           valeur de l'attribut <att>when</att> de l'élément <gi>date</gi> et
+                           l'enseignante responsable du cours par un élément <gi>authority</gi>.</p>
+                     </div5>
+                     <div5>
+                        <head>Le <hi rend="italic">sourceDesc</hi></head>
+                        <p>Le <gi>sourceDesc</gi> sert à décrire les différentes sources utilisées
+                           pour établir la présente édition. Il est composé tout d'abord d'une
+                              <gi>listWit</gi> contenant les informations concernant les manuscrits
+                           utilisés pour établir l'édition, puis d'une <gi>listBibl</gi> décrivant
+                           les différentes publications utiles pour étudier le contenu de ces
+                           documents.</p>
+                        <div6>
+                           <head>La <hi rend="italic">listWit</hi></head>
+                           <p>L'élément <gi>listWit</gi> contient toutes les données disponibles sur
+                              les trois documents sources utilisés pour établir cette édition.
+                              Chacun de ces documents est représenté par un élément
+                              <gi>witness</gi>, dont les données sont encapsulé par un élément
+                                 <gi>msDesc</gi>. Cet élément est associé à un attribut
+                                 <att>xml:id</att> dont la valeur correspond à la cote archivistique
+                              du document afin de faciliter les renvois internes dans l'édition.</p>
+                           <p>Chaque élément <gi>msDesc</gi> se composé de quatre sections : <specList>
+                                 <specDesc key="msIdentifier"/>
+                                 <specDesc key="msContents"/>
+                                 <specDesc key="physDesc"/>
+                                 <specDesc key="history"/>
+                              </specList> Le <gi>msIdentifier</gi> contient les éléments permettant
+                              d'identifier le document, le <gi>msContents</gi> décrit son contenu
+                              intellectuel, le <gi>physDesc</gi> décrit l'état matériel du document
+                              et l'<gi>history</gi> contient les données disponibles sur l'histoire
+                              de ce document.</p>
+                           <p>Le <gi>msIdentifier</gi> est composé d'un élément <gi>region</gi>
+                              contenant le pays dans lequel est situé le document, un élément
+                                 <gi>settlement</gi> contenant la ville, un élément
+                                 <gi>repository</gi> contenant le nom du dépôt d'archive et un
+                              élément <gi>idno</gi> dont l'attribut <att>type</att> est associé à la
+                              valeur <val>cote_archivistique</val> et contenant ladite cote du
+                              document.</p>
+                           <p>Le <gi>msContents</gi> est composé uniquement d'un élément
+                                 <gi>summary</gi> contenant un élément <gi>ref</gi> dont l'attribut
+                                 <att>corresp</att> contient la valeur <val>#resume</val> permettant
+                              de renvoyer vers le résumé du texte décrit dans le
+                                 <gi>profileDesc</gi>.</p>
+                           <p>Le <gi>physDesc</gi> est composé d'un <gi>objectDesc</gi> dont
+                              l'attribut <att>form</att> est utilisé lorsque le document se présente
+                              sous forme de <val>rouleau</val>. Cet élément comporte lui-même un
+                                 <gi>supportDesc</gi> dont l'attribut <att>material</att> permet de
+                              décrire le matériau dont est composé le document (<val>parchemin</val>
+                              ou <val>papier</val>). D'autres éléments contenus dans ce
+                                 <gi>supportDesc</gi> permettent ensuite de compléter cette
+                              description : le <gi>support</gi> permet d'expliciter la forme du
+                              document et son matériau (ce dernier étant contenu dans un élément
+                                 <gi>material</gi>), la balise <gi>extent</gi> contient les
+                              précisions disponibles sur ses <gi>dimensions</gi> (sous forme de
+                              balises <gi>height</gi> et <gi>width</gi> toutes deux associées à un
+                              attribut <att>unit</att> associé à la valeur <val>mm</val> signifiant
+                              que les valeurs indiquées sont mesurées en milimètres), et l'élement
+                                 <gi>condition</gi> permet de préciser l'état de conservation du
+                              document.</p>
+                           <p>L'<gi>history</gi> est composé tout d'abord d'une <gi>origin</gi>
+                              décrivant le contexte de production du document, sa date est encapulé
+                              dans un élément <gi>date</gi> dont les attributs <att>notBefore</att>
+                              et <att>notAfter</att> permettent de donner une fourchette concernant
+                              la date de production. Vient ensuite la <gi>provenance</gi>, qui
+                              contient un élément <gi>p</gi> dans lequel sont décrits les éléments
+                              connus concernant la circulation du document depuis sa production
+                              jusqu'à son lieu de conservation actuel et un élément <gi>bibl</gi>
+                              dont l'attribut <att>corresp</att> permet de renvoyer vers l'élément
+                              bibliographique contenant ces inforamtions. Pour finir, l'élément
+                                 <gi>acquisition</gi> permet de décrire le contexte dans lequel ce
+                              document est arrivée dans son lieu de conservation actuel.</p>
+                           <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                              <witness>
+                                 <msDesc xml:id="AD69_48H_1669">
+                                    <msIdentifier>
+                                       <region>France</region>
+                                       <settlement>Lyon</settlement>
+                                       <repository>Archives du Département du Rhône et de la
+                                          Métropole de Lyon</repository>
+                                       <idno type="Cote_archivistique">48 H 1669</idno>
+                                    </msIdentifier>
+                                    <msContents>
+                                       <summary>
+                                          <ref corresp="#resume"/>
+                                       </summary>
+                                    </msContents>
+                                    <physDesc>
+                                       <objectDesc form="rouleau">
+                                          <supportDesc material="parchemin">
+                                             <support>Rouleau de
+                                                <material>parchemin</material></support>
+                                             <extent>
+                                                <dimensions>
+                                                  <height unit="mm">1390</height>
+                                                  <width unit="mm">550</width>
+                                                </dimensions>
+                                             </extent>
+                                             <condition>Document en mauvais état, des parties
+                                                entières ont été altérées par de mauvaises
+                                                conditions de conservation.</condition>
+                                          </supportDesc>
+                                       </objectDesc>
+                                    </physDesc>
+                                    <history>
+                                       <origin>Manuscrit produit <date notBefore="1335"
+                                             notAfter="1400">après 1335</date> par la commanderie de
+                                          Devesset.</origin>
+                                       <provenance><p>Le manuscrit a suivi le fonds de l'actuelle
+                                             série 48 H depuis Devesset vers le centre du
+                                             grand-prieuré d'Auvergne à Lyon.</p>
+                                          <bibl corresp="Niepce_1883"/>
+                                       </provenance>
+                                       <acquisition>Les archives du Grand-Prieuré de Lyon ont été
+                                          transférés aux AD du Rhône à la Révolution.</acquisition>
+                                    </history>
+                                 </msDesc>
+                              </witness>
+                           </egXML>
+                        </div6>
+                        <div6>
+                           <head>La <hi rend="italic">listBibl</hi></head>
+                           <p>L'élément <gi>listBit</gi> contient toutes les données disponibles sur
+                              les ouvrages et articles utilisés comme support pour appréhender les
+                              éléments contenus dans ce texte. Chacun des ouvrages utilisé est
+                              représenté par un élément <gi>bibl</gi> associé à un attribut
+                                 <att>xml:id</att> dont la valeur permet de faciliter les renvois
+                              internes vers ces écrits et à un attribut <att>type</att> dont la
+                              valeur permet de connaître le type d'indication que l'on pourra y
+                              trouver (des éléments de contexte si la valeur est
+                                 <val>bibliographie</val> ou une description physique si la valeur
+                              est <val>inventaire_archivistique</val>).</p>
+                           <p>Chaque élément <gi>bibl</gi> se compose d'un <gi>title</gi> contenant
+                              le titre de la publication, d'un <gi>author</gi> contenant son auteur,
+                              et d'une <gi>date</gi> contenant la date de parution. S'il s'agit d'un
+                              article, la revue est précisée via une balise <gi>series</gi> composée
+                              d'un <gi>title</gi> contenant son titre, d'un <gi>idno</gi> contenant
+                              le numéro dans lequel l'article est paru et d'un <gi>biblScope</gi>
+                              contenant les pages où il se situe. S'il s'agit d'un ouvrage, des
+                              précisions sont ajoutées sur son lieu d'édition via un
+                                 <gi>pubPlace</gi>, sur l'organisme producteur via un
+                                 <gi>editor</gi>, sur son editeur via un <gi>publisher</gi> et sur
+                              le nombre de volume via un <gi>extent</gi>. S'il s'agit d'un travail
+                              universitaire, d'autres précisions sont contenus sur sa nature via un
+                                 <gi>objectName</gi>, sur l'établissement d'inscription via
+                                 <gi>affiliation</gi>, sur sa ville via <gi>pubPlace</gi> et les
+                              personnes ayant chapeauté le travail via un <gi>RespStmt</gi> (cet
+                              élément contient ainsi le rôle de la personne dans ce travail dans la
+                              balise <gi>resp</gi>, son nom dans la balise <gi>persName</gi> et son
+                              établissement de rattachement via la balise <gi>orgName</gi>).
+                              D'autres informations peuvent suivrent comme le lien vers un accès en
+                              ligne du document contenu dans une balise <gi>ref</gi>, avec ledit
+                              lien comme valeur de l'attribut <att>target</att> ou encore d'autres
+                              informations utiles sur la publication dans une balise
+                              <gi>note</gi>.</p>
+                           <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                              <bibl xml:id="Reignier_2021b" type="Bibliographie">
+                                 <title>Les droits de passage à Saint-Agrève au début du XIVe
+                                    siècle</title>
+                                 <author>Virgile Reignier</author>
+                                 <date>2021</date>
+                                 <series>
+                                    <title>Mémoire d'Ardèche et temps présent</title>
+                                    <idno>151</idno>
+                                    <biblScope>p. 89-94</biblScope>
+                                 </series>
+                              </bibl></egXML>
+                        </div6>
+                     </div5>
+                  </div4>
+                  <div4>
+                     <head>Le <hi rend="italic">profileDesc</hi></head>
+                     <p>Le <gi>profileDesc</gi> contient 4 sections : <specList>
+                           <specDesc key="abstract"/>
+                           <specDesc key="langUsage"/>
+                           <specDesc key="particDesc"/>
+                           <specDesc key="settingDesc"/>
+                        </specList>Un <gi>abstract</gi> permettant d'identifier et de résumer les
+                        différentes parties du texte, un <gi>langUsage</gi> permettant de décrire
+                        les langages utilisées, un <gi>particDesc</gi> contenant un index des
+                        principaux personnages évoqués dans ce texte et un <gi>settingDesc</gi>
+                        contenant un index des principaux lieux.</p>
+                     <div5>
+                        <head>L'<hi rend="italic">abstract</hi></head>
+                        <p>L'<gi>abstract</gi> permet d'identifier et résumer les différentes
+                           parties du texte édité. Cet élément est associé à un <att>xml:id</att>
+                           associé à la valeur <val>resume</val> permettant de réaliser des renvois
+                           internes vers lui. Il est composé d'un élément <gi>p</gi> permettant
+                           d'introduire le résumé, disposé sous forme de <gi>list</gi> imbriquées
+                           dont les <gi>item</gi> sont associés à un attribut <att>corresp</att>
+                           permettant de renvoyer vers les parties du texte concernés. Les
+                              sous-<gi>item</gi> disposent également d'un attribut <att>n</att>
+                           permettant d'ordonner les actes décrits. Ils contiennent un résumé de
+                           l'acte, au sein du quel sont encapsulés les dates sous forme d'élément
+                              <gi>date</gi> associé à un attribut <att>when</att> permettant de les
+                           présenter sous forme normalisée, les noms de personnes sous forme
+                           d'élément <gi>persName</gi> ou <gi>orgName</gi>associés à un
+                              <att>nymRef</att> renvoyant vers l'index des participants et les noms
+                           de lieu sous forme d'élément <gi>placeName</gi> associés à un
+                              <att>nymRef</att> renvoyant vers l'index des lieux.</p>
+                     </div5>
+                     <div5>
+                        <head>Le <hi rend="italic">langUsage</hi></head>
+                        <p>Le <gi>langUsage</gi> décrit l'ensemble des langues présentes dans ce
+                           texte à l'aide d'élements <gi>language</gi> associés à l'attribut
+                              <att>ident</att> décrivant la langue sous sa forme normalisée, à
+                           l'attribut <att>usage</att> permettant d'estimer la proportion d'usage
+                           dans le texte et l'attribut <att>xml:lang</att> permettant de lui donner
+                           un identifiant.</p>
+                     </div5>
+                     <div5>
+                        <head>Le <hi rend="italic">particDesc</hi></head>
+                        <p>Le <gi>particDesc</gi> permet de lister les principaux personnages et
+                           organisations mentionnés dans ce texte. Il se compose d'une
+                              <gi>listPerson</gi> contenant une liste de notices correspondant aux
+                           personnes et d'une <gi>listOrg</gi> correspondant aux groupes et
+                           institutions.</p>
+                        <p>La <gi>listPerson</gi> est constituée d'une série de <gi>person</gi>,
+                           chacune contenant un <gi>persName</gi> associé à un <att>xml:id</att>
+                           permettant de renvoyer vers lui, une <gi>occupation</gi> décrivant son
+                           rôle (cet élément contient parfois un <gi>placeName</gi> ou un
+                              <gi>orgName</gi> associé à un <att>nymRef</att> lorsque ce rôle se
+                           définit en fonction d'une localité ou d'une institution), une éventuelle
+                              <gi>affiliation</gi> lorsque ce rôle est associé à un <gi>orgName</gi>
+                           (cet élément dispose alors d'un <att>nymRef</att> renvoyant vers
+                           l'élément correspondant de l'index), et d'un éventuel <gi>event</gi>
+                           contenant des indications sur la vie de cette personne encapsulé dans un
+                           élément <gi>desc</gi> (lui-même contenant un élément <gi>persName</gi>
+                           associé à un <att>nymRef</att> lorsque l'évènement concerne une autre
+                           personne de l'index).</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                           <person>
+                              <persName xml:id="Armand_de_Polignac">Armandus de
+                                 Podemniaco</persName>
+                              <occupation>Vicomte de Polignac et seigneur pour partie de <placeName
+                                    nymRef="#Saint-Agrève">Saint-Agrève</placeName></occupation>
+                              <event>
+                                 <desc>Marié avec <persName nymRef="#Cateherine_de_Bouzols"
+                                       >Catherine de Bouzols</persName></desc>
+                              </event>
+                           </person>
+                        </egXML>
+                        <p>La <gi>listOrg</gi> est constituée d'une série d'<gi>org</gi>, chacune
+                           contenant un <gi>orgName</gi> associé à un <att>xml:id</att> permettant
+                           de renvoyer vers elle, un <gi>trait</gi> permettant de la décrire dans un
+                           élément <gi>p</gi> (cette description peut se faire en fonction d'un
+                           autre <gi>orgName</gi>, il dispose alors d'un <att>nymRef</att>
+                           permettant de renvoyant vers la notice concernée), d'un éventuel
+                              <gi>settlement</gi> associé à un <att>type</att> de valeur
+                              <val>commune</val> pour décrire la commune actuelle où elle se situe,
+                           d'éventuels <gi>district</gi> associé à un <att>type</att> de valeur
+                              <val>département</val> pour décrire le ou les départements où elle se
+                           situe et d'une éventuelle <gi>note</gi> pour donner des indications
+                           supplémentaires à son propos.</p>
+                     </div5>
+                     <div5>
+                        <head>Le <hi rend="italic">settingDesc</hi></head>
+                        <p>Le <gi>settingDesc</gi> permet de lister dans un élément
+                              <gi>listPlace</gi> les principales localités mentionnées dans ce
+                           texte. Celles-ci sont toutes encapsulées dans des éléments <gi>place</gi>
+                           contenant un <gi>placeName</gi> associé à un <att>xml:id</att>, un
+                              <gi>geogName</gi> contenant le nom actuel du lieu, un
+                              <gi>settlement</gi> dont le <att>type</att> est <val>commune</val>
+                           contenant sa commune actuelle et un <gi>district</gi> dont le
+                              <att>type</att> est <val>département</val> contenant son département
+                           actuel.</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                           <place>
+                              <placeName xml:id="Commanderie_de_Devesset">Commanderie de
+                                 Devesset</placeName>
+                              <geogName>Devesset</geogName>
+                              <settlement type="commune">Devesset</settlement>
+                              <district type="département">Ardèche</district>
+                           </place>
+                        </egXML>
+                     </div5>
+                  </div4>
+               </div3>
+               <div3>
+                  <head>Structure du texte</head>
+                  <p>Le corpus est structuré à l'aide des balises suivantes : <specList>
+                        <specDesc key="div1"/>
+                        <specDesc key="div2"/>
+                        <specDesc key="div3"/>
+                        <specDesc key="p"/>
+                     </specList></p>
+                  <p>Les éléments <gi>div1</gi>, <gi>div2</gi> et <gi>div3</gi> permettent de mettre
+                     en valeur l'organisation hierarchique du texte. Les deux premiers englobent
+                     respectivement les ensemble d'actes et les actes identifiés dans le texte,
+                     chacun est associé à un <att>xml:id</att> afin de pouvoir réaliser des renvois
+                     internes vers ces parties de texte. L'élément <gi>div3</gi> n'est présent que
+                     pour l'acte principal et permet d'identifier ses quatre parties. Tous les
+                     éléments de texte sont ensérés dans des éléments <gi>p</gi> permettant de
+                     séparer les blocs cohérents d'information présents dans ce texte.</p>
+                  <div4>
+                     <head>Reproduction de la mise en page</head>
+                     <p>L'élément <gi>lb</gi> permet d'indiquer tous les retours à la ligne du
+                        texte, il dispose d'un attribut <att>n</att> dont la valeur correspond au
+                        numéro de la ligne. En cas de césure à l'intérieur d'un mot, l'élément
+                        dispose aussi d'un attribu <gi>break</gi> associé à la valeur <val>no</val>
+                        et d'un attribut <gi>rend</gi> associé à la valeur <val>hyphen</val> afin de
+                        remplacer les tirets habituellement utilisés pour indiquer cette césure</p>
+                  </div4>
+                  <div4>
+                     <head>Encodage des lacunes et des restitutions</head>
+                     <p>Le texte édité présente de nombreuses lacunes, dont certaines peuvent être
+                        complétées à l'aide des deux copies du texte conservés dans le même fonds ou
+                        par répétition d'autres éléments similaires présents dans le texte. Les
+                        éléments restitués sont insérés dans une balise <gi>supplied</gi> à laquelle
+                        est associée, le cas échéant, un attribut <att>source</att> dont la valeur
+                        correspond au document d'archive concerné décrit dans l'élément
+                           <gi>listWit</gi>. Les lacunes n'ayant pu être restituées sont quant à
+                        elles indiquées par une balise <gi>gap</gi> dont l'attribut <att>gi</att>
+                        est associé à la valeur <val>...</val>.</p>
+                  </div4>
+                  <div4>
+                     <head>Mise en valeur des noms de lieux et de personnes</head>
+                     <p>Le texte édité comporte différents noms de lieux et de personnes, dont les
+                        éléments les plus importants sont reportés dans les deux index
+                           <gi>settingDesc</gi> et <gi>particDesc</gi>. Ces éléments remarquables
+                        sont encapsulés dans des balises <gi>persName</gi>, <gi>placeName</gi> et
+                           <gi>orgName</gi> associés le cas échéant à un attribut <att>nymRef</att>
+                        dont la valeur correspond à une notice de ces index. Certains groupes de
+                           <gi>persName</gi> sont encapsulés dans une <gi>listPerson</gi>, un
+                           <gi>personGrp</gi> et un <gi>p</gi> afin de mettre en valeur leur
+                        fonction à l'aide de l'attribut <att>role</att> associé à la valeur
+                           <val>Ratifiants</val> ou <val>Témoins</val>. Le même procédé est utilisé
+                        dans la liste des "homines devesseti" pour regrouper les groupes-familles
+                        présents dans cette liste.</p>
+                     <p>Le texte est écrit en latin et la plupart des patonymes et toponymes sont
+                        latinisés. Les quelques uns présents sous leur forme vernaculaire sont
+                        encaplusés dans un élément <gi>foreign</gi> dont l'attribut
+                           <att>xml:lang</att> renvoie vers la valeur <val>occ</val>.</p>
+                  </div4>
+                  <div4>
+                     <head>Renvois internes au document</head>
+                     <p>Le texte édité se termine par deux petits groupes de mots associés à un
+                        symbole permettant de renvoyer vers leur emplacement logique dans le texte
+                        où ils ont été oubliés. Ces insises sont contenus dans un élément
+                           <gi>div1</gi> dont l'<att>xml:id</att> correspond à la valeur
+                           <val>renvois_internes</val>. Cet élément est ensuite composés d'un
+                           <gi>p</gi> contenant deux <gi>seg</gi>, chacun associés à un
+                           <att>xml:id</att> et un <att>n</att>. Le lieu correspondant à ces incises
+                        est mis en valeur par un <gi>ref</gi>, dont la valeur de l'attribut
+                           <att>target</att> permet de l'associer au groupe de mot à insérer</p>
+                  </div4>
+                  <div4>
+                     <head>Les variantes présentes dans les copies du texte</head>
+                     <p>Si la plupart des variantes remarquées entre le texte et ses copies
+                        concernent des erreurs orthographiques ou des fautes grammaticales.
+                        Cependant certaines portent des informations supplémentaires sur le texte
+                        méritant d'être reportées dans l'édition. Elles ont dans ce cas été
+                        encapsulées dans un élément <gi>rdg</gi> avec un attribut <att>wit</att>
+                        renvoyant vers le manuscrit concerné.</p>
+                  </div4>
+                  <div4>
+                     <head>Commentaires sur la transcription</head>
+                     <p>La présente édition contient quelques indications sur le texte original ne
+                        pouvant être reportées directement par la transcription mais méritant d'être
+                        mentionnées. Nous avons dans ce cas encapsulé ces commentaires dans un
+                        élément <gi>note</gi> associé à un attribut <att>n</att> permettant de les
+                        numéroter.</p>
+                  </div4>
+                  <div4>
+                     <head>La transcription du manuscrit</head>
+                     <p>Cette édition a été réalisée dans le but de pouvoir associer la
+                        transcription du manuscrit avec sa numérisation. Il a donc été décidé de
+                        proposer une transcription visuelle de la source associée à une
+                        transcription normalisée en fonction des standards habituels afin de
+                        faciliter l'accès à son contenu intellectuel.</p>
+                     <p>Ces versions alternatives ont été mis en valeur avec la balise
+                           <gi>choice</gi> contenant deux balises permettant d'encoder à chaque fois
+                        la graphie originale du texte et sa normalisation :</p>
+                     <list>
+                        <item><gi>sic</gi> et <gi>corr</gi> permettent d'encoder une graphie
+                           originale incohérente et sa correction</item>
+                        <item><gi>orig</gi> et <gi>reg</gi> permettent d'encoder une graphie
+                           originale et sa normilisation</item>
+                        <item><gi>abbr</gi> et <gi>expan</gi> permettent d'encoder une abbréviation
+                           et son développement</item>
+                     </list>
+                     <p>Les plus récurrentes de ces alternatives ont été déclarées dans une entité,
+                        ce qui permet d'alléger l'encodage de transcription et d'éviter les erreurs.
+                        L'intégralité des entités utilisées dans le document XML sont présentes dans
+                        une déclaration au début de l'encodage.</p>
+                     <div5>
+                        <head>Abbréviations et caractère spéciaux</head>
+                        <p>Le texte contient de nombreuses abréviations, chacune encapsulée dans un
+                           élément <gi>choice</gi>. Dans l'optique des transcriptions alternatives
+                           décrites plus haut, celui-ci contient un élément <gi>abbr</gi> contenant
+                           le caractère unicode qui correspond au signe d'abbréviation employé et un
+                           élément <gi>expan</gi> contenant son devéloppement, sous la forme
+                           suivante :</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples"><choice>
+                              <abbr>&#999;</abbr>
+                              <expan>con</expan>
+                           </choice></egXML>
+                        <p>De la même manière, le texte contient certains caractères spéciaux que
+                           nous avons voulu reproduire afin de proposer une transcription au plus
+                           proche du texte original :</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples"><choice>
+                              <abbr>&#383;</abbr>
+                              <expan>s</expan>
+                           </choice></egXML>
+                     </div5>
+                     <div5>
+                        <head>Ponctuation et initiales</head>
+                        <p>L'utilisation des majuscules ne correspondant pas à nos usages habituels,
+                           la présente édition a pris le parti de rétablir leur usage logique (c'est
+                           à dire uniquement pour les noms propres et en début de phrase) à l'aide
+                           d'un élément <gi>choice</gi> contenant la version originale dans un
+                           élément <gi>orig</gi> et sa normalisation dans un élément <gi>reg</gi>,
+                           sous la forme suivante :</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples"><choice>
+                              <orig>T</orig>
+                              <reg>t</reg>
+                           </choice></egXML>
+                        <p>Par ailleurs, nous avons également créé des éléments de ponctuation selon
+                           une logique similaire afin de faciliter la compréhension du texte édité.
+                           Ceux-ci se présentent sous la forme suivante :</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples"><choice>
+                              <orig/>
+                              <reg>.</reg>
+                           </choice></egXML>
+                     </div5>
+                     <div5>
+                        <head>Normalisation orthographique</head>
+                        <p>Certains mots sont présents dans ce texte selon une orthographe
+                           différente de celle utilisée habituellement. Dans ce cas, nous avons
+                           appliqué le même processus que pour la normalisation des majuscules :</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples"><choice>
+                              <orig>sollepniter</orig>
+                              <reg>sollemniter</reg>
+                           </choice></egXML>
+                     </div5>
+                  </div4>
+               </div3>
+            </div2>
+         </div1>
+         <div1>
+            <head>Tableau des éléments</head>
+            <schemaSpec ident="ODD_Devoir_charte_Devesset" start="TEI">
+               <!-- Modules obligatoires -->
+               <moduleRef key="tei"/>
+               <moduleRef key="header"
+                  include="teiHeader fileDesc titleStmt editionStmt publicationStmt authority sourceDesc idno extent profileDesc abstract langUsage language encodingDesc"/>
+               <moduleRef key="core"
+                  include="title respStmt resp note p ref publisher pubPlace name date bibl author series biblScope editor list item placeName desc graphic lb choice orig reg abbr expan sic corr gap foreign listBibl"/>
+               <moduleRef key="textstructure" include="TEI text body div1 div2 div3 back"/>
+               <!-- Modules additionnels -->
+               <moduleRef key="textcrit" include="app lem rdg listWit witness variantEncoding"/>
+               <moduleRef key="namesdates"
+                  include="persName orgName region settlement objectName affiliation placeName listPerson person occupation event listOrg org trait district listPlace place personGrp geogName"/>
+               <moduleRef key="msdescription"
+                  include="msDesc msIdentifier repository msContents summary physDesc objectDesc supportDesc support height width condition history msDescription provenance acquisition origin material dimensions"/>
+               <moduleRef key="corpus" include="particDesc settingDesc"/>
+               <moduleRef key="transcr"
+                  include="facsimile surface zone supplied ex surfaceGrp handShift"/>
+               <moduleRef key="linking" include="seg"/>
+               <!-- Classes de modèles -->
+               <classRef key="model.global"/>
+               <classRef key="model.common"/>
+               <classRef key="model.phrase"/>
+               <classRef key="model.respLike"/>
+               <classRef key="model.pLike"/>
+               <classRef key="model.teiHeaderPart"/>
+               <classRef key="model.publicationStmtPart.agency"/>
+               <classRef key="model.publicationStmtPart.detail"/>
+               <classRef key="model.listLike"/>
+               <classRef key="model.biblLike"/>
+               <classRef key="model.biblPart"/>
+               <classRef key="model.dimLike"/>
+               <classRef key="model.profileDescPart"/>
+               <classRef key="model.personLike"/>
+               <classRef key="model.personPart"/>
+               <classRef key="model.placeLike"/>
+               <classRef key="model.nameLike"/>
+               <classRef key="model.noteLike"/>
+               <classRef key="model.placeStateLike"/>
+               <classRef key="model.encodingDescPart"/>
+               <classRef key="model.graphicLike"/>
+               <classRef key="model.div1Like"/>
+               <classRef key="model.div2Like"/>
+               <classRef key="model.div3Like"/>
+               <classRef key="model.choicePart"/>
+               <classRef key="model.rdgLike"/>
+               <classRef key="model.rdgPart"/>
+               <!-- Classes d'attributs -->
+               <classRef key="att.global"/>
+               <classRef key="att.textCritical"/>
+               <classRef key="att.witnessed"/>
+               <classRef key="att.datable.w3c"/>
+               <classRef key="att.typed"/>
+               <classRef key="att.naming"/>
+               <classRef key="att.pointing"/>
+               <classRef key="att.dimensions"/>
+               <!-- Éléments personnalisés -->
+               <elementSpec ident="date" mode="change">
+                  <attList org="choice">
+                     <attDef ident="when" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @when est recommandé et doit contenir une
+                           date sauf s'il y a les attributs @notBefore et @notAfter</desc>
+                        <datatype>
+                           <dataRef key="teidata.temporal.w3c"/>
+                        </datatype>
+                     </attDef>
+                     <attList org="group">
+                        <attDef ident="notBefore" mode="change" usage="rec">
+                           <desc xml:lang="fr">L'attribut @notBefore est recommandé et doit contenir
+                              une date si l'attribut @notAfter est utilisé</desc>
+                           <datatype>
+                              <dataRef key="teidata.temporal.w3c"/>
+                           </datatype>
+                        </attDef>
+                        <attDef ident="notAfter" mode="change" usage="rec">
+                           <desc xml:lang="fr">L'attribut @noteAfter est recommandé et doit contenir
+                              une date sauf si l'attribut @notBefore est utilisé</desc>
+                           <datatype>
+                              <dataRef key="teidata.temporal.w3c"/>
+                           </datatype>
+                        </attDef>
+                     </attList>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="msDesc" mode="change">
+                  <attList>
+                     <attDef ident="xml:id" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @xml:id est obligatoire</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="bibl" mode="change">
+                  <attList>
+                     <attDef ident="corresp" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @corresp est recommandé et doit contenir une
+                           référence à un xml:id, sauf s'il y a un attribut @xml:id</desc>
+                        <datatype>
+                           <dataRef key="teidata.pointer"/>
+                        </datatype>
+                     </attDef>
+                     <attDef ident="xml:id" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @xml:id est recommandé sauf s'il y a un
+                           attribut @corresp</desc>
+                     </attDef>
+                     <attDef ident="type" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @type est recommandé lorsque l'attribut
+                           @xml:id est utilisé et ne peut contenir que deux valeurs :</desc>
+                        <valList mode="add" type="closed">
+                           <valItem ident="bibliographie"/>
+                           <valItem ident="inventaire_archivistique"/>
+                        </valList>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="abstract" mode="change">
+                  <attList>
+                     <attDef ident="xml:id" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @xml:id est obligatoire</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <constraintSpec scheme="schematron" ident="formbibl">
+                  <constraint>
+                     <s:rule context="tei:bibl[@type='bibliographie']">
+                        <s:assert test="matches(@xml:id, '^[a-zA-Z]*_\d{4}[a-z]?$')">Pour les
+                           ouvrages en bibliographie, l'attribut @xml:id doit se présenter sous la
+                           forme sous la forme nom_AAAAa.</s:assert>
+                     </s:rule>
+                  </constraint>
+               </constraintSpec>
+               <constraintSpec scheme="schematron" ident="formmsDesc">
+                  <constraint>
+                     <s:rule context="tei:msDesc[@xml:id]">
+                        <s:assert test="matches(@xml:id, '^AD[0-9]{2}_[a-zA-Z0-9]*$')">Pour les
+                           manuscrits étudiés, l'attribut doit se présenter sous la forme
+                           ADnumdpt_cote.</s:assert>
+                     </s:rule>
+                  </constraint>
+               </constraintSpec>
+               <elementSpec ident="placeName" mode="change">
+                  <attList org="choice">
+                     <attDef ident="nymRef" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @nymRef est recommandé et doit contenir une
+                           référence à un xml:id sauf s'il y a un attribut @xml:id</desc>
+                        <datatype>
+                           <dataRef key="teidata.pointer"/>
+                        </datatype>
+                     </attDef>
+                     <attDef ident="xml:id" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @xml:id est recommandé sauf s'il y a un
+                           attribut @nymRef</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="persName" mode="change">
+                  <attList org="choice">
+                     <attDef ident="nymRef" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @nymRef est recommandé et doit contenir une
+                           référence à un xml:id sauf s'il y a un attribut @xml:id</desc>
+                        <datatype maxOccurs="unbounded">
+                           <dataRef key="teidata.pointer"/>
+                        </datatype>
+                     </attDef>
+                     <attDef ident="xml:id" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @xml:id est recommandé sauf s'il y a un
+                           attribut @nymRef</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="language" mode="change">
+                  <attList>
+                     <attDef ident="usage" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @usage est obligatoire</desc>
+                     </attDef>
+                     <attDef ident="xml:lang" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @xml:lang est obligatoire</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="person" mode="change">
+                  <content>
+                     <sequence preserveOrder="true">
+                        <elementRef key="persName"/>
+                        <elementRef key="affiliation" minOccurs="0"/>
+                        <elementRef key="occupation"/>
+                        <elementRef key="event" minOccurs="0"/>
+                     </sequence>
+                  </content>
+               </elementSpec>
+               <elementSpec ident="org" mode="change">
+                  <content>
+                     <sequence>
+                        <alternate>
+                           <sequence preserveOrder="true">
+                              <elementRef key="orgName"/>
+                              <elementRef key="trait"/>
+                           </sequence>
+                           <sequence preserveOrder="true">
+                              <elementRef key="orgName"/>
+                              <elementRef key="note"/>
+                           </sequence>
+                        </alternate>
+                        <elementRef key="settlement" minOccurs="0"/>
+                        <elementRef key="district" minOccurs="0" maxOccurs="unbounded"/>
+                     </sequence>
+                  </content>
+               </elementSpec>
+               <elementSpec ident="place" mode="change">
+                  <content>
+                     <sequence preserveOrder="true">
+                        <elementRef key="placeName"/>
+                        <elementRef key="geogName"/>
+                        <elementRef key="settlement"/>
+                        <elementRef key="district"/>
+                     </sequence>
+                  </content>
+               </elementSpec>
+               <elementSpec ident="facsimile" mode="change">
+                  <attList>
+                     <attDef ident="corresp" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @corresp est obligatoire et doit renvoyer
+                           vers un xml:id</desc>
+                        <datatype>
+                           <dataRef key="teidata.pointer"/>
+                        </datatype>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="zone" mode="change">
+                  <attList>
+                     <attDef ident="corresp" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @corresp est obligatoire et doit renvoyer
+                           vers un xml:id</desc>
+                        <datatype>
+                           <dataRef key="teidata.pointer"/>
+                        </datatype>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="div1" mode="change">
+                  <attList>
+                     <attDef ident="xml:id" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @xml:id est obligatoire</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="div2" mode="change">
+                  <attList>
+                     <attDef ident="xml:id" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @xml:id est obligatoire</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="lb" mode="change">
+                  <attList>
+                     <attDef ident="n" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @n est obligatoire</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="choice" mode="change">
+                  <content>
+                     <alternate>
+                        <sequence preserveOrder="true">
+                           <elementRef key="orig"/>
+                           <elementRef key="reg"/>
+                        </sequence>
+                        <sequence preserveOrder="true">
+                           <elementRef key="abbr"/>
+                           <elementRef key="expan"/>
+                        </sequence>
+                        <sequence preserveOrder="true">
+                           <elementRef key="sic"/>
+                           <elementRef key="corr"/>
+                        </sequence>
+                     </alternate>
+                  </content>
+               </elementSpec>
+               <elementSpec ident="supplied" mode="change">
+                  <attList>
+                     <attDef ident="source" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @source est recommandé et doit renvoyer vers
+                           un xml:id</desc>
+                        <datatype>
+                           <dataRef key="teidata.pointer"/>
+                        </datatype>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="gap" mode="change">
+                  <attList>
+                     <attDef ident="rend" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @rend est obligatoire</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="note" mode="change">
+                  <attList>
+                     <attDef ident="n" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @n est recommandé</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="personGrp" mode="change">
+                  <attList>
+                     <attDef ident="role" mode="change" usage="rec">
+                        <desc xml:lang="fr">L'attribut @role est recommandé</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="foreign" mode="change">
+                  <attList>
+                     <attDef ident="xml:lang" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @xml:lang est obligatoire</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="seg" mode="change">
+                  <attList>
+                     <attDef ident="xml:id" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @xml:id est obligatoire</desc>
+                     </attDef>
+                     <attDef ident="n" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @n est obligatoire</desc>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="lem" mode="change">
+                  <attList>
+                     <attDef ident="wit" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @wit est obligatoire et doit renvoyer vers un
+                           xml:id</desc>
+                        <datatype>
+                           <dataRef key="teidata.pointer"/>
+                        </datatype>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="rdg" mode="change">
+                  <attList>
+                     <attDef ident="wit" mode="change" usage="req">
+                        <desc xml:lang="fr">L'attribut @wit est obligatoire et doit renvoyer vers un
+                           xml:id</desc>
+                        <datatype>
+                           <dataRef key="teidata.pointer"/>
+                        </datatype>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+            </schemaSpec>
+         </div1>
+      </body>
+   </text>
+</TEI>

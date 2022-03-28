@@ -1,14 +1,16 @@
-from flask import render_template, request, flash, redirect
+from flask import render_template, request, flash, redirect, url_for
 from flask_login import login_user, current_user, logout_user
 from ..app import app, login, db
 from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, DetailPossessions, Authorship
 from ..modeles.utilisateurs import User
 from ..constantes import PERSONNES_PAR_PAGE
 
-#Routes de base :
+
+# Routes de base :
 @app.route("/")
 def accueil():
     return render_template("pages/accueil.html", nom="Homines Devesseti")
+
 
 @app.route("/index")
 def index():
@@ -19,27 +21,33 @@ def index():
     '''Pour une raison que j'ignore, il est impossible de factoriser les requêtes au début de cette page.
     Il faut donc les répéter à chaque usage'''
     return render_template("pages/index.html", nom="Homines Devesseti",
-        recs=recs, hommes=hommes, dets_pos=dets_pos, dets_red=dets_red)
+                           recs=recs, hommes=hommes, dets_pos=dets_pos, dets_red=dets_red)
 
-#Routes permettant l'affichage des données du terrier :
+
+# Routes permettant l'affichage des données du terrier :
 @app.route("/name/<int:name_id>")
 def nom(name_id):
     hommes = Personnes.query.order_by(Personnes.id).all()
     nbr_hommes = hommes[-1].id
     return render_template("pages/noms.html", nom="Homines Devesseti", homme=hommes[name_id - 1], nbr=nbr_hommes)
-    #On enlève systématiquement 1 à l'index car Python fait commencer le sien à 0
+    # On enlève systématiquement 1 à l'index car Python fait commencer le sien à 0
+
 
 @app.route("/dp/<int:dp_id>")
 def det_pos(dp_id):
     dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
     nbr_det_pos = dets_pos[-1].id_detail_possession
-    return render_template("pages/detail_possessions.html", nom="Homines Devesseti", det_pos=dets_pos[dp_id - 1], nbr=nbr_det_pos)
+    return render_template("pages/detail_possessions.html", nom="Homines Devesseti", det_pos=dets_pos[dp_id - 1],
+                           nbr=nbr_det_pos)
+
 
 @app.route("/dr/<int:dr_id>")
 def det_red(dr_id):
     dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
     nbr_det_red = dets_red[-1].id_detail_redevance
-    return render_template("pages/detail_redevances.html", nom="Homines Devesseti", det_red=dets_red[dr_id - 1], nbr=nbr_det_red)
+    return render_template("pages/detail_redevances.html", nom="Homines Devesseti", det_red=dets_red[dr_id - 1],
+                           nbr=nbr_det_red)
+
 
 @app.route("/rec/<int:rec_id>")
 def rec(rec_id):
@@ -61,9 +69,10 @@ def rec(rec_id):
     '''Pour réaliser ces renvois internes, j'ai également créé une liste contenant tous les éléments concernés par 
     chacune des reconnaissances afin de crer un lien hypertext vers leur page'''
     return render_template("pages/reconnaissances.html", nom="Homines Devesseti", rec=reco[0],
-        rec_hommes=rec_hommes, rec_det_pos=rec_det_pos, rec_det_red=rec_det_red, nbr=nbr_rec)
+                           rec_hommes=rec_hommes, rec_det_pos=rec_det_pos, rec_det_red=rec_det_red, nbr=nbr_rec)
 
-#Routes concernant les comptes utilisateur :
+
+# Routes concernant les comptes utilisateur :
 @app.route("/register", methods=["GET", "POST"])
 def inscription():
     # Si on est en POST, cela veut dire que le formulaire a été envoyé
@@ -82,6 +91,7 @@ def inscription():
             return render_template("pages/inscription.html")
     else:
         return render_template("pages/inscription.html")
+
 
 @app.route("/connexion", methods=["POST", "GET"])
 def connexion():
@@ -102,6 +112,8 @@ def connexion():
             flash("Les identifiants n'ont pas été reconnus", "error")
 
     return render_template("pages/connexion.html")
+
+
 login.login_view = 'connexion'
 
 
@@ -112,33 +124,88 @@ def deconnexion():
     flash("Vous êtes déconnecté(e)", "info")
     return redirect("/")
 
-#Intégration de la charte de Devesset :
+
+# Intégration de la charte de Devesset :
+import os
+from ..app import chemin_actuel
+from bs4 import BeautifulSoup
+
+
+def transfo_charte(path):
+    with open(path, 'r', encoding="ISO-8859-1") as f:
+        html_doc = f.read()
+    soup = BeautifulSoup(html_doc)
+    body = str(soup.find('body')).replace('<body>', '').replace('</body>', '')
+    changements = [["allograph", "norm", "index", "images", "accueil"], ["_paleo", "_norm", "_index", "_images", ""]]
+    for c in changements[0]:
+        body = body.replace(
+        'file:/C:/Users/virgi/Desktop/Master%20TNAH/Python/Devoir_Python/Homines_Devesseti/templates/charte/Devoir_charte_Devesset_' + c + '.html',
+        "{{url_for('charte" + changements[1][changements[0].index(c)] + "')}}")
+    for x in range(1, 5):
+        body = body.replace(
+        "file:/C:/Users/virgi/Desktop/Master%20TNAH/Python/Devoir_Python/Homines_Devesseti/templates/charte/Images/Page_" + str(x) +".jpg",
+        "{{url_for('static', filename='images/charte/Page_" + str(x) + ".jpg')}}")
+    debut = "{% extends 'conteneur.html' %} {% block corps %}"
+    fin = "<nav aria-label=\"research-pagination\" class=\"center-link\"><p><a href=\"{{url_for('accueil')}}\">Retour accueil</a></p></nav>{% endblock %}"
+    # Tout ça est un peu artisanal, mais ça me permet d'inclure mes pages html dans mon site sans modifier le xslt
+    with open(path, "w", encoding="ISO-8859-1") as f:
+        f.write(debut)
+        f.write(body)
+        f.write(fin)
+
+
 @app.route("/charte")
 def charte():
-    return render_template("charte/Devoir_charte_Devesset_python_accueil.html", nom="Homines Devesseti")
+    list_page = ["accueil", "allograph", "norm", "index", "images"]
+    for page in list_page:
+        nom_complet = "Devoir_charte_Devesset_" + page + ".html"
+        path = os.path.join(chemin_actuel, "templates/charte", nom_complet)
+        with open(path, 'r', encoding="ISO-8859-1") as f:
+            html_doc = f.read()
+        soup = BeautifulSoup(html_doc)
+        id = soup.find('html').get('id')
+        if id:
+            transfo_charte(path)
+        f.close()
+    return render_template("charte/Devoir_charte_Devesset_accueil.html", nom="Homines Devesseti")
+
 
 @app.route("/charte/paleo")
 def charte_paleo():
-    return render_template("charte/Devoir_charte_Devesset_python_allograph.html", nom="Homines Devesseti")
+    return render_template("charte/Devoir_charte_Devesset_allograph.html", nom="Homines Devesseti")
+
 
 @app.route("/charte/norm")
 def charte_norm():
-    return render_template("charte/Devoir_charte_Devesset_python_norm.html", nom="Homines Devesseti")
+    return render_template("charte/Devoir_charte_Devesset_norm.html", nom="Homines Devesseti")
+
 
 @app.route("/charte/index")
 def charte_index():
-    return render_template("charte/Devoir_charte_Devesset_python_index.html", nom="Homines Devesseti")
+    return render_template("charte/Devoir_charte_Devesset_index.html", nom="Homines Devesseti")
 
-@app.route("/formulaire")
-def formulaire():
-    attributs = ["nom", "prenom", "localité"]
-    return render_template("pages/formulaire_recherche.html", nom="Homines Devesseti", attributs=attributs)
 
-#Route pour mes recherches :
+@app.route("/charte/images")
+def charte_images():
+    return render_template("charte/Devoir_charte_Devesset_images.html", nom="Homines Devesseti")
+
+
+# Route pour mes recherches :
 from whoosh import index, query
 from whoosh.index import create_in
 from whoosh.qparser import QueryParser
 from ..models_whoosh import PageWhoosh
+
+
+@app.route("/formulaire")
+def formulaire():
+    try:
+        index.open_dir(app.config["WHOOSH_SCHEMA_DIR"])
+        attributs = ["nom", "prenom", "localité"]
+        return render_template("pages/formulaire_recherche.html", nom="Homines Devesseti", attributs=attributs)
+    except:
+        return redirect("/generate_index")
+
 
 @app.route("/generate_index")
 def generate_index():
@@ -153,8 +220,9 @@ def generate_index():
             localité=homme.localite
         )
     writer.commit()
-    flash("Index régénéré", "info")
+    flash("Index mis à jour", "info")
     return redirect("/formulaire")
+
 
 @app.route("/recherche")
 def recherche():
@@ -169,11 +237,11 @@ def recherche():
     q = QueryParser(attribut, ix.schema).parse(motclef)
     with ix.searcher() as s:
         results = s.search_page(q, page, pagelen=PERSONNES_PAR_PAGE, terms=True)
-        #La pagination est un peu artisanale, mais je n'ai pas trouvé comment naviguer dans des éléments whoosh
+        # La pagination est un peu artisanale, mais je n'ai pas trouvé comment naviguer dans des éléments whoosh
         prev, next = False, False
         if page > 1:
             prev = True
-        if page <= len(results)/PERSONNES_PAR_PAGE:
+        if page <= len(results) / PERSONNES_PAR_PAGE:
             next = True
         titre = "Résultat pour la recherche `" + motclef.replace('*', '') + "` dans la classe " + attribut
         return render_template("pages/recherche.html", nom="Homines Devesseti", resultats=results, titre=titre,
