@@ -39,7 +39,7 @@
                 {% if homme.informations_personnelles %}
                 <dt>Information personnelle :</dt><dd>{{homme.informations_personnelles.replace("�", "'")}}</dd>
                 {% endif %}     
-                <dt>Reconnaissance :</dt><dd><a href="{{url_for('rec', rec_id=homme.id_reconnaissance)}}">{{homme.id_reconnaissance}}</a>{% if homme.represente_par %} 
+                <dt>Reconnaissance :</dt><dd><a href="{{url_for('rec', rec_id=homme.id_reconnaissance)}}">{{homme.id_reconnaissance}}</a>{% if homme.represente_par %}
                     (représenté par <a href="{{url_for('nom', name_id=homme.represente_par)}}">un proche</a>){% endif %}</dd>
             </dl>
             <d2>

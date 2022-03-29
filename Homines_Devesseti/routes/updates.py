@@ -331,8 +331,6 @@ def det_pos_update(dp_id):
     if request.method == "POST":
         if not request.form.get("dpReco", "").strip():
             erreurs.append("dpReco")
-        elif request.form["dpReco"] is not int:
-            erreurs.append("dpReco")
         if not request.form.get("dpPersonne", "").strip():
             erreurs.append("dpPersonne")
         if not request.form.get("dpPossession", "").strip():
@@ -406,23 +404,13 @@ def det_red_update(dr_id):
     if request.method == "POST":
         if not request.form.get("drReco", "").strip():
             erreurs.append("drReco")
-        elif request.form["drReco"] is not int:
-            erreurs.append("drReco")
         if not request.form.get("drPoules", "").strip():
-            erreurs.append("drPoules")
-        elif request.form["drPoules"] is not int:
             erreurs.append("drPoules")
         if not request.form.get("drSeigle", "").strip():
             erreurs.append("drSeigle")
-        elif request.form["drSeigle"] is not int:
-            erreurs.append("drSeigle")
         if not request.form.get("drAvoine", "").strip():
             erreurs.append("drAvoine")
-        elif request.form["drAvoine"] is not int:
-            erreurs.append("drAvoine")
         if not request.form.get("drMonnaie", "").strip():
-            erreurs.append("drMonnaie")
-        elif request.form["drMonnaie"] is not int:
             erreurs.append("drMonnaie")
         if not request.form.get("drBien", "").strip():
             erreurs.append("drBien")
@@ -488,8 +476,6 @@ def name_update(name_id):
             erreurs.append("hommeSexe")
         if not request.form.get("hommeReco", "").strip():
             erreurs.append("hommeReco")
-        elif request.form["hommeReco"] is not int:
-            erreurs.append("hommeReco")
         if not request.form.get("hommeLieu", "").strip():
             erreurs.append("hommeLieu")
         if not request.form.get("hommePrecisionLieu", "").strip():
@@ -541,8 +527,6 @@ def name_create():
     if request.method == "POST":
         if not request.form.get("hommeReco", "").strip():
             erreurs.append("hommeReco")
-        elif request.form["hommeReco"] is not int:
-            erreurs.append("hommeReco")
         if request.form["hommeSexe"] not in sexes:
             erreurs.append("hommeSexe")
         if not erreurs:
@@ -586,23 +570,13 @@ def det_red_create():
     if request.method == "POST":
         if not request.form.get("drReco", "").strip():
             erreurs.append("drReco")
-        elif request.form["drReco"] is not int:
-            erreurs.append("drReco")
         if not request.form.get("drPoules", "").strip():
-            erreurs.append("drPoules")
-        elif request.form["drPoules"] is not int:
             erreurs.append("drPoules")
         if not request.form.get("drSeigle", "").strip():
             erreurs.append("drSeigle")
-        elif request.form["drSeigle"] is not int:
-            erreurs.append("drSeigle")
         if not request.form.get("drAvoine", "").strip():
             erreurs.append("drAvoine")
-        elif request.form["drAvoine"] is not int:
-            erreurs.append("drAvoine")
         if not request.form.get("drMonnaie", "").strip():
-            erreurs.append("drMonnaie")
-        elif request.form["drMonnaie"] is not int:
             erreurs.append("drMonnaie")
         if not erreurs:
             id_reconnaissance = request.form["drReco"]
@@ -645,8 +619,6 @@ def det_pos_create():
     erreurs = []
     if request.method == "POST":
         if not request.form.get("dpReco", "").strip():
-            erreurs.append("dpReco")
-        if request.form["dpReco"] is not int:
             erreurs.append("dpReco")
         if not erreurs:
             id_reconnaissance = request.form["dpReco"]
