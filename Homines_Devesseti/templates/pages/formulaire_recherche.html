@@ -7,7 +7,7 @@
 {% endif %}
 <h1>Formulaire de recherche</h1>
 <div>
-    <p>Ce formulaire permet de chercher parmis les noms, prénoms et localités des déclarants du terrier de Devesset</p>
+    <p>Ce formulaire ne permet de chercher que parmis les noms, prénoms et localités des déclarants du terrier de Devesset</p>
     <p>Pour chercher dans les autres tables, merci de passer par l'<a href="{{url_for('index')}}">index</a> du site</p>
 </div>
 <div class="hero jumbotron" style="margin-bottom:5%">
@@ -32,6 +32,11 @@
       </form>
     </div>
   </div>
+  <div>Pour information, les données ont été récoltées à partir du terrier de Devesset (conservé aux ADRML, cote 48 H 1688) et contenues dans des 
+    reconnaissances organisées de la manière suivante :</div>
+    <figure>
+      <img src="{{url_for('static', filename='images/reconnaissance.png')}}" width="600px" />
+  </figure>
   <nav aria-label="research-pagination" class="center-link">
     <p>
         <a href="{{url_for('accueil')}}">Retour à l'accueil</a>

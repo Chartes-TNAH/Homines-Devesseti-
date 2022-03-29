@@ -33,7 +33,9 @@
                 {% if homme.genre=="F" %}
                 <dd>Femme</dd>
                 {% endif %}
+                {% if homme.localite %}
                 <dt>Lieu d'habitation :</dt><dd>{{homme.localite}}{% if homme.precision_sur_origine %}, {{homme.precision_sur_origine}}{% endif %}</dd>
+                {% endif %}  
                 {% if homme.informations_personnelles %}
                 <dt>Information personnelle :</dt><dd>{{homme.informations_personnelles.replace("�", "'")}}</dd>
                 {% endif %}     

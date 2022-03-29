@@ -58,6 +58,8 @@ def api_rec_single(rec_id):
 
 @app.route(API_ROUTE + "/search")
 def api_name_search():
+    #Nous n'avons pas trouvé comment jsonifier les données issues des recherches whoosh et nous sommes donc ici
+    #concentrés sur une méthode "classique" de recherche
     motclef = request.args.get("q", None)
     page = request.args.get("page", 1)
     if isinstance(page, str) and page.isdigit():

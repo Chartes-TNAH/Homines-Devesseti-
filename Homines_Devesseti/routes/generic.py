@@ -45,7 +45,8 @@ def index():
 def nom(name_id):
     hommes = Personnes.query.order_by(Personnes.id).all()
     nbr_hommes = hommes[-1].id
-    return render_template("pages/noms.html", nom="Homines Devesseti", homme=hommes[name_id - 1], nbr=nbr_hommes)
+    if name_id-1 > 0: #Pour éviter qu'il existe une route "/name/0"
+        return render_template("pages/noms.html", nom="Homines Devesseti", homme=hommes[name_id - 1], nbr=nbr_hommes)
     # On enlève systématiquement 1 à l'index car Python fait commencer le sien à 0
 
 
@@ -53,7 +54,8 @@ def nom(name_id):
 def det_pos(dp_id):
     dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
     nbr_det_pos = dets_pos[-1].id_detail_possession
-    return render_template("pages/detail_possessions.html", nom="Homines Devesseti", det_pos=dets_pos[dp_id - 1],
+    if dp_id - 1 > 0:
+        return render_template("pages/detail_possessions.html", nom="Homines Devesseti", det_pos=dets_pos[dp_id - 1],
                            nbr=nbr_det_pos)
 
 
@@ -61,7 +63,8 @@ def det_pos(dp_id):
 def det_red(dr_id):
     dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
     nbr_det_red = dets_red[-1].id_detail_redevance
-    return render_template("pages/detail_redevances.html", nom="Homines Devesseti", det_red=dets_red[dr_id - 1],
+    if dr_id - 1 > 0:
+        return render_template("pages/detail_redevances.html", nom="Homines Devesseti", det_red=dets_red[dr_id - 1],
                            nbr=nbr_det_red)
 
 
