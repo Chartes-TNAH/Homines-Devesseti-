@@ -911,6 +911,5 @@ def delete(d, n):
             return redirect(url_for(det_red_update, dr_id=n))
 
 @app.route("/participer")
-@login_required
 def participer():
     return render_template("pages/update/participer.html")

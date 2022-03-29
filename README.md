@@ -1,5 +1,3 @@
-
-
 #Contexte :
 
 Ce projet est issu du cours Python de M2 TNAH 2021-2022.
@@ -29,4 +27,4 @@ AttributeError: module 'time' has no attribute 'clock’
 
 Il suffit alors de modifier l’élément time.clock qui pose problème par l’élément time.time (v. aussi https://stackoverflow.com/questions/58569361/attributeerror-module-time-has-no-attribute-clock-in-python-3-8).
 
-Pour optimiser la qualité visuelle de ce site, merci de privilégier la consultation en plein écran.
+Pour optimiser la qualité visuelle, merci de privilégier la consultation en plein écran.
