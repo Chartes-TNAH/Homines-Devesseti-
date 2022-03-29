@@ -5,16 +5,11 @@
 {% endblock %}
 
 {% block corps %}
-{% if updated %}
-	<div class="alert alert-success">
-		<p>Modification enregistrée</p>
-	</div>
-{% endif %}
 	<h1>Nouvelle déclaration de bien</h1>
     <form method="POST">
 		<div class="mb-3">
 		    <label for="dpReco" class="form-label">Reconnaissance :</label>
-		    <input type="text" step="0.000001" name="dpReco" class="form-control" id="dpReco" value="" />
+		    <input type="text" step="0.000001" name="dpReco" class="form-control" placeholder="Champ Requis" id="dpReco" value=""/></input>
 		  </div>
 		  <div class="mb-3">
 		    <label for="dpPersonne" class="form-label">Personne concernée :</label>

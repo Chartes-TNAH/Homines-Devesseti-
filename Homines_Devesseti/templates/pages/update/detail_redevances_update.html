@@ -6,12 +6,8 @@
 
 {% block corps %}
     {% if det_red %}
-	{% if updated %}
-	<div class="alert alert-success">
-		<p>Modification enregistrée</p>
-	</div>
-{% endif %}
 	<h1>Redevance n°{{det_red.id_detail_redevance}}</h1>
+	<a class="btn-nav btn" href="{{ url_for('delete', d='dr', n=det_red.id_detail_redevance) }}">Supprimer</a>
     <form method="POST" action="{{ url_for('det_red_update', dr_id=det_red.id_detail_redevance)}}">
 		<div class="mb-3">
 		    <label for="drReco" class="form-label">Reconnaissance :</label>

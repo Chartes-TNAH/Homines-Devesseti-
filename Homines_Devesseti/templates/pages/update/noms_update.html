@@ -6,11 +6,7 @@
 
 {% block corps %}
     {% if homme %}
-	{% if updated %}
-	<div class="alert alert-success">
-		<p>Modification enregistrée</p>
-	</div>
-{% endif %}
+	<a class="btn-nav btn" href="{{ url_for('delete', d='name', n=homme.id) }}">Supprimer</a>
     <form method="POST" action="{{ url_for('name_update', name_id=homme.id)}}">
     	 <div class="mb-3">
 		    <label for="hommePrenom" class="form-label">Prenom :</label>

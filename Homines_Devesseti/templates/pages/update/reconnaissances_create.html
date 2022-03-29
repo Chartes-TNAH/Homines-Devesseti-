@@ -8,6 +8,14 @@
 	<h1>Nouvelle reconnaissance</h1>
     <form method="POST">
 		<div class="mb-3">
+		    <label for="recId" class="form-label">Numéro (ancienne page + position) :</label>
+		    <input type="integer" name="recId" class="form-control" placeholder="Champ Requis" id="recId" aria-describedby="recIdHelp" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recCommandeur" class="form-label">Commandeur :</label>
+		    <input type="integer" name="recCommandeur" class="form-control" placeholder="Champ Requis" id="recCommandeur" aria-describedby="recCommandeurHelp" value="" />
+		  </div>
+		<div class="mb-3">
 		    <label for="recPage" class="form-label">Page (numéro + position) :</label>
 		    <input type="integer" name="recPage" class="form-control" id="recPage" aria-describedby="recPageHelp" value="" />
 		  </div>

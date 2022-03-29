@@ -5,13 +5,9 @@
 {% endblock %}
 
 {% block corps %}
-    {% if det_pos %}
-	{% if updated %}
-	<div class="alert alert-success">
-		<p>Modification enregistrée</p>
-	</div>
-{% endif %}
+{% if det_pos %}
 	<h1>Déclaration de bien n°{{det_pos.id_detail_possession}}</h1>
+	<a class="btn-nav btn" href="{{ url_for('delete', d='dp', n=det_pos.id_detail_possession) }}">Supprimer</a>
     <form method="POST" action="{{ url_for('det_pos_update', dp_id=det_pos.id_detail_possession)}}">
 		<div class="mb-3">
 		    <label for="dpReco" class="form-label">Reconnaissance :</label>

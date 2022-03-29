@@ -1,6 +1,6 @@
 from flask import render_template, request, flash, url_for, redirect
 from flask_login import login_required, current_user
-from .generic import generate_index
+from .generic import generate_index, formulaire
 from ..app import app, login, db
 from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, DetailPossessions, Authorship
 
@@ -309,7 +309,8 @@ def rec_update(rec_id):
         else:
             print(erreurs)
 
-    return render_template(
+    if updated == False:
+        return render_template(
             "pages/update/reconnaissances_update.html",
             nom="Gazetteer",
             rec=reco,
@@ -318,6 +319,8 @@ def rec_update(rec_id):
             updated=updated,
             page=page
         )
+    else:
+        return formulaire(updated=updated)
 
 @app.route("/dp/<int:dp_id>/update", methods=["GET", "POST"])
 @login_required
@@ -327,6 +330,8 @@ def det_pos_update(dp_id):
     updated = False
     if request.method == "POST":
         if not request.form.get("dpReco", "").strip():
+            erreurs.append("dpReco")
+        elif request.form["dpReco"] is not int:
             erreurs.append("dpReco")
         if not request.form.get("dpPersonne", "").strip():
             erreurs.append("dpPersonne")
@@ -382,12 +387,15 @@ def det_pos_update(dp_id):
             updated = True
         else:
             print(erreurs)
-    return render_template(
-        "pages/update/detail_possessions_update.html",
-        nom="Gazetteer",
-        det_pos=dp,
-        updated=updated
-    )
+    if updated == False:
+        return render_template(
+            "pages/update/detail_possessions_update.html",
+            nom="Gazetteer",
+            det_pos=dp,
+            updated=updated
+        )
+    else:
+        return formulaire(updated=updated)
 
 @app.route("/dr/<int:dr_id>/update", methods=["GET", "POST"])
 @login_required
@@ -398,13 +406,23 @@ def det_red_update(dr_id):
     if request.method == "POST":
         if not request.form.get("drReco", "").strip():
             erreurs.append("drReco")
+        elif request.form["drReco"] is not int:
+            erreurs.append("drReco")
         if not request.form.get("drPoules", "").strip():
+            erreurs.append("drPoules")
+        elif request.form["drPoules"] is not int:
             erreurs.append("drPoules")
         if not request.form.get("drSeigle", "").strip():
             erreurs.append("drSeigle")
+        elif request.form["drSeigle"] is not int:
+            erreurs.append("drSeigle")
         if not request.form.get("drAvoine", "").strip():
             erreurs.append("drAvoine")
+        elif request.form["drAvoine"] is not int:
+            erreurs.append("drAvoine")
         if not request.form.get("drMonnaie", "").strip():
+            erreurs.append("drMonnaie")
+        elif request.form["drMonnaie"] is not int:
             erreurs.append("drMonnaie")
         if not request.form.get("drBien", "").strip():
             erreurs.append("drBien")
@@ -440,12 +458,15 @@ def det_red_update(dr_id):
             updated = True
         else:
             print(erreurs)
-    return render_template(
-        "pages/update/detail_redevances_update.html",
-        nom="Gazetteer",
-        det_red=dr,
-        updated=updated
-    )
+    if updated == False:
+        return render_template(
+            "pages/update/detail_redevances_update.html",
+            nom="Gazetteer",
+            det_red=dr,
+            updated=updated
+        )
+    else:
+        return formulaire(updated=updated)
 
 @app.route("/name/<int:name_id>/update", methods=["GET", "POST"])
 @login_required
@@ -466,6 +487,8 @@ def name_update(name_id):
         elif request.form["hommeSexe"] not in sexes:
             erreurs.append("hommeSexe")
         if not request.form.get("hommeReco", "").strip():
+            erreurs.append("hommeReco")
+        elif request.form["hommeReco"] is not int:
             erreurs.append("hommeReco")
         if not request.form.get("hommeLieu", "").strip():
             erreurs.append("hommeLieu")
@@ -516,6 +539,10 @@ def name_create():
     erreurs = []
     updated = False
     if request.method == "POST":
+        if not request.form.get("hommeReco", "").strip():
+            erreurs.append("hommeReco")
+        elif request.form["hommeReco"] is not int:
+            erreurs.append("hommeReco")
         if request.form["hommeSexe"] not in sexes:
             erreurs.append("hommeSexe")
         if not erreurs:
@@ -547,7 +574,6 @@ def name_create():
             "pages/update/noms_create.html",
             nom="Gazetteer",
             sexes=sexes,
-            updated=updated
         )
     else:
         return generate_index(updated=updated) #permet de maj l'index automatiquement à chaque modification
@@ -556,79 +582,111 @@ def name_create():
 @login_required
 def det_red_create():
     updated = False
+    erreurs = []
     if request.method == "POST":
-        id_reconnaissance = request.form["drReco"]
-        cens_en_poules = request.form["drPoules"]
-        totalSeigle = request.form["drSeigle"]
-        totalAvoine = request.form["drAvoine"]
-        total_monnaie = request.form["drMonnaie"]
-        pro = request.form["drBien"]
-        nom = request.form["drNom"]
-        lieu = request.form["drLieu"]
-        supplement = request.form["drInfo"]
-        # Mise à jour des tables :
-        dr = DetailRedevances(
-            id_reconnaissance=id_reconnaissance,
-            cens_en_poules=cens_en_poules,
-            totalSeigle=totalSeigle,
-            totalAvoine=totalAvoine,
-            total_monnaie=total_monnaie,
-            pro=pro,
-            nom=nom,
-            lieu=lieu,
-            supplement=supplement
+        if not request.form.get("drReco", "").strip():
+            erreurs.append("drReco")
+        elif request.form["drReco"] is not int:
+            erreurs.append("drReco")
+        if not request.form.get("drPoules", "").strip():
+            erreurs.append("drPoules")
+        elif request.form["drPoules"] is not int:
+            erreurs.append("drPoules")
+        if not request.form.get("drSeigle", "").strip():
+            erreurs.append("drSeigle")
+        elif request.form["drSeigle"] is not int:
+            erreurs.append("drSeigle")
+        if not request.form.get("drAvoine", "").strip():
+            erreurs.append("drAvoine")
+        elif request.form["drAvoine"] is not int:
+            erreurs.append("drAvoine")
+        if not request.form.get("drMonnaie", "").strip():
+            erreurs.append("drMonnaie")
+        elif request.form["drMonnaie"] is not int:
+            erreurs.append("drMonnaie")
+        if not erreurs:
+            id_reconnaissance = request.form["drReco"]
+            cens_en_poules = request.form["drPoules"]
+            totalSeigle = request.form["drSeigle"]
+            totalAvoine = request.form["drAvoine"]
+            total_monnaie = request.form["drMonnaie"]
+            pro = request.form["drBien"]
+            nom = request.form["drNom"]
+            lieu = request.form["drLieu"]
+            supplement = request.form["drInfo"]
+            # Mise à jour des tables :
+            dr = DetailRedevances(
+                id_reconnaissance=id_reconnaissance,
+                cens_en_poule=cens_en_poules,
+                totalSeigle=totalSeigle,
+                totalAvoine=totalAvoine,
+                total_monnaie=total_monnaie,
+                pro=pro,
+                nom=nom,
+                lieu=lieu,
+                supplement=supplement
+            )
+            db.session.add(dr)
+            db.session.add(Authorship(detail_redevances=dr, user=current_user))
+            db.session.commit()
+            updated = True
+    if updated == False:
+        return render_template(
+            "pages/update/detail_redevances_create.html",
+            nom="Gazetteer",
         )
-        db.session.add(dr)
-        db.session.add(Authorship(detail_redevances=dr, user=current_user))
-        db.session.commit()
-        updated = True
-    return render_template(
-        "pages/update/detail_redevances_create.html",
-        nom="Gazetteer",
-        updated=updated
-    )
+    else:
+        return formulaire(updated=updated)
 
 @app.route("/dp/create", methods=["GET", "POST"])
 @login_required
 def det_pos_create():
     updated = False
+    erreurs = []
     if request.method == "POST":
-        id_reconnaissance = request.form["dpReco"]
-        personne_concernee = request.form["dpPersonne"]
-        possession = request.form["dpPossession"]
-        nom = request.form["dpNom"]
-        lieu = request.form["dpLieu"]
-        supplement = request.form["dpInfo"]
-        confront1 = request.form["dpConfront1"]
-        confront2 = request.form["dpConfront2"]
-        confront3 = request.form["dpConfront3"]
-        confront4 = request.form["dpConfront4"]
-        confront5 = request.form["dpConfront5"]
-        confront6 = request.form["dpConfront6"]
-        #Mise à jour des tables :
-        dp = DetailPossessions(
-            id_reconnaissance=id_reconnaissance,
-            personne_concernee=personne_concernee,
-            possession=possession,
-            nom=nom,
-            lieu=lieu,
-            supplement=supplement,
-            confront1=confront1,
-            confront2=confront2,
-            confront3=confront3,
-            confront4=confront4,
-            confront5=confront5,
-            confront6=confront6,
+        if not request.form.get("dpReco", "").strip():
+            erreurs.append("dpReco")
+        if request.form["dpReco"] is not int:
+            erreurs.append("dpReco")
+        if not erreurs:
+            id_reconnaissance = request.form["dpReco"]
+            personne_concernee = request.form["dpPersonne"]
+            possession = request.form["dpPossession"]
+            nom = request.form["dpNom"]
+            lieu = request.form["dpLieu"]
+            supplement = request.form["dpInfo"]
+            confront1 = request.form["dpConfront1"]
+            confront2 = request.form["dpConfront2"]
+            confront3 = request.form["dpConfront3"]
+            confront4 = request.form["dpConfront4"]
+            confront5 = request.form["dpConfront5"]
+            confront6 = request.form["dpConfront6"]
+            #Mise à jour des tables :
+            dp = DetailPossessions(
+                id_reconnaissance=id_reconnaissance,
+                personne_concernee=personne_concernee,
+                possession=possession,
+                nom=nom,
+                lieu=lieu,
+                supplement=supplement,
+                confront1=confront1,
+                confront2=confront2,
+                confront3=confront3,
+                confront4=confront4,
+                confront5=confront5,
+                confront6=confront6,
+            )
+            db.session.add(dp)
+            db.session.add(Authorship(detail_possessions=dp, user=current_user))
+            db.session.commit()
+            updated = True
+    if updated == False:
+        return render_template(
+            "pages/update/detail_possessions_create.html",
+            nom="Gazetteer",
         )
-        db.session.add(dp)
-        db.session.add(Authorship(detail_possessions=dp, user=current_user))
-        db.session.commit()
-        updated = True
-    return render_template(
-        "pages/update/detail_possessions_create.html",
-        nom="Gazetteer",
-        updated=updated
-    )
+    else:
+        return formulaire(updated=updated)
 
 @app.route("/rec/create", methods=["GET", "POST"])
 @login_required
@@ -650,7 +708,13 @@ def rec_create():
             erreurs.append("recJornalia")
         if request.form["recChareis"] not in corvees:
             erreurs.append("recChareis")
+        if not request.form.get("recId", "").strip():
+            erreurs.append("recId")
+        if not request.form.get("recCommandeur", "").strip():
+            erreurs.append("recCommandeur")
         if not erreurs:
+            id_reconnaissance = request.form["recId"]
+            commandeur = request.form["recCommandeur"]
             ref_du_terrier = request.form["recPage"]
             notaire = request.form["recNotaire"]
             temoin1 = request.form["recTemoin1"]
@@ -666,7 +730,7 @@ def rec_create():
             manobrias = request.form["recManobrias"]
             jornalia = request.form["recJornalia"]
             chareis = request.form["recChareis"]
-            complement_sur_corvees = request.form["recComplementCorvees"]
+            complement_sur_Corvees = request.form["recComplementCorvees"]
             statut_terre = request.form["recStatutTerres"]
             domus = request.form["recDomus"]
             orti = request.form["recOrti"]
@@ -716,10 +780,12 @@ def rec_create():
             total_sous_tournois = request.form["recMonnaie"]
             mesure_de_cereale_utilisee = request.form["recMesure"]
             jour_paiement = request.form["recJourPaiement"]
-            juridiction = request.form["recJuridiction"]
+            type_de_Juridiction = request.form["recJuridiction"]
             mandement = request.form["recMandement"]
             #Mise à jour des tables :
             reco = Reconnaissances(
+            id_reconnaissance = id_reconnaissance,
+            commandeur = commandeur,
             notaire = notaire,
             temoin1 = temoin1,
             temoin2 = temoin2,
@@ -734,7 +800,7 @@ def rec_create():
             manobrias = manobrias,
             jornalia = jornalia,
             chareis = chareis,
-            complement_sur_corvees = complement_sur_corvees,
+            complement_sur_Corvees = complement_sur_Corvees,
             statut_terre = statut_terre,
             domus = domus,
             orti = orti,
@@ -784,7 +850,7 @@ def rec_create():
             total_sous_tournois = total_sous_tournois,
             mesure_de_cereale_utilisee = mesure_de_cereale_utilisee,
             jour_paiement = jour_paiement,
-            juridiction = juridiction,
+            type_de_Juridiction = type_de_Juridiction,
             mandement = mandement
             )
             db.session.add(reco)
@@ -795,11 +861,56 @@ def rec_create():
             updated = True
         else:
             print(erreurs)
-
-    return render_template(
+    if updated == False:
+        return render_template(
             "pages/update/reconnaissances_create.html",
             nom="Gazetteer",
             mois=mois,
             corvees=corvees,
-            updated=updated,
         )
+    else:
+        return formulaire(updated=updated)
+
+@app.route("/<d>/<int:n>/delete", methods=["GET", "POST"])
+@login_required
+def delete(d, n):
+    data = [["name", "dp", "dr", "rec"], [Personnes, DetailPossessions, DetailRedevances, Reconnaissances]]
+    page = []
+    try:
+        table = data[1][data[0].index(d)]
+        if d == "rec":
+            ligne = list(filter(lambda rec: rec.id_reconnaissance == n, Reconnaissances.query.all()))[0]
+            if ligne.page:
+                page = list(filter(lambda p: p.id_reconnaissance == n, Repertoire.query.all()))[0]
+        else:
+            ligne = table.query.get(n)
+        db.session.delete(ligne)
+        if d == "rec":
+            db.session.add(Authorship(reconnaissances=ligne, user=current_user))
+        elif d == "dp":
+            db.session.add(Authorship(detail_possessions=ligne, user=current_user))
+        elif d == "dr":
+            db.session.add(Authorship(detail_redevances=ligne, user=current_user))
+        elif d == "name":
+            db.session.add(Authorship(personnes=ligne, user=current_user))
+        if page:
+            db.session.delete(page)
+        db.session.commit()
+        if d == "name":
+            return generate_index(updated=True)
+        else:
+            return formulaire(updated=True)
+    except:
+        if d == "name":
+            return redirect(url_for(name_update, name_id=n))
+        elif d == "rec":
+            return redirect(url_for(rec_update, rec_id=n))
+        elif d == "dp":
+            return redirect(url_for(det_pos_update, dp_id=n))
+        elif d == "dr":
+            return redirect(url_for(det_red_update, dr_id=n))
+
+@app.route("/participer")
+@login_required
+def participer():
+    return render_template("pages/update/participer.html")

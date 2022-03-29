@@ -5,32 +5,27 @@
 {% endblock %}
 
 {% block corps %}
-{% if updated %}
-	<div class="alert alert-success">
-		<p>Modification enregistrée</p>
-	</div>
-{% endif %}
 	<h1>Nouvelle redevance</h1>
     <form method="POST">
 		<div class="mb-3">
 		    <label for="drReco" class="form-label">Reconnaissance :</label>
-		    <input type="text" step="0.000001" name="drReco" class="form-control" id="drReco" value="" />
+		    <input type="text" step="0.000001" name="drReco" placeholder="Champ Requis" class="form-control" id="drReco" value="" />
 		  </div>
 		  <div class="mb-3">
 		    <label for="drPoules" class="form-label">Cens en poules :</label>
-		    <input type="integer" step="0.000001" name="drPoules" class="form-control" id="drPoules" value="" />
+		    <input type="integer" step="0.000001" name="drPoules" placeholder="Champ Requis" class="form-control" id="drPoules" value="" />
 		  </div>
 		  <div class="mb-3">
 		    <label for="drSeigle" class="form-label">Cens en seigle (setiers) :</label>
-		    <input type="integer" step="0.000001" name="drSeigle" class="form-control" id="drSeigle" value="" />
+		    <input type="integer" step="0.000001" name="drSeigle" placeholder="Champ Requis" class="form-control" id="drSeigle" value="" />
 		  </div>
 		  <div class="mb-3">
 		    <label for="drAvoine" class="form-label">Cens en avoine (setiers) :</label>
-		    <input type="integer" step="0.000001" name="drAvoine" class="form-control" id="drAvoine" value="" />
+		    <input type="integer" step="0.000001" name="drAvoine" placeholder="Champ Requis" class="form-control" id="drAvoine" value="" />
 		  </div>
 		  <div class="mb-3">
 		    <label for="drMonnaie" class="form-label">Cens en monnaie (sous tournois) :</label>
-		    <input type="integer" step="0.000001" name="drMonnaie" class="form-control" id="drMonnaie" value="" />
+		    <input type="integer" step="0.000001" name="drMonnaie" placeholder="Champ Requis" class="form-control" id="drMonnaie" value="" />
 		  </div>
 		  <div class="mb-3">
 		    <label for="drBien" class="form-label">Biens ou taxes associés :</label>

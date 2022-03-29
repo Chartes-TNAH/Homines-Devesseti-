@@ -146,7 +146,7 @@ from bs4 import BeautifulSoup
 
 
 def transfo_charte(path):
-    #Programme un peu artisanal permettant de parser le html obtenu par la transfo de la charte utilisé pour le devoir
+    #fonction un peu artisanale permettant de parser le html obtenu par la transfo de la charte utilisé pour le devoir
     # de XSLT et l'intégrer dans l'appli
     with open(path, 'r', encoding="ISO-8859-1") as f:
         html_doc = f.read()
