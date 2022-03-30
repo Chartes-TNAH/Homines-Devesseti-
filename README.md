@@ -6,16 +6,10 @@ Il consiste en une visualisation de données collectées dans le cadre d’un tr
 
 Ce projet a été intégralement travaillé à partir d’un ordinateur personnel sous Windows. Malgré notre vigilance à ce sujet, il est possible que le changement de système d’exploitation nuise à certaines fonctionnalités.
 
-Une des difficultés de ce travail a été de traiter des données qui ont été conçues à partir d’un tableur excel et dont le traitement automatique n’a pas été anticipé. Cela s’est notamment avéré complexe au niveau des identifiant des reconnaissances : ceux-ci constituent une sémantique personnelle et doivent pourtant être utilisés en l’état car c’est ce code qui est repris dans les autres tables pour effectuer des renvois. Nous avons également dû traité l’absence de normalisation des données par une série de conditions imbriqués permettant de les traiter en fonction de leur expression. Nous avons veillé à la qualité des données affichées à l’aide d’une batterie de tests, mais il est possible qu’il demeure quelques incohérences à ce sujet.
+Une des difficultés de ce travail a été de traiter des données qui ont été conçues à partir d’un tableur excel et dont le traitement automatique n’a pas été anticipé. Cela s’est notamment avéré complexe au niveau des identifiant des reconnaissances : ceux-ci constituent une sémantique personnelle et doivent pourtant être utilisés en l’état car c’est ce code qui est repris dans les autres tables pour effectuer des renvois. Nous avons également dû traité l’absence de normalisation des données par une série de conditions imbriquées permettant de les traiter en fonction de leur expression et nous avons dû réduire certaines de nos ambitions faute de pouvoir consacrer un temps conséquent à les retravailler.
 
 De la même manière, la recherche à facette permise par la librairie whoosh n'a pas pu être généralisé en raison de la structure complexe
-des données. Nous avons donc fait le choix de ne l'utiliser que pour la table Personnes
-
-#Nota Bene :
-
-Quelques images ont été emprunté au site personnel du propriétaire de la commanderie de Devesset, les autres sont issu de notre collection personnelle.
-
-Le code regroupe systématiquement les données concernant les individus concernés sous le vocable « hommes », comme traduction générique du terme « homines ».
+des données. Nous avons donc fait le choix de ne l'utiliser que pour une seule table
 
 #Installation :
 
