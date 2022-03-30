@@ -1,10 +1,11 @@
-from flask import render_template, request, url_for, jsonify
+from flask import render_template, request, url_for, jsonify, redirect
+import os
 from urllib.parse import urlencode
 from ..app import app
 from ..constantes import PERSONNES_PAR_PAGE, API_ROUTE
 from ..modeles.donnees import Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire
 
-#Fonction prédéfinie pour l'affichage des données en JSON:
+#Fonction prédéfinie :
 
 def Json_404():
     response = jsonify({"erreur": "Unable to perform the query"})
@@ -59,7 +60,7 @@ def api_rec_single(rec_id):
 @app.route(API_ROUTE + "/search")
 def api_name_search():
     #Nous n'avons pas trouvé comment jsonifier les données issues des recherches whoosh et nous sommes donc ici
-    #concentrés sur une méthode "classique" de recherche
+    #concentrés sur une méthode plus classique de recherche
     motclef = request.args.get("q", None)
     page = request.args.get("page", 1)
     if isinstance(page, str) and page.isdigit():
@@ -101,3 +102,13 @@ def api_name_search():
         dict_resultats["links"]["prev"] = url_for("api_name_search", _external=True) + "?" + urlencode(arguments)
     response = jsonify(dict_resultats)
     return response
+
+#Route pour accéder au manifest iiif de la charte de Devesset produite dans le cadre du cours d'anglais
+@app.route(API_ROUTE + "/charte")
+def api_charte():
+    try:
+        path = os.path.join("static", "images", "manifest.json")
+        url = "http://localhost:5000/" + path
+        return redirect(url)
+    except:
+        return Json_404()

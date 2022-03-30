@@ -1,6 +1,5 @@
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, url_for, redirect
 from flask_login import login_user, current_user, logout_user
-import os
 from ..app import app, login, db, chemin_actuel
 from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, DetailPossessions, Authorship
 from ..modeles.utilisateurs import User
@@ -15,12 +14,10 @@ def charte_hommes():
     }
     path = os.path.join(chemin_actuel, "templates/charte", "Devoir_charte_Devesset.xml")
     file = ET.parse(path)
-    root = file.xpath("//tei:personGrp[@role = 'Ratifiants']//tei:persName//text()", namespaces=NAMESPACES)
-    #Là l'idée c'est à partir de ça d'essayer de récupérer des noeud txt en entier en les reconstituant pour en faire
-    #une classe SQLAlchemy. Question à 1000 francs : comment reconstituer des noeuds ?
+    root = file.xpath("//tei:personGrp[@role = 'Ratifiants']//tei:persName//text()[normalize-space()]", namespaces=NAMESPACES)
+    #Bon j'ai des éléments normalisés, maintenant faut que j'arrive à concaténer le texte à l'intérieur de ça
     for element in root:
         print(element)
-
 
 # Routes de base :
 @app.route("/")
@@ -45,7 +42,7 @@ def index():
 def nom(name_id):
     hommes = Personnes.query.order_by(Personnes.id).all()
     nbr_hommes = hommes[-1].id
-    if name_id-1 > 0: #Pour éviter qu'il existe une route "/name/0"
+    if name_id-1 >= 0: #Pour éviter qu'il existe une route "/name/0"
         return render_template("pages/noms.html", nom="Homines Devesseti", homme=hommes[name_id - 1], nbr=nbr_hommes)
     # On enlève systématiquement 1 à l'index car Python fait commencer le sien à 0
 
@@ -54,7 +51,7 @@ def nom(name_id):
 def det_pos(dp_id):
     dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
     nbr_det_pos = dets_pos[-1].id_detail_possession
-    if dp_id - 1 > 0:
+    if dp_id - 1 >= 0:
         return render_template("pages/detail_possessions.html", nom="Homines Devesseti", det_pos=dets_pos[dp_id - 1],
                            nbr=nbr_det_pos)
 
@@ -63,7 +60,7 @@ def det_pos(dp_id):
 def det_red(dr_id):
     dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
     nbr_det_red = dets_red[-1].id_detail_redevance
-    if dr_id - 1 > 0:
+    if dr_id - 1 >= 0:
         return render_template("pages/detail_redevances.html", nom="Homines Devesseti", det_red=dets_red[dr_id - 1],
                            nbr=nbr_det_red)
 
@@ -117,7 +114,6 @@ def connexion():
     if current_user.is_authenticated is True:
         flash("Vous êtes déjà connecté-e", "info")
         return redirect("/")
-    # Si on est en POST, cela veut dire que le formulaire a été envoyé
     if request.method == "POST":
         utilisateur = User.identification(
             login=request.form.get("login", None),
@@ -207,6 +203,9 @@ def charte_index():
 def charte_images():
     return render_template("charte/Devoir_charte_Devesset_images.html", nom="Homines Devesseti")
 
+@app.route("/charte/visualisation")
+def charte_visualisation():
+    return redirect("https://projectmirador.org/embed/?iiif-content=https://virgile-reignier.github.io/CharteDevesset/manifests/manifest.json")
 
 # Routes pour mes recherches :
 from whoosh import index, query
