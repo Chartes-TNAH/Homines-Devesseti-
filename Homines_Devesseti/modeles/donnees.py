@@ -407,3 +407,9 @@ class Repertoire(db.Model):
                 "position_dans_la_page": int(str(self.ref_du_terrier).split()[0][-1])
                 #Méthode similaire à celle de la page générique pour extraire les éléments du code utilisé
             }
+
+class Charte(db.Model):
+    __tablename__ = "charte"
+    id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
+    prenom = db.Column(db.Text)
+    nom = db.Column(db.Text)

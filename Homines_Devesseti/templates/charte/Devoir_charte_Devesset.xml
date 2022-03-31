@@ -1610,8 +1610,7 @@
                               </choice>rmandus de <choice>
                                  <orig>r</orig>
                                  <reg>R</reg>
-                              </choice>uppe</persName>&virgule; <persName>Joha&n;nes filius
-                                 <persName>Guilliermi de <choice>
+                              </choice>uppe</persName>&virgule; <persName>Joha&n;nes filius <persName>Guilliermi de <choice>
                                     <orig>r</orig>
                                     <reg>R</reg>
                                  </choice>uppe condam</persName></persName>&virgule;
@@ -1703,14 +1702,13 @@
                                        </choice>ivieria</persName> pro se et <persName><choice>
                                           <orig>m</orig>
                                           <reg>M</reg>
-                                       </choice>ichaele</persName> et <persName>Joha&n;ne</persName>
-                                    eius fratrib&us;</p>
+                                       </choice>ichaele</persName> et <persName>Joha&n;ne
+                                       </persName>eius fratrib&us;</p>
                               </personGrp>
                            </listPerson>&virgule; <persName>Anthonius de <foreign xml:lang="occ"><choice>
                                     <orig>c</orig>
                                     <reg>C</reg>
-                                 </choice>habanaas</foreign></persName>&virgule; <persName>Poncius
-                              de <choice>
+                                 </choice>habanaas</foreign></persName>&virgule; <persName>Poncius de <choice>
                                  <orig>c</orig>
                                  <reg>C</reg>
                               </choice>ro&s_long;o</persName>&virgule; <listPerson>
@@ -1739,8 +1737,7 @@
                                        </choice>artinus de la <choice>
                                           <orig>c</orig>
                                           <reg>C</reg>
-                                       </choice>o&s_long;ta</persName> et <persName>Pa&s_long;calis
-                                       de la <choice>
+                                       </choice>o&s_long;ta</persName> et <persName>Pa&s_long;calis de la <choice>
                                           <orig>c</orig>
                                           <reg>C</reg>
                                        </choice>osta</persName> pro se et
@@ -1763,8 +1760,7 @@
                                              <orig>j</orig>
                                              <reg>J</reg>
                                           </choice>alibertas</foreign></persName> pro se et
-                                          <persName><supplied source="#AD69_48H_1671-3">&Johann;e
-                                          ei&us; &fratr;e</supplied></persName></p>
+                                          <persName><supplied source="#AD69_48H_1671-3">&Johann;e ei&us; &fratr;e</supplied></persName></p>
                               </personGrp>
                            </listPerson>&virgule; <lb n="82"/><persName>Jacobus de la <choice>
                                  <orig>v</orig>
@@ -1858,7 +1854,7 @@
                            </listPerson>&virgule; <persName>Johan&n;es de <foreign xml:lang="occ"><choice>
                                     <orig>c</orig>
                                     <reg>C</reg>
-                                 </choice>hanicros</foreign> &s_long;ive de <choice>
+                                 </choice>hanicros </foreign>&s_long;ive de <choice>
                                  <orig>p</orig>
                                  <reg>P</reg>
                               </choice>odio <foreign xml:lang="occ"><choice>
@@ -1906,8 +1902,8 @@
                            </listPerson>&virgule; <persName>Armandus de <foreign xml:lang="occ"><choice>
                                     <orig>b</orig>
                                     <reg>B</reg>
-                                 </choice>ertos</foreign></persName>, <persName>Girardonus de
-                                 <supplied source="#AD69_48H_1671-3"><foreign xml:lang="occ"><choice>
+                                 </choice>ertos</foreign></persName>, <persName>Girardonus de <supplied source="#AD69_48H_1671-3">
+                                    <foreign xml:lang="occ"><choice>
                                        <orig>b</orig>
                                        <reg>B</reg>
                                     </choice><choice>

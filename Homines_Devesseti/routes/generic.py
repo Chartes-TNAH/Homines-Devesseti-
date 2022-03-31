@@ -1,3 +1,4 @@
+import os
 from flask import render_template, request, flash, url_for, redirect
 from flask_login import login_user, current_user, logout_user
 from ..app import app, login, db, chemin_actuel
@@ -14,10 +15,15 @@ def charte_hommes():
     }
     path = os.path.join(chemin_actuel, "templates/charte", "Devoir_charte_Devesset.xml")
     file = ET.parse(path)
-    root = file.xpath("//tei:personGrp[@role = 'Ratifiants']//tei:persName//text()[normalize-space()]", namespaces=NAMESPACES)
-    #Bon j'ai des éléments normalisés, maintenant faut que j'arrive à concaténer le texte à l'intérieur de ça
-    for element in root:
-        print(element)
+    root = file.xpath("//tei:personGrp[@role = 'Ratifiants']/tei:p/tei:persName", namespaces=NAMESPACES)
+    root2 = file.xpath("//tei:personGrp[@role = 'Ratifiants']/tei:p/tei:personGrp", namespaces=NAMESPACES)
+    for name in root:
+        nom = ""
+        for t in name.xpath(".//text()[not(parent::node()[local-name()='orig' or local-name()='abbr' or local-name()='sic'])][normalize-space()]"):
+            nom = nom + t
+        print(nom)
+    #Bon il me restera à traiter mes personGrp
+    #Mais là j'ai déjà toute une série de nom de gens, du coup de serait bien que je réflexhisse à ce que j'en fais quoi...
 
 # Routes de base :
 @app.route("/")
@@ -125,10 +131,7 @@ def connexion():
             return redirect("/")
         else:
             flash("Les identifiants n'ont pas été reconnus", "error")
-
     return render_template("pages/connexion.html")
-
-
 login.login_view = 'connexion'
 
 
