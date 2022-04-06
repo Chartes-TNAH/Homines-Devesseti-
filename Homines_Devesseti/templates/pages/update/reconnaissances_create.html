@@ -1,0 +1,313 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+|  Reconnaissance | Création 
+{% endblock %}
+
+{% block corps %}
+	<h1>Nouvelle reconnaissance</h1>
+    <form method="POST">
+		<div class="mb-3">
+		    <label for="recId" class="form-label">Numéro (ancienne page + position) :</label>
+		    <input type="integer" name="recId" class="form-control" placeholder="Champ Requis" id="recId" aria-describedby="recIdHelp" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recCommandeur" class="form-label">Commandeur :</label>
+		    <input type="integer" name="recCommandeur" class="form-control" placeholder="Champ Requis" id="recCommandeur" aria-describedby="recCommandeurHelp" value="" />
+		  </div>
+		<div class="mb-3">
+		    <label for="recPage" class="form-label">Page (numéro + position) :</label>
+		    <input type="integer" name="recPage" class="form-control" id="recPage" aria-describedby="recPageHelp" value="" />
+		  </div>
+		<div class="mb-3">
+		    <label for="recNotaire" class="form-label">Notaire présent :</label>
+		    <input type="text" name="recNotaire" class="form-control" id="recNotaire" aria-describedby="recNotaireHelp" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recTemoin1" class="form-label">Témoin 1 :</label>
+		    <input type="text" step="0.000001" name="recTemoin1" class="form-control" id="recTemoin1" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recTemoin2" class="form-label">Témoin 2 :</label>
+		    <input type="text" step="0.000001" name="recTemoin2" class="form-control" id="recTemoin2" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recTemoin3" class="form-label">Témoin 3 :</label>
+		    <input type="text" step="0.000001" name="recTemoin3" class="form-control" id="recTemoin3" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recTemoin4" class="form-label">Témoin 4 :</label>
+		    <input type="text" step="0.000001" name="recTemoin4" class="form-control" id="recTemoin4" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recTemoin5" class="form-label">Témoin 5 :</label>
+		    <input type="text" step="0.000001" name="recTemoin5" class="form-control" id="recTemoin5" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recAnnee" class="form-label">Année :</label>
+		    <input type="integer" step="0.000001" name="recAnnee" class="form-control" id="recAnnee" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recMois" class="form-label">Mois :</label>
+		    <select name="recMois" id="recMois">
+		    	{% for m in mois %}
+		    		<option value="{{m}}">
+			    		{{m}}
+			    	</option>
+		    	{% endfor %}
+		    </select>
+		  </div>
+		  <div class="mb-3">
+		    <label for="recJour" class="form-label">Jour :</label>
+		    <input type="integer" step="0.000001" name="recJour" class="form-control" id="recJour" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recStatut" class="form-label">Statut :</label>
+		    <input type="text" step="0.000001" name="recStatut" class="form-control" id="recStatut" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recDetStatut" class="form-label">Autre statut :</label>
+		    <input type="text" step="0.000001" name="recDetStatut" class="form-control" id="recDetStatut" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recManobrias" class="form-label">Manobrias :</label>
+		    <select name="recManobrias" id="recManobrias">
+		    	{% for corvee in corvees %}
+		    		<option value="{{corvee}}">
+			    		{{corvee}}
+			    	</option>
+		    	{% endfor %}
+		    </select>
+		  </div>
+		  <div class="mb-3">
+		    <label for="recJornalia" class="form-label">Jornalia :</label>
+		    <select name="recJornalia" id="recJornalia">
+		    	{% for corvee in corvees %}
+		    		<option value="{{corvee}}">
+			    		{{corvee}}
+			    	</option>
+		    	{% endfor %}
+		    </select>
+		  </div>
+		  <div class="mb-3">
+		    <label for="recChareis" class="form-label">Chareis :</label>
+		    <select name="recChareis" id="recChareis">
+		    	{% for corvee in corvees %}
+		    		<option value="{{corvee}}">
+			    		{{corvee}}
+			    	</option>
+		    	{% endfor %}
+		    </select>
+		  </div>
+		  <div class="mb-3">
+		    <label for="recComplementCorvees" class="form-label">Complément sur les corvées :</label>
+		    <textarea name="recComplementCorvees" class="form-control" id="recComplementCorvees"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="recStatutTerres" class="form-label">Statut des terres :</label>
+		    <textarea name="recStatutTerres" class="form-control" id="recStatutTerres"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="recDomus" class="form-label">Domus :</label>
+		    <input type="text" step="0.000001" name="recDomus" class="form-control" id="recDomus" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recOrti" class="form-label">Orti :</label>
+		    <input type="text" step="0.000001" name="recOrti" class="form-control" id="recOrti" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recPrata" class="form-label">Prata :</label>
+		    <input type="text" step="0.000001" name="recPrata" class="form-control" id="recPrata" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recCompos" class="form-label">Compos :</label>
+		    <input type="text" step="0.000001" name="recCompos" class="form-control" id="recCompos" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recNemora" class="form-label">Nemora :</label>
+		    <input type="text" step="0.000001" name="recNemora" class="form-control" id="recNemora" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recPascua" class="form-label">Pascua :</label>
+		    <input type="text" step="0.000001" name="recPascua" class="form-control" id="recPascua" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recPasturalia" class="form-label">Pasturalia :</label>
+		    <input type="text" step="0.000001" name="recPasturalia" class="form-control" id="recPasturalia" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recTerrae" class="form-label">Terrae :</label>
+		    <input type="text" step="0.000001" name="recTerrae" class="form-control" id="recTerrae" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recCasalia" class="form-label">Casalia :</label>
+		    <input type="text" step="0.000001" name="recCasalia" class="form-control" id="recCasalia" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recCasamenta" class="form-label">Casamenta :</label>
+		    <input type="text" step="0.000001" name="recCasamenta" class="form-control" id="recCasamenta" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recGrangiae" class="form-label">Grangiae :</label>
+		    <input type="text" step="0.000001" name="recGrangiae" class="form-control" id="recGrangiae" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recDenesia" class="form-label">Denesia :</label>
+		    <input type="text" step="0.000001" name="recDenesia" class="form-control" id="recDenesia" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recCalma" class="form-label">Calma :</label>
+		    <input type="text" step="0.000001" name="recCalma" class="form-control" id="recCalma" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recAssensa" class="form-label">Assensa :</label>
+		    <input type="text" step="0.000001" name="recAssensa" class="form-control" id="recAssensa" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recMolendinus" class="form-label">Molendinus :</label>
+		    <input type="text" step="0.000001" name="recMolendinus" class="form-control" id="recMolendinus" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recOuchias" class="form-label">Ouchias :</label>
+		    <input type="text" step="0.000001" name="recOuchias" class="form-control" id="recOuchias" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recGaraitum" class="form-label">Garaitum :</label>
+		    <input type="text" step="0.000001" name="recGaraitum" class="form-control" id="recGaraitum" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recPatile" class="form-label">Patile :</label>
+		    <input type="text" step="0.000001" name="recPatile" class="form-control" id="recPatile" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recHospicii" class="form-label">Hospicii :</label>
+		    <input type="text" step="0.000001" name="recHospicii" class="form-control" id="recHospicii" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recPetiae" class="form-label">Petiae :</label>
+		    <input type="text" step="0.000001" name="recPetiae" class="form-control" id="recPetiae" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recEsclausae" class="form-label">Esclausae :</label>
+		    <input type="text" step="0.000001" name="recEsclausae" class="form-control" id="recEsclausae" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recTerminus" class="form-label">Terminus :</label>
+		    <input type="text" step="0.000001" name="recTerminus" class="form-control" id="recTerminus" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recCostam" class="form-label">Costam :</label>
+		    <input type="text" step="0.000001" name="recCostam" class="form-control" id="recCostam" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recSana" class="form-label">Sana :</label>
+		    <input type="text" step="0.000001" name="recSana" class="form-control" id="recSana" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recTenementum" class="form-label">Tenementum :</label>
+		    <input type="text" step="0.000001" name="recTenementum" class="form-control" id="recTenementum" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recVersana" class="form-label">Versana :</label>
+		    <input type="text" step="0.000001" name="recVersana" class="form-control" id="recVersana" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recMasacgio" class="form-label">Masacgio :</label>
+		    <input type="text" step="0.000001" name="recMasacgio" class="form-control" id="recMasacgio" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recVineae" class="form-label">Vineae :</label>
+		    <input type="text" step="0.000001" name="recVineae" class="form-control" id="recVineae" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recBlachia" class="form-label">Blachia :</label>
+		    <input type="text" step="0.000001" name="recBlachia" class="form-control" id="recBlachia" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recArbores" class="form-label">Arbores :</label>
+		    <input type="text" step="0.000001" name="recArbores" class="form-control" id="recArbores" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recPassetae" class="form-label">Passetae :</label>
+		    <input type="text" step="0.000001" name="recPassetae" class="form-control" id="recPassetae" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recChastanerii" class="form-label">Chastanerii :</label>
+		    <input type="text" step="0.000001" name="recChastanerii" class="form-control" id="recChastanerii" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recLevata" class="form-label">Levata :</label>
+		    <input type="text" step="0.000001" name="recLevata" class="form-control" id="recLevata" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recCreysementum" class="form-label">Creysementum :</label>
+		    <input type="text" step="0.000001" name="recCreysementum" class="form-control" id="recCreysementum" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recBessaa" class="form-label">Bessaa :</label>
+		    <input type="text" step="0.000001" name="recBessaa" class="form-control" id="recBessaa" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recBesseta" class="form-label">Besseta :</label>
+		    <input type="text" step="0.000001" name="recBesseta" class="form-control" id="recBesseta" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recLameytenchada" class="form-label">Lameytenchada :</label>
+		    <input type="text" step="0.000001" name="recLameytenchada" class="form-control" id="recLameytenchada" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recBealis" class="form-label">Bealis :</label>
+		    <input type="text" step="0.000001" name="recBealis" class="form-control" id="recBealis" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recMansum" class="form-label">Mansum :</label>
+		    <input type="text" step="0.000001" name="recMansum" class="form-control" id="recMansum" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recSanhassium" class="form-label">Sanhassium :</label>
+		    <input type="text" step="0.000001" name="recSanhassium" class="form-control" id="recSanhassium" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recAutres" class="form-label">Autres possessions :</label>
+		    <input type="text" step="0.000001" name="recAutres" class="form-control" id="recAutres" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recLieu" class="form-label">Localisation :</label>
+		    <input type="text" step="0.000001" name="recLieu" class="form-control" id="recLieu" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recPoules" class="form-label">Cens en poules :</label>
+		    <input type="integer" step="0.000001" name="recPoules" class="form-control" id="recPoules" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recSeigle" class="form-label">Cens en seigle (setiers) :</label>
+		    <input type="integer" step="0.000001" name="recSeigle" class="form-control" id="recSeigle" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recAvoine" class="form-label">Cens en avoine (setiers) :</label>
+		    <input type="integer" step="0.000001" name="recAvoine" class="form-control" id="recAvoine" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recMonnaie" class="form-label">Cens en monnaie (sous tournois) :</label>
+		    <input type="integer" step="0.000001" name="recMonnaie" class="form-control" id="recMonnaie" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recMesure" class="form-label">Mesure de céréale :</label>
+		    <input type="text" step="0.000001" name="recMesure" class="form-control" id="recMesure" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recJourPaiement" class="form-label">Jour de paiement :</label>
+		    <input type="text" step="0.000001" name="recJourPaiement" class="form-control" id="recJourPaiement" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recJuridiction" class="form-label">Juridiction :</label>
+		    <input type="text" step="0.000001" name="recJuridiction" class="form-control" id="recJuridiction" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="recMandement" class="form-label">Mandement :</label>
+		    <input type="text" step="0.000001" name="recMandement" class="form-control" id="recMandement" value="" />
+		  </div>
+		  <input type="submit" name="Modifier" class="btn btn-primary" />
+    </form>
+    <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+| Redevance | Création
+{% endblock %}
+
+{% block corps %}
+	<h1>Nouvelle redevance</h1>
+    <form method="POST">
+		<div class="mb-3">
+		    <label for="drReco" class="form-label">Reconnaissance :</label>
+		    <input type="text" step="0.000001" name="drReco" placeholder="Champ Requis" class="form-control" id="drReco" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="drPoules" class="form-label">Cens en poules :</label>
+		    <input type="integer" step="0.000001" name="drPoules" placeholder="Champ Requis" class="form-control" id="drPoules" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="drSeigle" class="form-label">Cens en seigle (setiers) :</label>
+		    <input type="integer" step="0.000001" name="drSeigle" placeholder="Champ Requis" class="form-control" id="drSeigle" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="drAvoine" class="form-label">Cens en avoine (setiers) :</label>
+		    <input type="integer" step="0.000001" name="drAvoine" placeholder="Champ Requis" class="form-control" id="drAvoine" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="drMonnaie" class="form-label">Cens en monnaie (sous tournois) :</label>
+		    <input type="integer" step="0.000001" name="drMonnaie" placeholder="Champ Requis" class="form-control" id="drMonnaie" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="drBien" class="form-label">Biens ou taxes associés :</label>
+		    <textarea name="drBien" class="form-control" id="drBien"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="drNom" class="form-label">Nom :</label>
+		    <textarea name="drNom" class="form-control" id="drNom"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="drLieu" class="form-label">Emplacement :</label>
+		    <textarea name="drLieu" class="form-control" id="drLieu"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="drInfo" class="form-label">Information complémentaire :</label>
+		    <textarea name="drInfo" class="form-control" id="drInfo"></textarea>
+		  </div>
+		  <input type="submit" name="Modifier" class="btn btn-primary" />
+    </form>
+    <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+{% endblock %}

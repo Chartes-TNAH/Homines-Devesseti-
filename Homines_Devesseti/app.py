@@ -15,10 +15,13 @@ app = Flask(__name__,
     template_folder=templates,
     static_folder=statics)
 
-from .routes import generic, api
+from .routes import generic, api, updates
 
 def config_app(config_name="test"):
     app.config.from_object(CONFIG[config_name])
     db.init_app(app)
     login.init_app(app)
+    app.config["WHOOSH_SCHEMA_DIR"] = os.path.join(chemin_actuel, "whoosh")
+    if not os.path.exists(app.config["WHOOSH_SCHEMA_DIR"]):
+        os.makedirs(app.config["WHOOSH_SCHEMA_DIR"], exist_ok=True)
     return app

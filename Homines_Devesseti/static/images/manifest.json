@@ -1,0 +1,164 @@
+{
+  "@context" : "http://iiif.io/api/presentation/2/context.json",
+  "@id" : "https://virgile-reignier.github.io/CharteDevesset/manifests/manifest.json",
+  "@type" : "sc:Manifest",
+  "label" : "Carta Devesseti",
+  "service" : {
+    "profile" : "http://iiif.io/api/search/0/search",
+    "@id" : "https://dev.gdmrdigital.com/search-api/1245635613/64497404/manifests/search",
+    "@context" : "http://iiif.io/api/search/0/context.json"
+  },
+  "metadata" : [ ],
+  "description" : [ {
+    "@value" : "Chart regulating the rights of passage of men and animals from Devesset to Saint-Agrève",
+    "@language" : "en"
+  } ],
+  "license" : "https://creativecommons.org/licenses/by/4.0/",
+  "attribution" : "AD 69, 48 H 1669",
+  "sequences" : [ {
+    "@id" : "http://d8c7d730-3c05-4cc0-819f-940933bf8df5",
+    "@type" : "sc:Sequence",
+    "label" : [ {
+      "@value" : "Normal Sequence",
+      "@language" : "en"
+    } ],
+    "canvases" : [ {
+      "@id" : "http://5f25aa83-0999-4208-9536-d5b8fd67ae4d",
+      "@type" : "sc:Canvas",
+      "label" : "Page1",
+      "height" : 2459,
+      "width" : 3748,
+      "images" : [ {
+        "@context" : "http://iiif.io/api/presentation/2/context.json",
+        "@id" : "http://0b87ce89-f3d3-4476-8b1d-7d56fd2bcd32",
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "resource" : {
+          "@id" : "https://virgile-reignier.github.io/CharteDevesset/images/Page_1/full/full/0/default.jpg",
+          "@type" : "dctypes:Image",
+          "format" : "image/jpeg",
+          "service" : {
+            "@context" : "http://iiif.io/api/image/2/context.json",
+            "@id" : "https://virgile-reignier.github.io/CharteDevesset/images/Page_1",
+            "profile" : "http://iiif.io/api/image/2/level0.json"
+          },
+          "height" : 2459,
+          "width" : 3748
+        },
+        "on" : "http://5f25aa83-0999-4208-9536-d5b8fd67ae4d"
+      } ],
+      "related" : "",
+      "otherContent" : [ {
+        "@type" : "sc:AnnotationList",
+        "@id" : "https://dev.gdmrdigital.com/annotations/1245635613/64497404/b33772231fb026f90a24f0eee4daab40.json",
+        "label" : "Annotations for canvas Page1"
+      } ]
+    }, {
+      "@id" : "http://60ab6cae-a4c6-4661-abdd-f93047ffbb99",
+      "@type" : "sc:Canvas",
+      "label" : "Page2",
+      "height" : 2444,
+      "width" : 3438,
+      "images" : [ {
+        "@context" : "http://iiif.io/api/presentation/2/context.json",
+        "@id" : "http://1829a5cf-fabb-4a5c-9bcd-bda4b2819cba",
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "resource" : {
+          "@id" : "https://virgile-reignier.github.io/CharteDevesset/images/Page_2/full/full/0/default.jpg",
+          "@type" : "dctypes:Image",
+          "format" : "image/jpeg",
+          "service" : {
+            "@context" : "http://iiif.io/api/image/2/context.json",
+            "@id" : "https://virgile-reignier.github.io/CharteDevesset/images/Page_2",
+            "profile" : "http://iiif.io/api/image/2/level0.json"
+          },
+          "height" : 2444,
+          "width" : 3438
+        },
+        "on" : "http://60ab6cae-a4c6-4661-abdd-f93047ffbb99"
+      } ],
+      "related" : "",
+      "otherContent" : [ {
+        "@type" : "sc:AnnotationList",
+        "@id" : "https://dev.gdmrdigital.com/annotations/1245635613/64497404/6dadc115ec0d1298f6214ea4ddc09451.json",
+        "label" : "Annotations for canvas Page2"
+      } ]
+    }, {
+      "@id" : "http://631c466d-bc0a-4d95-bcac-3821e6140b61",
+      "@type" : "sc:Canvas",
+      "label" : "Page3",
+      "height" : 2444,
+      "width" : 3438,
+      "images" : [ {
+        "@context" : "http://iiif.io/api/presentation/2/context.json",
+        "@id" : "http://1c1e8a65-3418-45d4-9739-657376e12fd7",
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "resource" : {
+          "@id" : "https://virgile-reignier.github.io/CharteDevesset/images/Page_3/full/full/0/default.jpg",
+          "@type" : "dctypes:Image",
+          "format" : "image/jpeg",
+          "service" : {
+            "@context" : "http://iiif.io/api/image/2/context.json",
+            "@id" : "https://virgile-reignier.github.io/CharteDevesset/images/Page_3",
+            "profile" : "http://iiif.io/api/image/2/level0.json"
+          },
+          "height" : 2444,
+          "width" : 3438
+        },
+        "on" : "http://631c466d-bc0a-4d95-bcac-3821e6140b61"
+      } ],
+      "related" : "",
+      "otherContent" : [ {
+        "@type" : "sc:AnnotationList",
+        "@id" : "https://dev.gdmrdigital.com/annotations/1245635613/64497404/e3bb72a8a62c1dff807c5bd634032970.json",
+        "label" : "Annotations for canvas Page3"
+      } ]
+    }, {
+      "@id" : "http://9dfbf9da-ed69-4365-8110-bcafaabcb787",
+      "@type" : "sc:Canvas",
+      "label" : "Page4",
+      "height" : 2444,
+      "width" : 3438,
+      "images" : [ {
+        "@context" : "http://iiif.io/api/presentation/2/context.json",
+        "@id" : "http://70e50cc5-31fe-47dd-845f-b7f46b018b74",
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "resource" : {
+          "@id" : "https://virgile-reignier.github.io/CharteDevesset/images/Page_4/full/full/0/default.jpg",
+          "@type" : "dctypes:Image",
+          "format" : "image/jpeg",
+          "service" : {
+            "@context" : "http://iiif.io/api/image/2/context.json",
+            "@id" : "https://virgile-reignier.github.io/CharteDevesset/images/Page_4",
+            "profile" : "http://iiif.io/api/image/2/level0.json"
+          },
+          "height" : 2444,
+          "width" : 3438
+        },
+        "on" : "http://9dfbf9da-ed69-4365-8110-bcafaabcb787"
+      } ],
+      "related" : "",
+      "otherContent" : [ {
+        "@type" : "sc:AnnotationList",
+        "@id" : "https://dev.gdmrdigital.com/annotations/1245635613/64497404/eb4585f86136c8bcc57d7a0867fe01b6.json",
+        "label" : "Annotations for canvas Page4"
+      } ]
+    } ]
+  } ],
+  "structures" : [ {
+    "@id" : "http://example.org/iiif/book1/range/top",
+    "@type" : "sc:Range",
+    "label" : "Table of Content",
+    "viewingHint" : "top",
+    "ranges" : [ "http://example.org/iiif/book1/range/intro" ]
+  }, {
+    "@id" : "http://example.org/iiif/book1/range/intro",
+    "@type" : "sc:Range",
+    "label" : "Introduction",
+    "canvases" : [ "http://5f25aa83-0999-4208-9536-d5b8fd67ae4d" ]
+  } ],
+  "viewingHint" : ""
+}
