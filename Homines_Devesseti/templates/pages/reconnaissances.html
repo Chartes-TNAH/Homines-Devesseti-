@@ -103,7 +103,7 @@
                         {% if rec.orti == "Oui" %}
                         <dd>Orti</dd>
                         {% else %}
-                            {% if rec.orti <= "1" %}
+                            {% if rec.orti|int <= 1 %}
                             <dd>{{rec.orti}} ortus</dd>
                             {% else %}
                             <dd>{{rec.orti}} orti</dd>
@@ -114,7 +114,7 @@
                         {% if rec.prata == "Oui" %}
                         <dd>Parta</dd>
                         {% else %}
-                            {% if rec.prata <= "1" %}
+                            {% if rec.prata|int <= 1 %}
                             <dd>{{rec.prata}} pratum</dd>
                             {% else %}
                             <dd>{{rec.prata.lower()}} prata</dd>
@@ -125,7 +125,7 @@
                         {% if rec.compos == "Oui" %}
                         <dd>Compos</dd>
                         {% else %}
-                            {% if rec.prata <= "1" %}
+                            {% if rec.prata|int <= 1 %}
                             <dd>{{rec.compos}} compus</dd>
                             {% else %}
                             <dd>{{rec.compos}} compos</dd>
@@ -136,7 +136,7 @@
                         {% if rec.nemora == "Oui" %}
                         <dd>Nemora</dd>
                         {% else %}
-                            {% if rec.nemora <= "1" %}
+                            {% if rec.nemora|int <= 1 %}
                             <dd>{{rec.nemora}} nemus</dd>
                             {% else %}
                             <dd>{{rec.nempora}} nemora</dd>
@@ -147,7 +147,7 @@
                         {% if rec.pascua == "Oui" %}
                         <dd>Pascua</dd>
                         {% else %}
-                            {% if rec.pascua <= "1" %}
+                            {% if rec.pascua|int <= 1 %}
                             <dd>{{rec.pascua}} pascuus</dd>
                             {% else %}
                             <dd>{{rec.pascua}} pascua</dd>
@@ -165,7 +165,7 @@
                         {% if rec.terrae == "Oui" %}
                         <dd>Terrae</dd>
                         {% else %}
-                        {% if rec.terrae <= "1" %}
+                        {% if rec.terrae|int <= 1 %}
                             <dd>{{rec.terrae}} terra</dd>
                             {% else %}
                             <dd>{{rec.terrae}} terrae</dd>
@@ -176,7 +176,7 @@
                         {% if rec.casalia == "Oui" %}
                         <dd>Casalia</dd>
                         {% else %}
-                        {% if rec.casalia <= "1" %}
+                        {% if rec.casalia|int <= 1 %}
                             <dd>{{rec.casalia}} casale</dd>
                             {% else %}
                             <dd>{{rec.casalia}} casalia</dd>
@@ -190,7 +190,7 @@
                         {% if rec.grangiae == "Oui" %}
                         <dd>Grangiae</dd>
                         {% else %}
-                            {% if rec.grangiae <= "1" %}
+                            {% if rec.grangiae|int <= 1 %}
                             <dd>{{rec.grangiae}} grangia</dd>
                             {% else %}
                             <dd>{{rec.grangiae}} grangiae</dd>
@@ -225,7 +225,7 @@
                         {% if rec.ouchias == "Oui" %}
                         <dd>Ouchias</dd>
                         {% else %}
-                            {% if rec.ouchias <= "1" %}
+                            {% if rec.ouchias|int <= 1 %}
                             <dd>{{rec.ouchias}} ouchia</dd>
                             {% else %}
                             <dd>{{rec.ouchias}} ouchias</dd>
@@ -236,7 +236,7 @@
                         {% if rec.garaitum=="Oui" %}
                         <dd>Garaitum</dd>
                         {% else %}
-                            {% if rec.garaitum <= "1" %}
+                            {% if rec.garaitum|int <= 1 %}
                             <dd>{{rec.garaitum}} garaitum</dd>
                             {% else %}
                             <dd>{{rec.garaitum}} garaita</dd>
@@ -250,7 +250,7 @@
                         {% if rec.hospicii == "Oui" %}
                         <dd>Hospicii</dd>
                         {% else %}
-                            {% if rec.hospicii <= "1" %}
+                            {% if rec.hospicii|int <= 1 %}
                             <dd>{{rec.hospicii}} hospicium</dd>
                             {% else %}
                             <dd>{{rec.hospicii}} hospicii</dd>
@@ -261,7 +261,7 @@
                         {% if rec.petiae == "Oui" %}
                         <dd>Petiae</dd>
                         {% else %}
-                            {% if rec.petiae <= "1" %}
+                            {% if rec.petiae|int <= 1 %}
                             <dd>{{rec.petiae}} petia</dd>
                             {% else %}
                             <dd>{{rec.petiae}} petiae</dd>
@@ -272,7 +272,7 @@
                         {% if rec.esclausae == "Oui" %}
                         <dd>Esclausae</dd>
                         {% else %}
-                            {% if rec.esclausae <= "1" %}
+                            {% if rec.esclausae|int <= 1 %}
                             <dd>{{rec.esclausae}} esclausa</dd>
                             {% else %}
                             <dd>{{rec.esclausae}} esclausae</dd>
@@ -283,7 +283,7 @@
                         {% if rec.terminus=="Oui" %}
                         <dd>Termini</dd>
                         {% else %}
-                            {% if rec.terminus <= "1" %}
+                            {% if rec.terminus|int <= 1 %}
                             <dd>{{rec.terminus}} terminus</dd>
                             {% else %}
                             <dd>{{rec.terminus}} termini</dd>
@@ -294,7 +294,7 @@
                         {% if rec.costam == "Oui" %}
                         <dd>Costae</dd>
                         {% else %}
-                            {% if rec.costam <= "1" %}
+                            {% if rec.costam|int <= 1 %}
                             <dd>{{rec.costam}} costam</dd>
                             {% else %}
                             <dd>{{rec.costam}} costae</dd>
@@ -305,7 +305,7 @@
                         {% if rec.sana == "Oui" %}
                         <dd>Sana</dd>
                         {% else %}
-                            {% if rec.sana <= "1" %}
+                            {% if rec.sana|int <= 1 %}
                             <dd>{{rec.sana}} sana</dd>
                             {% else %}
                             <dd>{{rec.sana}} sanae</dd>
@@ -316,7 +316,7 @@
                         {% if rec.tenementum == "Oui" %}
                         <dd>Tenementa</dd>
                         {% else %}
-                            {% if rec.tenementum <= "1" %}
+                            {% if rec.tenementum|int <= 1 %}
                             <dd>{{rec.tenementum}} tenementum</dd>
                             {% else %}
                             <dd>{{rec.tenementum}} tenementa</dd>
@@ -327,7 +327,7 @@
                         {% if rec.versana == "Oui" %}
                         <dd>Versanae</dd>
                         {% else %}
-                            {% if rec.versana <= "1" %}
+                            {% if rec.versana|int <= 1 %}
                             <dd>{{rec.versana}} versana</dd>
                             {% else %}
                             <dd>{{rec.versana}} versanae</dd>
@@ -338,7 +338,7 @@
                         {% if rec.masacgio == "Oui" %}
                         <dd>Masacgiis</dd>
                         {% else %}
-                            {% if rec.masacgio <= "1" %}
+                            {% if rec.masacgio|int <= 1 %}
                             <dd>{{rec.masacgio}} masacgio</dd>
                             {% else %}
                             <dd>{{rec.masacgio}} masacgiis</dd>
@@ -349,7 +349,7 @@
                         {% if rec.vineae == "Oui" %}
                         <dd>Vineae</dd>
                         {% else %}
-                            {% if rec.vineae <= "1" %}
+                            {% if rec.vineae|int <= 1 %}
                             <dd>{{rec.vineae}} vinea</dd>
                             {% else %}
                             <dd>{{rec.vineae}} vineae</dd>
@@ -360,7 +360,7 @@
                         {% if rec.blachia == "Oui" %}
                         <dd>Blachia</dd>
                         {% else %}
-                            {% if rec.blachia <= "1" %}
+                            {% if rec.blachia|int <= 1 %}
                             <dd>{{rec.blachia}} blachiae</dd>
                             {% else %}
                             <dd>{{rec.blachia}} blachia</dd>
@@ -374,7 +374,7 @@
                         {% if rec.passetae == "Oui" %}
                         <dd>Passetae</dd>
                         {% else %}
-                            {% if rec.passetae <= "1" %}
+                            {% if rec.passetae|int <= 1 %}
                             <dd>{{rec.passetae}} passeta</dd>
                             {% else %}
                             <dd>{{rec.passetae}} passetae</dd>
@@ -385,7 +385,7 @@
                         {% if rec.chastanerii == "Oui" %}
                         <dd>Chastanerii</dd>
                         {% else %}
-                            {% if rec.chastanerii <= "1" %}
+                            {% if rec.chastanerii|int <= 1 %}
                             <dd>{{rec.chastanerii}} chastanerius</dd>
                             {% else %}
                             <dd>{{rec.chastanerii}} chastanerii</dd>
@@ -396,7 +396,7 @@
                         {% if rec.levata == "Oui" %}
                         <dd>Levata</dd>
                         {% else %}
-                            {% if rec.levata <= "1" %}
+                            {% if rec.levata|int <= 1 %}
                             <dd>{{rec.levata}} levatum</dd>
                             {% else %}
                             <dd>{{rec.levata}} levata</dd>
@@ -407,7 +407,7 @@
                         {% if rec.creysementum == "Oui" %}
                         <dd>Creysementa</dd>
                         {% else %}
-                            {% if rec.creysementum <= "1" %}
+                            {% if rec.creysementum|int <= 1 %}
                             <dd>{{rec.creysementum}} creysementum</dd>
                             {% else %}
                             <dd>{{rec.creysementum}} creysementa</dd>
@@ -446,7 +446,7 @@
                         {% if rec.mansum == "Oui" %}
                         <dd>Mansa</dd>
                         {% else %}
-                            {% if rec.manum <= "1" %}
+                            {% if rec.manum|int <= 1 %}
                             <dd>{{rec.mansum}} mansum</dd>
                             {% else %}
                             <dd>{{rec.mansum}} mansa</dd>
@@ -457,7 +457,7 @@
                         {% if rec.sanhassium == "Oui" %}
                         <dd>Sanhassia</dd>
                         {% else %}
-                            {% if rec.sanhassium <= "1" %}
+                            {% if rec.sanhassium|int <= 1 %}
                             <dd>{{rec.sanhassium}} sanhassium</dd>
                             {% else %}
                             <dd>{{rec.sanhassium}} sanhassia</dd>
