@@ -19,10 +19,11 @@ def index():
     dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
     dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
     recs = Reconnaissances.query.outerjoin(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
+    charte_hommes = Charte.query.order_by(Charte.id).all()
     '''Pour une raison que j'ignore, il est impossible de factoriser les requêtes au début de cette page.
     Il faut donc les répéter à chaque usage'''
     return render_template("pages/index.html", nom="Homines Devesseti",
-                           recs=recs, hommes=hommes, dets_pos=dets_pos, dets_red=dets_red)
+                           recs=recs, hommes=hommes, dets_pos=dets_pos, dets_red=dets_red, charte_hommes=charte_hommes)
 
 
 # Routes permettant l'affichage des données du terrier :
@@ -304,8 +305,8 @@ def charte_hommes():
 @app.route("/charte_homme/<int:name_id>")
 def charte_nom(name_id):
     hommes = Charte.query.order_by(Charte.id).all()
-    nbr_hommes = hommes[-1].id
     if hommes:
+        nbr_hommes = hommes[-1].id
         if name_id-1 >= 0:
             return render_template("pages/charte_homme.html", nom="Homines Devesseti", homme=hommes[name_id - 1], nbr=nbr_hommes)
     else:

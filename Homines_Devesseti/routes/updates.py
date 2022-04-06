@@ -904,12 +904,13 @@ def charte_homme_create():
 @app.route("/<d>/<int:n>/delete", methods=["GET", "POST"])
 @login_required
 def delete(d, n):
-    data = [["name", "dp", "dr", "rec", "charte_homme"], [Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Charte]]
+    data = [["name", "dp", "dr", "rec", "charte_homme"], [Personnes, DetailPossessions, DetailRedevances,
+                                                          Reconnaissances, Charte]]
     page = []
     try:
         table = data[1][data[0].index(d)]
         if d == "rec":
-            ligne = list(filter(lambda rec: rec.id_reconnaissance == n, Reconnaissances.query.all()))[0]
+            ligne = list(filter(lambda r: r.id_reconnaissance == n, Reconnaissances.query.all()))[0]
             if ligne.page:
                 page = list(filter(lambda p: p.id_reconnaissance == n, Repertoire.query.all()))[0]
         else:
@@ -934,15 +935,15 @@ def delete(d, n):
             return formulaire(updated=True)
     except:
         if d == "name":
-            return redirect(url_for(name_update, name_id=n))
+            return redirect(url_for("name_update", name_id=n))
         elif d == "rec":
-            return redirect(url_for(rec_update, rec_id=n))
+            return redirect(url_for("rec_update", rec_id=n))
         elif d == "dp":
-            return redirect(url_for(det_pos_update, dp_id=n))
+            return redirect(url_for("det_pos_update", dp_id=n))
         elif d == "dr":
-            return redirect(url_for(det_red_update, dr_id=n))
+            return redirect(url_for("det_red_update", dr_id=n))
         elif d == "charte_homme":
-            return redirect(url_for(charte_homme_update, dr_id=n))
+            return redirect(url_for("charte_homme_update", dr_id=n))
 
 @app.route("/participer")
 def participer():
