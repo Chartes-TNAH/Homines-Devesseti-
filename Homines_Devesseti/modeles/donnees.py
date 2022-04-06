@@ -7,6 +7,7 @@ from ..app import db
 class Authorship(db.Model):
     __tablename__ = "authorship"
     authorship_id = db.Column(db.Integer, nullable=True, autoincrement=True, primary_key=True)
+    authorship_charte_id = db.Column(db.Integer, db.ForeignKey('charte.id'))
     authorship_name_id = db.Column(db.Integer, db.ForeignKey('personnes.id'))
     authorship_dp_id = db.Column(db.Integer, db.ForeignKey('detail_possessions.id_detail_possession'))
     authorship_dr_id = db.Column(db.Integer, db.ForeignKey('detail_redevances.id_detail_redevance'))
@@ -18,6 +19,7 @@ class Authorship(db.Model):
     detail_possessions = db.relationship("DetailPossessions", back_populates="authorships")
     detail_redevances = db.relationship("DetailRedevances", back_populates="authorships")
     reconnaissances = db.relationship("Reconnaissances", back_populates="authorships")
+    charte = db.relationship("Charte", back_populates="authorships")
 
     def author_to_json(self):
         return {
@@ -413,3 +415,31 @@ class Charte(db.Model):
     id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
     prenom = db.Column(db.Text)
     nom = db.Column(db.Text)
+    authorships = db.relationship("Authorship", back_populates="charte")
+
+    def to_jsonapi_name(self):
+        return {
+            "type": "Personne",
+            "id": self.id,
+            "attributes": {
+                "prenom": self.prenom,
+                "nom": self.nom,
+                "source": {
+                    "nom": "charte_de_devesset",
+                    "links": {
+                        "page": url_for("charte", _external=True),
+                        "manifest": url_for("api_charte", _external=True)
+                    }
+                },
+            },
+             "links": {
+                "self": url_for("charte_nom", name_id=self.id, _external=True),
+                "json": url_for("api_charte_nom_single", name_id=self.id, _external=True)
+            },
+            "relationships": {
+                 "editions": [
+                     author.author_to_json()
+                     for author in self.authorships
+                 ]
+            }
+        }

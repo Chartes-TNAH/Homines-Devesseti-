@@ -65,7 +65,7 @@
    <!ENTITY rie "<choice> <abbr>r&amp;</abbr> <expan>rie</expan> </choice>">
    <!ENTITY elli "<choice> <abbr>&#734;</abbr> <expan>elli</expan> </choice>">
    <!ENTITY iam "<choice> <abbr>&#734;</abbr> <expan>iam</expan> </choice>">
-   <!ENTITY us "<choice> <abbr>&#999;</abbr> <expan>us</expan> </choice>">
+   <!ENTITY us "<choice> <abbr>&#999;</abbr> <expan>us </expan> </choice>">
    <!ENTITY us_v2 "<choice> <abbr>&#541;</abbr> <expan>us</expan> </choice>">
    <!ENTITY m_v2 "<choice> <abbr>&#541;</abbr> <expan>m</expan> </choice>">
    <!ENTITY vel "<choice> <abbr>v&#175;l</abbr> <expan>vel</expan> </choice>">  
@@ -1643,7 +1643,7 @@
                                           </choice><ex>u</ex>s <choice>
                                              <orig>t</orig>
                                              <reg>T</reg>
-                                          </choice>rau&s_long;&s_long;at</supplied>
+                                          </choice>rau&s_long;&s_long;at </supplied>
                                        <lb n="79"/>de <choice>
                                           <orig>r</orig>
                                           <reg>R</reg>
@@ -1685,8 +1685,8 @@
                                     <persName><supplied source="#AD69_48H_1671-3"><choice>
                                              <abbr>guill</abbr>
                                              <expan>Guill<ex>erm</ex></expan>
-                                          </choice><ex>u</ex>suillermus ei&us;</supplied>
-                                       <lb n="80"/>frater</persName></p>
+                                          </choice><ex>u</ex>s ei&us; </supplied>
+                                       <lb n="80"/> frater</persName></p>
                               </personGrp>
                            </listPerson>&virgule; <persName>Andreas <choice>
                                  <orig>g</orig>
@@ -1801,11 +1801,11 @@
                                           <orig>k</orig>
                                           <reg>K</reg>
                                        </choice>a<supplied source="#AD69_48H_1671-3"
-                                          >therina</supplied>
+                                          >therina </supplied>
                                        <lb n="83"/>eius &s_long;orore</persName> et
                                        <persName>Guigone fili<choice>
                                           <orig>e</orig>
-                                          <reg>o</reg>
+                                          <reg>o </reg>
                                        </choice>
                                        <persName><choice>
                                              <orig>b</orig>
@@ -1955,7 +1955,7 @@
                                              <reg>V</reg>
                                           </choice>ital&is; <choice>
                                              <orig>v</orig>
-                                             <reg>V</reg>
+                                             <reg> V</reg>
                                           </choice>erilhati</persName> &pro;</supplied>
                                     <lb n="87"/>se et <persName>Durando eius
                                        &con;&s_long;anguineo</persName></p>
@@ -1989,7 +1989,7 @@
                               <personGrp>
                                  <p><supplied source="#AD69_48H_1671-3"><persName><choice>
                                              <abbr>pe&#175;</abbr>
-                                             <expan>Petrus</expan>
+                                             <expan>Petrus </expan>
                                           </choice>
                                           <choice>
                                              <orig>p</orig>

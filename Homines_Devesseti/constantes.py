@@ -1,8 +1,9 @@
-from warnings import warn
-
 PERSONNES_PAR_PAGE = 18
 SECRET_KEY = "JE SUIS UN SECRET !"
 API_ROUTE = "/api"
+NAMESPACES = {
+    "tei": "http://www.tei-c.org/ns/1.0"
+}
 
 #Configuration des bases :
 class _TEST:

@@ -2,7 +2,8 @@ from flask import render_template, request, flash, url_for, redirect
 from flask_login import login_required, current_user
 from .generic import generate_index, formulaire
 from ..app import app, login, db
-from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, DetailPossessions, Authorship
+from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, \
+    DetailPossessions, Authorship, Charte
 
 #Mise à jour :
 @app.route("/rec/<int:rec_id>/update", methods=["GET", "POST"])
@@ -515,6 +516,39 @@ def name_update(name_id):
     else:
         return generate_index(updated=updated)  # permet de maj l'index automatiquement à chaque modification
 
+@app.route("/charte_homme/<int:name_id>/update", methods=["GET", "POST"])
+@login_required
+def charte_homme_update(name_id):
+    homme = Charte.query.get_or_404(name_id)
+    erreurs = []
+    updated = False
+    if request.method == "POST":
+        if not request.form.get("hommePrenom", "").strip():
+            erreurs.append("hommePrenom")
+        if not request.form.get("hommeNom", "").strip():
+            erreurs.append("hommeNom")
+        if not erreurs:
+            if request.form["hommePrenom"] != "None":
+                homme.prenom = request.form["hommePrenom"]
+            if request.form["hommeNom"] != "None":
+                homme.nom = request.form["hommeNom"]
+            # Mise à jour des tables :
+            db.session.add(homme)
+            db.session.add(Authorship(charte=homme, user=current_user))
+            db.session.commit()
+            updated = True
+        else:
+            print(erreurs)
+    if updated == False:
+        return render_template(
+            "pages/update/charte_homme_update.html",
+            nom="Gazetteer",
+            homme=homme,
+            updated=updated
+        )
+    else:
+        return formulaire(updated=updated)
+
 #Création données :
 @app.route("/name/create", methods=["GET", "POST"])
 @login_required
@@ -843,10 +877,34 @@ def rec_create():
     else:
         return formulaire(updated=updated)
 
+@app.route("/charte_homme/create", methods=["GET", "POST"])
+@login_required
+def charte_homme_create():
+    updated = False
+    if request.method == "POST":
+        prenom = request.form["hommePrenom"]
+        nom = request.form["hommeNom"]
+        #Mise à jour des tables :
+        homme = Charte(
+            prenom=prenom,
+            nom=nom,
+        )
+        db.session.add(homme)
+        db.session.add(Authorship(charte=homme, user=current_user))
+        db.session.commit()
+        updated = True
+    if updated == False:
+        return render_template(
+            "pages/update/charte_homme_create.html",
+            nom="Gazetteer",
+        )
+    else:
+        return formulaire(updated=updated)
+
 @app.route("/<d>/<int:n>/delete", methods=["GET", "POST"])
 @login_required
 def delete(d, n):
-    data = [["name", "dp", "dr", "rec"], [Personnes, DetailPossessions, DetailRedevances, Reconnaissances]]
+    data = [["name", "dp", "dr", "rec", "charte_homme"], [Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Charte]]
     page = []
     try:
         table = data[1][data[0].index(d)]
@@ -865,6 +923,8 @@ def delete(d, n):
             db.session.add(Authorship(detail_redevances=ligne, user=current_user))
         elif d == "name":
             db.session.add(Authorship(personnes=ligne, user=current_user))
+        elif d == "charte_homme":
+            db.session.add(Authorship(charte=ligne, user=current_user))
         if page:
             db.session.delete(page)
         db.session.commit()
@@ -881,6 +941,8 @@ def delete(d, n):
             return redirect(url_for(det_pos_update, dp_id=n))
         elif d == "dr":
             return redirect(url_for(det_red_update, dr_id=n))
+        elif d == "charte_homme":
+            return redirect(url_for(charte_homme_update, dr_id=n))
 
 @app.route("/participer")
 def participer():

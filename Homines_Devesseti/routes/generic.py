@@ -2,28 +2,10 @@ import os
 from flask import render_template, request, flash, url_for, redirect
 from flask_login import login_user, current_user, logout_user
 from ..app import app, login, db, chemin_actuel
-from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, DetailPossessions, Authorship
+from ..modeles.donnees import Personnes, Reconnaissances, Repertoire, DetailRedevances, DetailPossessions, \
+    Authorship, Charte
 from ..modeles.utilisateurs import User
-from ..constantes import PERSONNES_PAR_PAGE
-
-#On va tenter de faire un truc avec lxml
-from lxml import etree as ET
-@app.route("/charte_hommes")
-def charte_hommes():
-    NAMESPACES = {
-        "tei": "http://www.tei-c.org/ns/1.0"
-    }
-    path = os.path.join(chemin_actuel, "templates/charte", "Devoir_charte_Devesset.xml")
-    file = ET.parse(path)
-    root = file.xpath("//tei:personGrp[@role = 'Ratifiants']/tei:p/tei:persName", namespaces=NAMESPACES)
-    root2 = file.xpath("//tei:personGrp[@role = 'Ratifiants']/tei:p/tei:personGrp", namespaces=NAMESPACES)
-    for name in root:
-        nom = ""
-        for t in name.xpath(".//text()[not(parent::node()[local-name()='orig' or local-name()='abbr' or local-name()='sic'])][normalize-space()]"):
-            nom = nom + t
-        print(nom)
-    #Bon il me restera à traiter mes personGrp
-    #Mais là j'ai déjà toute une série de nom de gens, du coup de serait bien que je réflexhisse à ce que j'en fais quoi...
+from ..constantes import PERSONNES_PAR_PAGE, NAMESPACES
 
 # Routes de base :
 @app.route("/")
@@ -267,3 +249,64 @@ def recherche():
         titre = "Résultat pour la recherche `" + motclef.replace('*', '') + "` dans la classe " + attribut
         return render_template("pages/recherche.html", nom="Homines Devesseti", resultats=results, titre=titre,
                                keyword=motclef, next=next, prev=prev, page=page, attribut=attribut)
+
+#Importation des données issues de ma charte
+from lxml import etree as ET
+
+def concat_nom(x):
+    nom = ""
+    for e in x.xpath(
+            ".//text()[not(parent::node()[local-name()='orig' or local-name()='abbr' or local-name()='sic'])][normalize-space()]"):
+        nom = nom + e
+    return nom
+
+@app.route("/charte_hommes")
+def charte_hommes():
+    #Route permettant de rendre dynamique l'importation des données depuis le fichier XML
+    hommes = Charte.query.all()
+    for homme in hommes:
+        db.session.delete(homme)
+    path = os.path.join(chemin_actuel, "templates/charte", "Devoir_charte_Devesset.xml")
+    file = ET.parse(path)
+    liste = file.xpath("//tei:personGrp[@role = 'Ratifiants']/tei:p/*[name()='persName' or name()='listPerson']", namespaces=NAMESPACES)
+    for e in liste:
+        #Mes données sont présents sous deux formes : persName et personGrp contenant des persName
+        if e.xpath("name(.) = 'persName'", namespaces=NAMESPACES):
+            nom = concat_nom(e)
+            db.session.add(Charte(
+                prenom=nom.split()[0],
+                nom=" ".join(nom.split()[1:])
+            ))
+        else:
+            d = e.xpath(".//tei:persName", namespaces=NAMESPACES)
+            #Pour récupérer les persName contenues dans des groupes de personnes
+            premier_famille = concat_nom(d[0])
+            if len(premier_famille.split()) == 1:
+                premier_famille = concat_nom(d[1])
+                #Dans le cas où le nom de famille ne serait pas dans le premier nom
+            nom_famille = premier_famille.split(' ', 1)[-1]
+            for n in d:
+                nom = concat_nom(n)
+                if "eius" in nom:
+                    contenu = nom.split()
+                    lien = contenu.index("eius")
+                    nom = nom.replace(contenu[lien], '').replace(contenu[lien+1], '')
+                    #Pour supprimer les mots parasites des noms
+                if nom_famille not in nom:
+                    nom = nom + " " + nom_famille
+                db.session.add(Charte(
+                    prenom=nom.split()[0],
+                    nom=" ".join(nom.split()[1:])
+                ))
+    db.session.commit()
+    return redirect("/")
+
+@app.route("/charte_homme/<int:name_id>")
+def charte_nom(name_id):
+    hommes = Charte.query.order_by(Charte.id).all()
+    nbr_hommes = hommes[-1].id
+    if hommes:
+        if name_id-1 >= 0:
+            return render_template("pages/charte_homme.html", nom="Homines Devesseti", homme=hommes[name_id - 1], nbr=nbr_hommes)
+    else:
+        return redirect("/charte_hommes")

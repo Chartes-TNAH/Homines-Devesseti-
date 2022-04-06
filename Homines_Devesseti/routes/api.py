@@ -3,7 +3,7 @@ import os
 from urllib.parse import urlencode
 from ..app import app
 from ..constantes import PERSONNES_PAR_PAGE, API_ROUTE
-from ..modeles.donnees import Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire
+from ..modeles.donnees import Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire, Charte
 
 #Fonction prédéfinie :
 
@@ -54,6 +54,15 @@ def api_rec_single(rec_id):
             ref_du_terrier="Inconnue"
         )]
         return jsonify(reconnaissance=query_rec.to_jsonapi_rec())
+    except:
+        return Json_404()
+
+@app.route(API_ROUTE + "/charte_homme/<int:name_id>")
+def api_charte_nom_single(name_id):
+    try:
+        hommes = Charte.query.order_by(Charte.id).all()
+        query_name = hommes[name_id - 1]
+        return jsonify(query_name.to_jsonapi_name())
     except:
         return Json_404()
 
