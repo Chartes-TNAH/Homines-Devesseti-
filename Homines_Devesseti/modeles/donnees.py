@@ -419,7 +419,7 @@ class Charte(db.Model):
 
     def to_jsonapi_name(self):
         return {
-            "type": "Personne",
+            "type": "personne",
             "id": self.id,
             "attributes": {
                 "prenom": self.prenom,

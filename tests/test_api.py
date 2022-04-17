@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-import os, sys; sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-#Permet d'organiser l'import interne de fonctions sans passer par l'app
-from base import Base
-from json import loads
-
-
-class TestApi(Base):
-    def test_single_name(self):
-        """ Vérifie qu'un nom est bien traité """
-        self.insert_all()
-        response = self.client.get("/api/name/1")
-        # Le corps de la réponse est dans .data
-        # .data est en "bytes". Pour convertir des bytes en str, on fait .decode()
-        content = response.data.decode()
-        self.assertEqual(
-            response.headers["Content-Type"], "application/json"
-        )
-        json_parse = loads(content)
-        self.assertEqual(json_parse["type"], "personne")
-        self.assertEqual(
-            json_parse["attributes"],
-            {'prenom': 'Jacobus', 'nom': 'Albi', 'localite': 'Mastortet', 'sexe': 'H'}
-        )
-        self.assertEqual(json_parse["links"]["self"], 'http://localhost/name/1')
-
-        # On vérifie que le lien est correct
-        seconde_requete = self.client.get(json_parse["links"]["self"])
-        self.assertEqual(seconde_requete.status_code, 200)
-=======
 from base import Base
 from json import loads
 
@@ -43,7 +13,7 @@ class TestApi(Base):
             response_dp.headers["Content-Type"], "application/json"
         )
         json_parse_dp = loads(content_dp)
-        self.assertEqual(json_parse_dp["type"], "Déclaration de bien")
+        self.assertEqual(json_parse_dp["type"], "déclaration de bien")
         self.assertEqual(
             json_parse_dp["attributes"]["reconnaissance"]["id"], 142)
         self.assertEqual(json_parse_dp["attributes"]["confronts"][0], "Domui suum")
@@ -57,7 +27,7 @@ class TestApi(Base):
             response_dr.headers["Content-Type"], "application/json"
         )
         json_parse_dr = loads(content_dr)
-        self.assertEqual(json_parse_dr["type"], "Redevance")
+        self.assertEqual(json_parse_dr["type"], "redevance")
         self.assertEqual(
             json_parse_dr["attributes"]["reconnaissance"]["id"], 142)
         self.assertEqual(json_parse_dr["attributes"]["redevances_a_payer"]["avoine"]["valeur"], 4.875)
@@ -71,7 +41,7 @@ class TestApi(Base):
             response_name.headers["Content-Type"], "application/json"
         )
         json_parse_name = loads(content_name)
-        self.assertEqual(json_parse_name["type"], "Personne")
+        self.assertEqual(json_parse_name["type"], "personne")
         self.assertEqual(
             json_parse_name["attributes"]["reconnaissance"]["id"], 1773)
         self.assertEqual(json_parse_name["links"]["self"], 'http://localhost/name/2')
@@ -84,20 +54,20 @@ class TestApi(Base):
             response_charte.headers["Content-Type"], "application/json"
         )
         json_parse_charte = loads(content_charte)
-        self.assertEqual(json_parse_charte["type"], "Personne")
+        self.assertEqual(json_parse_charte["type"], "personne")
         self.assertEqual(
             json_parse_charte["attributes"]["source"]["nom"], "charte_de_devesset")
         self.assertEqual(json_parse_charte["links"]["self"], 'http://localhost/charte_homme/2')
         seconde_requete_charte = self.client.get(json_parse_charte["links"]["self"])
         self.assertEqual(seconde_requete_charte.status_code, 200)
-        #Tests pour la classe Reconnaissances (non-fonctionnel pour le moment)
+        #Tests pour la classe Reconnaissances
         response_rec = self.client.get("/api/rec/162")
         content_rec = response_rec.data.decode()
         self.assertEqual(
             response_rec.headers["Content-Type"], "application/json"
         )
         json_parse_rec = loads(content_rec)["reconnaissance"]
-        self.assertEqual(json_parse_rec["type"], "Reconnaissance")
+        self.assertEqual(json_parse_rec["type"], "reconnaissance")
         self.assertEqual(
             json_parse_rec["attributes"]["id_reconnaissance"], 162)
         self.assertEqual(json_parse_rec["attributes"]["localisation_dans_le_terrier"]["page"], 82)
@@ -114,10 +84,9 @@ class TestApi(Base):
             response_search.headers["Content-Type"], "application/json"
         )
         json_parse_search = loads(content_search)["data"][0]
-        self.assertEqual(json_parse_search["type"], "Personne")
+        self.assertEqual(json_parse_search["type"], "personne")
         self.assertEqual(
             json_parse_search["attributes"]["reconnaissance"]["id"], 1371)
         self.assertEqual(json_parse_search["links"]["self"], 'http://localhost/name/1')
         seconde_requete_search = self.client.get("/recherche?keyword=Albi")
         self.assertEqual(seconde_requete_search.status_code, 200)
->>>>>>> tests

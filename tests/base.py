@@ -1,11 +1,7 @@
 from Homines_Devesseti.app import db, config_app, login
 from Homines_Devesseti.modeles.utilisateurs import User
-<<<<<<< HEAD
-from Homines_Devesseti.modeles.donnees import Personnes, Authorship
-=======
 from Homines_Devesseti.modeles.donnees \
     import Authorship, Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire, Charte
->>>>>>> tests
 from unittest import TestCase
 
 
@@ -40,8 +36,6 @@ class Base(TestCase):
             id_reconnaissance=1511
         )
     ]
-<<<<<<< HEAD
-=======
     dp = [
         DetailPossessions(
             id_reconnaissance=142,
@@ -191,7 +185,6 @@ class Base(TestCase):
             nom="filius Guilliermi de Ruppe condam"
         )
     ]
->>>>>>> tests
 
     def setUp(self):
         self.app = config_app("test")
@@ -202,18 +195,12 @@ class Base(TestCase):
     def tearDown(self):
         self.db.drop_all(app=self.app)
 
-<<<<<<< HEAD
-    def insert_all(self, names=True):
-=======
     def insert_all(self, names=True, dp=True, dr=True, rec=True, pages=True, charte=True):
->>>>>>> tests
         # On donne à notre DB le contexte d'exécution
         with self.app.app_context():
             if names:
                 for fixture in self.names:
                     self.db.session.add(fixture)
-<<<<<<< HEAD
-=======
             if dp:
                 for fixture in self.dp:
                     self.db.session.add(fixture)
@@ -229,5 +216,4 @@ class Base(TestCase):
             if charte:
                 for fixture in self.charte:
                     self.db.session.add(fixture)
->>>>>>> tests
             self.db.session.commit()
