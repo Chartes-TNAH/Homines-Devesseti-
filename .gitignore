@@ -5,3 +5,4 @@ __pycache__/
 Homines_Devesseti/modeles/__pycache__/*
 Homines_Devesseti/routes/__pycache__/*
 *.tmp
+~*

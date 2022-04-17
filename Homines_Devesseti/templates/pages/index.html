@@ -2,13 +2,14 @@
 {% block corps %}
 <h1><a href="{{url_for('accueil')}}">Retour à l'accueil</a></h1>
 {% if recs and hommes and dets_pos and dets_red %}
-<h2>Il y a {{recs|length + hommes|length + dets_pos|length + dets_rec|length}} enregistrements dans la base</h2>
+<h2>Il y a {{recs|length + hommes|length + dets_pos|length + dets_rec|length + charte_hommes|length}} enregistrements dans la base</h2>
 <h4 class="index" style="line-height: 140%;"><span style="text-decoration: underline;">Sommaire :</span>
     <ul>
     <li><a href="#recs">Reconnaissances</a></li>
     <li><a href="#hommes">Dépendants</a></li>
     <li><a href="#dets_pos">Déclarations de biens</a></li>
     <li><a href="#dets_red">Déclarations de redevances</a></li>
+    <li><a href="#charte">Charte de Devesset</a></li>
 </ul>
 </h4>
         <p id="recs">         
@@ -54,6 +55,29 @@
     <ul>
         {% for det_red in dets_red %}
             <li><a href="{{url_for('det_red', dr_id=det_red.id_detail_redevance)}}">Redevance n°{{det_red.id_detail_redevance}}</a></li>
+        {% endfor %}
+    </ul>
+</p>
+<p id="chartes">
+    Il y a {{charte_hommes|length}} hommes mentionnés dans le charte :
+    <ul>
+        {% for charte_homme in charte_hommes %}
+            <li><a href="{{url_for('charte_nom', name_id=charte_homme.id)}}">
+                {% if charte_homme.prenom or charte_homme.nom %}
+                {% if charte_homme.prenom %}    
+                {{charte_homme.prenom}}
+                {% else %}
+                (?)
+                {% endif %}
+                {% if charte_homme.nom %}
+                {{charte_homme.nom}}
+                {% else %}
+                (?)
+                {% endif %}
+                {% else %}
+                Inconnu
+                {% endif %}
+            </a></li>
         {% endfor %}
     </ul>
 </p>

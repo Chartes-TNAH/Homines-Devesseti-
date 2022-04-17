@@ -1,7 +1,7 @@
 from Homines_Devesseti.app import db, config_app, login
 from Homines_Devesseti.modeles.utilisateurs import User
 from Homines_Devesseti.modeles.donnees \
-    import Authorship, Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire
+    import Authorship, Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire, Charte
 from unittest import TestCase
 
 
@@ -171,6 +171,20 @@ class Base(TestCase):
             ref_du_terrier=821
         )
     ]
+    charte = [
+        Charte(
+            prenom="Petrus",
+            nom="La Rocha"
+        ),
+        Charte(
+            prenom="Armandus",
+            nom="De Ruppe"
+        ),
+        Charte(
+            prenom="Johannes",
+            nom="filius Guilliermi de Ruppe condam"
+        )
+    ]
 
     def setUp(self):
         self.app = config_app("test")
@@ -181,7 +195,7 @@ class Base(TestCase):
     def tearDown(self):
         self.db.drop_all(app=self.app)
 
-    def insert_all(self, names=True, dp=True, dr=True, rec=True, pages=True):
+    def insert_all(self, names=True, dp=True, dr=True, rec=True, pages=True, charte=True):
         # On donne à notre DB le contexte d'exécution
         with self.app.app_context():
             if names:
@@ -198,5 +212,8 @@ class Base(TestCase):
                     self.db.session.add(fixture)
             if pages:
                 for fixture in self.pages:
+                    self.db.session.add(fixture)
+            if charte:
+                for fixture in self.charte:
                     self.db.session.add(fixture)
             self.db.session.commit()

@@ -47,20 +47,46 @@ class TestApi(Base):
         self.assertEqual(json_parse_name["links"]["self"], 'http://localhost/name/2')
         seconde_requete_name = self.client.get(json_parse_name["links"]["self"])
         self.assertEqual(seconde_requete_name.status_code, 200)
-'''        #Tests pour la classe Reconnaissances (non-fonctionnel pour le moment)
+        #Tests pour la classe Charte
+        response_charte = self.client.get("/api/charte_homme/2")
+        content_charte = response_charte.data.decode()
+        self.assertEqual(
+            response_charte.headers["Content-Type"], "application/json"
+        )
+        json_parse_charte = loads(content_charte)
+        self.assertEqual(json_parse_charte["type"], "Personne")
+        self.assertEqual(
+            json_parse_charte["attributes"]["source"]["nom"], "charte_de_devesset")
+        self.assertEqual(json_parse_charte["links"]["self"], 'http://localhost/charte_homme/2')
+        seconde_requete_charte = self.client.get(json_parse_charte["links"]["self"])
+        self.assertEqual(seconde_requete_charte.status_code, 200)
+        #Tests pour la classe Reconnaissances (non-fonctionnel pour le moment)
         response_rec = self.client.get("/api/rec/162")
         content_rec = response_rec.data.decode()
         self.assertEqual(
             response_rec.headers["Content-Type"], "application/json"
         )
-        json_parse_rec = loads(content_rec)
+        json_parse_rec = loads(content_rec)["reconnaissance"]
         self.assertEqual(json_parse_rec["type"], "Reconnaissance")
         self.assertEqual(
             json_parse_rec["attributes"]["id_reconnaissance"], 162)
-        self.assertEqual(json_parse_rec["localisation_dans_le_terrier"], 82)
-        self.assertEqual(json_parse_rec["date"]["anne"], 1342)
-        self.assertEqual(json_parse_rec["biens_declares"]["domus"], "Oui"),
+        self.assertEqual(json_parse_rec["attributes"]["localisation_dans_le_terrier"]["page"], 82)
+        self.assertEqual(json_parse_rec["attributes"]["date"]["annee"], 1342)
+        self.assertEqual(json_parse_rec["attributes"]["biens_declares"]["domus"], "Oui"),
         self.assertEqual(json_parse_rec["attributes"]["redevances_a_payer"]["avoine"]["valeur"], 19.5)
         self.assertEqual(json_parse_rec["links"]["self"], 'http://localhost/rec/162')
         seconde_requete_rec = self.client.get(json_parse_rec["links"]["self"])
-        self.assertEqual(seconde_requete_rec.status_code, 200)'''
+        self.assertEqual(seconde_requete_rec.status_code, 200)
+        #Test portant sur la classe recherche
+        response_search = self.client.get("/api/search?q=Albi")
+        content_search = response_search.data.decode()
+        self.assertEqual(
+            response_search.headers["Content-Type"], "application/json"
+        )
+        json_parse_search = loads(content_search)["data"][0]
+        self.assertEqual(json_parse_search["type"], "Personne")
+        self.assertEqual(
+            json_parse_search["attributes"]["reconnaissance"]["id"], 1371)
+        self.assertEqual(json_parse_search["links"]["self"], 'http://localhost/name/1')
+        seconde_requete_search = self.client.get("/recherche?keyword=Albi")
+        self.assertEqual(seconde_requete_search.status_code, 200)
