@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import os, sys; sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 #Permet d'organiser l'import interne de fonctions sans passer par l'app
+=======
+>>>>>>> tests
 from base import Base
 from Homines_Devesseti.modeles.utilisateurs import User
 
 
 class TestUser(Base):
+<<<<<<< HEAD
     """ Unit tests for Users """
+=======
+>>>>>>> tests
     def test_creation(self):
         with self.app.app_context():
             statut, utilisateur = User.creer("joh", "johanna.johanna@enc-sorbonne.fr", "Johanna", "azerty")
@@ -19,6 +25,9 @@ class TestUser(Base):
         with self.app.app_context():
             statut, cree = User.creer("joh", "johanna.johanna@enc-sorbonne.fr", "Johanna", "azerty")
             connecte = User.identification("joh", "azerty")
+<<<<<<< HEAD
 
+=======
+>>>>>>> tests
         self.assertEqual(cree, connecte)
         self.assertTrue(statut)

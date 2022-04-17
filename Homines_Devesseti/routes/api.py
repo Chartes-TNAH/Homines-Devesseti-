@@ -1,12 +1,11 @@
-from flask import render_template, request, url_for, jsonify
+from flask import render_template, request, url_for, jsonify, redirect
+import os
 from urllib.parse import urlencode
-
 from ..app import app
-from ..constantes import LIEUX_PAR_PAGE, API_ROUTE
-from ..modeles.donnees import Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire
-from .generic import hommes, dets_pos, dets_red, recs
+from ..constantes import PERSONNES_PAR_PAGE, API_ROUTE
+from ..modeles.donnees import Personnes, DetailPossessions, DetailRedevances, Reconnaissances, Repertoire, Charte
 
-#Fonctions prédéfinies pour l'affichage des données en JSON:
+#Fonction prédéfinie :
 
 def Json_404():
     response = jsonify({"erreur": "Unable to perform the query"})
@@ -18,6 +17,7 @@ def Json_404():
 @app.route(API_ROUTE + "/name/<int:name_id>")
 def api_name_single(name_id):
     try:
+        hommes = Personnes.query.order_by(Personnes.id).all()
         query_name = hommes[name_id - 1]
         return jsonify(query_name.to_jsonapi_name())
     except:
@@ -27,6 +27,7 @@ def api_name_single(name_id):
 @app.route(API_ROUTE + "/dp/<int:dp_id>")
 def api_dp_single(dp_id):
     try:
+        dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
         query_dp = dets_pos[dp_id - 1]
         return jsonify(query_dp.to_jsonapi_dp())
     except:
@@ -35,6 +36,7 @@ def api_dp_single(dp_id):
 @app.route(API_ROUTE + "/dr/<int:dr_id>")
 def api_dr_single(dr_id):
     try:
+        dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
         query_dr = dets_red[dr_id - 1]
         return jsonify(query_dr.to_jsonapi_dr())
     except:
@@ -43,63 +45,79 @@ def api_dr_single(dr_id):
 @app.route(API_ROUTE + "/rec/<int:rec_id>")
 def api_rec_single(rec_id):
     try:
+        recs = Reconnaissances.query.outerjoin(Repertoire).order_by(Reconnaissances.id_reconnaissance).all()
         query_rec = list(filter(lambda rec: rec.id_reconnaissance == rec_id, recs))[0]
+        #Code pour injecter des données lorsque la jointure ne se fait pas avec la table Répertoire:
+        if not query_rec.page:
+            query_rec.page = [Repertoire(
+            id_reconnaissance="Inconnue",
+            ref_du_terrier="Inconnue"
+        )]
         return jsonify(reconnaissance=query_rec.to_jsonapi_rec())
     except:
         return Json_404()
 
-@app.route(API_ROUTE + "/name")
-def api_name_browse():
-    """ Route permettant la recherche plein-texte
+@app.route(API_ROUTE + "/charte_homme/<int:name_id>")
+def api_charte_nom_single(name_id):
+    try:
+        hommes = Charte.query.order_by(Charte.id).all()
+        query_name = hommes[name_id - 1]
+        return jsonify(query_name.to_jsonapi_name())
+    except:
+        return Json_404()
 
-    On s'inspirera de http://jsonapi.org/ faute de pouvoir trouver temps d'y coller à 100%
-    """
-    # q est très souvent utilisé pour indiquer une capacité de recherche
+@app.route(API_ROUTE + "/search")
+def api_name_search():
+    #Nous n'avons pas trouvé comment jsonifier les données issues des recherches whoosh et nous sommes donc ici
+    #concentrés sur une méthode plus classique de recherche
     motclef = request.args.get("q", None)
     page = request.args.get("page", 1)
-
     if isinstance(page, str) and page.isdigit():
         page = int(page)
     else:
         page = 1
-
     if motclef:
-        query = Place.query.filter(
+        query = Personnes.query.filter(
             Personnes.nom.like("%{}%".format(motclef))
         )
     else:
         query = Personnes.query
-
     try:
-        resultats = query.paginate(page=page, per_page=LIEUX_PAR_PAGE)
+        resultats = query.paginate(page=page, per_page=PERSONNES_PAR_PAGE)
     except Exception:
         return Json_404()
-
     dict_resultats = {
         "links": {
             "self": request.url
         },
         "data": [
-            place.to_jsonapi_dict()
-            for place in resultats.items
+            homme.to_jsonapi_name()
+            for homme in resultats.items
         ]
     }
-
     if resultats.has_next:
         arguments = {
             "page": resultats.next_num
         }
         if motclef:
             arguments["q"] = motclef
-        dict_resultats["links"]["next"] = url_for("api_places_browse", _external=True) + "?" + urlencode(arguments)
-
+        dict_resultats["links"]["next"] = url_for("api_name_search", _external=True) + "?" + urlencode(arguments)
     if resultats.has_prev:
         arguments = {
             "page": resultats.prev_num
         }
         if motclef:
             arguments["q"] = motclef
-        dict_resultats["links"]["prev"] = url_for("api_places_browse", _external=True) + "?" + urlencode(arguments)
-
+        dict_resultats["links"]["prev"] = url_for("api_name_search", _external=True) + "?" + urlencode(arguments)
     response = jsonify(dict_resultats)
     return response
+
+#Route pour accéder au manifest iiif de la charte de Devesset produite dans le cadre du cours d'anglais
+@app.route(API_ROUTE + "/charte")
+def api_charte():
+    try:
+        path = os.path.join("static", "images", "manifest.json")
+        url = "http://localhost:5000/" + path
+        return redirect(url)
+    except:
+        return Json_404()

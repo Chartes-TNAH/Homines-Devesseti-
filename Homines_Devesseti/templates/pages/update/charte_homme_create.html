@@ -1,0 +1,21 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+| Hommes de la charte de Devesset | Création
+{% endblock %}
+
+{% block corps %}
+	<h1>Nouvelle personne</h1>
+    <form method="POST">
+		<div class="mb-3">
+		    <label for="hommeNom" class="form-label">Nom :</label>
+		    <input type="text" name="hommeNom" class="form-control" id="hommeNom" aria-describedby="hommeNomHelp" value="" />
+		  </div>
+    	 <div class="mb-3">
+		    <label for="hommePrenom" class="form-label">Prenom :</label>
+		    <input type="text" name="hommePrenom" class="form-control" id="hommePrenom" aria-describedby="hommePrenomHelp" value="" />
+		  </div>
+		  <input type="submit" name="Modifier" class="btn btn-primary" />
+    </form>
+    <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+{% endblock %}

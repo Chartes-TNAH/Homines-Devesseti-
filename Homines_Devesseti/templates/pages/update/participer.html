@@ -1,0 +1,17 @@
+{% extends "conteneur.html" %}
+{% block afternav %}
+{% include "partials/recherche.html" %}
+{%endblock%}
+{% block corps %}
+<h1>Participez à l'élaboration de la base :</h1>
+<div>Connectez-vous pour alimenter la base de données et choisissez la table que vous voulez enrichir</div>
+<nav aria-label="research-pagination">
+    <p class="center-link" style="top:125%">
+        <a class="btn-nav" href="{{ url_for('name_create') }}">Personne</a>
+        <a class="btn-nav" href="{{ url_for('det_pos_create') }}">Déclaration de biens</a>
+        <a class="btn-nav" href="{{ url_for('det_red_create') }}">Redevance</a>
+        <a class="btn-nav" href="{{ url_for('det_red_create') }}">Reconnaissance</a>
+        <a class="btn-nav" href="{{ url_for('charte_homme_create') }}">Charte</a>
+    </p>
+</nav>
+{% endblock %}

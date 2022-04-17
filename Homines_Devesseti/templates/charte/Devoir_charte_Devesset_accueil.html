@@ -1,0 +1,15 @@
+{% extends 'conteneur.html' %} {% block corps %}
+<h1 style="text-align:center;">Edition de la charte régulant le passage des hommes et biens de Devesset par Saint-Agrève</h1>
+<p>La présente édition est réalisée à partir du texte original en complétant ses lacunes
+         à partir des deux copies conservées dans le même fonds.</p>
+<p>Elle est issue d'un travail réalisé par Virgile Reignier dans le cadre du master TNAH à l'Ecole Nationale des Chartes.</p>
+<p>Nous tenons à remercier chaleureusement le Pr Nicolas Carrier pour son aide précieuse
+         dans la transcription de ce texte. Nous remercions également Ségolène Albouy et Ariane Pinche pour leur aide dans l'encodage de celle-ci.</p>
+<p>On trouvera une édition-traduction partielle de ce texte dans "Les droits de passage à Saint-Agrève au début du XIVe siècle", Mémoire d'Ardèche
+         et temps présent, 151, 2021, p. 89-94.</p>
+<p>Pour plus d'informations sur le contexte historique, on se reportera aussi à "Aux origines de la commanderie de Devesset", Revue du Vivarais, CXXV, 2021, p. 81-105.</p>
+<p>L'édition paléographique du texte est disponible <a href="{{url_for('charte_paleo')}}">ici</a></p>
+<p>L'édition normalisée du texte est disponible <a href="{{url_for('charte_norm')}}">ici</a></p>
+<p>Un index a également été réalisé <a href="{{url_for('charte_index')}}">ici</a> avec les noms propres et les toponymes mentionnés dans le texte</p>
+<p>Les images d'origines sont disponibles <a href="{{url_for('charte_images')}}">ici</a></p>
+<nav aria-label="research-pagination" class="center-link"><p><a href="{{url_for('accueil')}}">Retour accueil</a></p></nav>{% endblock %}

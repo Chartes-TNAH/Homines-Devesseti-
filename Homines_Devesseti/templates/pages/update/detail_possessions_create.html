@@ -1,0 +1,61 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+| Detail sur possession | Création
+{% endblock %}
+
+{% block corps %}
+	<h1>Nouvelle déclaration de bien</h1>
+    <form method="POST">
+		<div class="mb-3">
+		    <label for="dpReco" class="form-label">Reconnaissance :</label>
+		    <input type="text" step="0.000001" name="dpReco" class="form-control" placeholder="Champ Requis" id="dpReco" value=""/></input>
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpPersonne" class="form-label">Personne concernée :</label>
+		    <input type="text" step="0.000001" name="dpPersonne" class="form-control" id="dpPersonne" value="" />
+		  </div> 
+		  <div class="mb-3">
+		    <label for="dpPossession" class="form-label">Type de bien :</label>
+		    <input type="text" step="0.000001" name="dpPossession" class="form-control" id="dpPossession" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpNom" class="form-label">Nom du bien :</label>
+		    <input type="text" name="dpNom" class="form-control" id="dpNom" aria-describedby="dcNomHelp" value="" />
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpLieu" class="form-label">Localisation :</label>
+		    <textarea name="dpLieu" class="form-control" id="dpLieu"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpInfo" class="form-label">Information complémentaire :</label>
+		    <textarea name="dpInfo" class="form-control" id="dpInfo"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpConfront1" class="form-label">Confront 1 :</label>
+		    <textarea name="dpConfront1" class="form-control" id="dpConfront1"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpConfront2" class="form-label">Confront 2 :</label>
+		    <textarea name="dpConfront2" class="form-control" id="dpConfront2"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpConfront3" class="form-label">Confront 3 :</label>
+		    <textarea name="dpConfront3" class="form-control" id="dpConfront3"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpConfront4" class="form-label">Confront 4 :</label>
+		    <textarea name="dpConfront4" class="form-control" id="dpConfront4"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpConfront5" class="form-label">Confront 5 :</label>
+		    <textarea name="dpConfront5" class="form-control" id="dpConfront5"></textarea>
+		  </div>
+		  <div class="mb-3">
+		    <label for="dpConfront6" class="form-label">Confront 6 :</label>
+		    <textarea name="dpConfront6" class="form-control" id="dpConfront6"></textarea>
+		  </div>
+		  <input type="submit" name="Modifier" class="btn btn-primary" />
+    </form>
+    <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+{% endblock %}
