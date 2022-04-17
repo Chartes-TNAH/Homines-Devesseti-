@@ -62,7 +62,22 @@
     Il y a {{charte_hommes|length}} hommes mentionnés dans le charte :
     <ul>
         {% for charte_homme in charte_hommes %}
-            <li><a href="{{url_for('charte_nom', name_id=charte_homme.id)}}">Redevance n°{{charte_homme.id}}</a></li>
+            <li><a href="{{url_for('charte_nom', name_id=charte_homme.id)}}">
+                {% if charte_homme.prenom or charte_homme.nom %}
+                {% if charte_homme.prenom %}    
+                {{charte_homme.prenom}}
+                {% else %}
+                (?)
+                {% endif %}
+                {% if charte_homme.nom %}
+                {{charte_homme.nom}}
+                {% else %}
+                (?)
+                {% endif %}
+                {% else %}
+                Inconnu
+                {% endif %}
+            </a></li>
         {% endfor %}
     </ul>
 </p>

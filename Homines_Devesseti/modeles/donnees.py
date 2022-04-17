@@ -278,7 +278,7 @@ class Reconnaissances(db.Model):
             "id": self.id,
             "attributes": {
                 "id_reconnaissance": self.id_reconnaissance,
-#                "localisation_dans_le_terrier": self.page[0].repertoire_to_json(),
+                "localisation_dans_le_terrier": self.page[0].repertoire_to_json(),
                 "commandeur": self.commandeur,
                 "notaire": self.notaire,
                 "temoins": [
