@@ -34,7 +34,6 @@ def nom(name_id):
         return render_template("pages/noms.html", nom="Homines Devesseti", homme=hommes[name_id - 1], nbr=nbr_hommes)
     # On enlève systématiquement 1 à l'index car Python fait commencer le sien à 0
 
-
 @app.route("/dp/<int:dp_id>")
 def det_pos(dp_id):
     dets_pos = DetailPossessions.query.order_by(DetailPossessions.id_detail_possession).all()
@@ -43,7 +42,6 @@ def det_pos(dp_id):
         return render_template("pages/detail_possessions.html", nom="Homines Devesseti", det_pos=dets_pos[dp_id - 1],
                            nbr=nbr_det_pos)
 
-
 @app.route("/dr/<int:dr_id>")
 def det_red(dr_id):
     dets_red = DetailRedevances.query.order_by(DetailRedevances.id_detail_redevance).all()
@@ -51,7 +49,6 @@ def det_red(dr_id):
     if dr_id - 1 >= 0:
         return render_template("pages/detail_redevances.html", nom="Homines Devesseti", det_red=dets_red[dr_id - 1],
                            nbr=nbr_det_red)
-
 
 @app.route("/rec/<int:rec_id>")
 def rec(rec_id):
@@ -75,7 +72,6 @@ def rec(rec_id):
     return render_template("pages/reconnaissances.html", nom="Homines Devesseti", rec=reco[0],
                            rec_hommes=rec_hommes, rec_det_pos=rec_det_pos, rec_det_red=rec_det_red, nbr=nbr_rec)
 
-
 # Routes concernant les comptes utilisateur :
 @app.route("/register", methods=["GET", "POST"])
 def inscription():
@@ -96,7 +92,6 @@ def inscription():
     else:
         return render_template("pages/inscription.html")
 
-
 @app.route("/connexion", methods=["POST", "GET"])
 def connexion():
     if current_user.is_authenticated is True:
@@ -116,14 +111,12 @@ def connexion():
     return render_template("pages/connexion.html")
 login.login_view = 'connexion'
 
-
 @app.route("/deconnexion", methods=["POST", "GET"])
 def deconnexion():
     if current_user.is_authenticated is True:
         logout_user()
     flash("Vous êtes déconnecté(e)", "info")
     return redirect("/")
-
 
 # Intégration de la charte de Devesset :
 from bs4 import BeautifulSoup
@@ -151,7 +144,6 @@ def transfo_charte(path):
         f.write(body)
         f.write(fin)
 
-
 @app.route("/charte")
 def charte():
     list_page = ["accueil", "allograph", "norm", "index", "images"]
@@ -167,21 +159,17 @@ def charte():
         f.close()
     return render_template("charte/Devoir_charte_Devesset_accueil.html", nom="Homines Devesseti")
 
-
 @app.route("/charte/paleo")
 def charte_paleo():
     return render_template("charte/Devoir_charte_Devesset_allograph.html", nom="Homines Devesseti")
-
 
 @app.route("/charte/norm")
 def charte_norm():
     return render_template("charte/Devoir_charte_Devesset_norm.html", nom="Homines Devesseti")
 
-
 @app.route("/charte/index")
 def charte_index():
     return render_template("charte/Devoir_charte_Devesset_index.html", nom="Homines Devesseti")
-
 
 @app.route("/charte/images")
 def charte_images():
@@ -197,7 +185,6 @@ from whoosh.index import create_in
 from whoosh.qparser import QueryParser
 from ..models_whoosh import PageWhoosh
 
-
 @app.route("/formulaire")
 def formulaire(updated=False):
     try:
@@ -207,7 +194,6 @@ def formulaire(updated=False):
                                updated=updated)
     except:
         return redirect("/generate_index")
-
 
 @app.route("/generate_index")
 def generate_index(updated=False):
@@ -224,7 +210,6 @@ def generate_index(updated=False):
     writer.commit()
     flash("Index mis à jour", "info")
     return formulaire(updated=updated)
-
 
 @app.route("/recherche")
 def recherche():
@@ -316,7 +301,7 @@ from folium.plugins import MarkerCluster
 from folium import IFrame
 @app.route("/carte_native")
 def carte_native():
-    """Route permettant de faire appel à la carte générée au sein d'une page html"""
+    #Route permettant de faire appel à la carte générée au sein d'une page html
     return render_template("partials/map.html")
 
 @app.route("/carte")

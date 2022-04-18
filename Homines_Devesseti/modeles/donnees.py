@@ -2,7 +2,7 @@ from flask import url_for
 import datetime
 from ..app import db
 
-#Tables correspondant au fichier SQLite, chacune associée à leur équivalent en JSON :
+#Les tables correspondent au fichier SQLite, chacune est associée à un équivalent en JSON :
 
 class Authorship(db.Model):
     __tablename__ = "authorship"

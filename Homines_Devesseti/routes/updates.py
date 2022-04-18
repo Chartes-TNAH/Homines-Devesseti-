@@ -13,7 +13,6 @@ def rec_update(rec_id):
     page = []
     if reco.page:
         page = list(filter(lambda p: p.id_reconnaissance == rec_id, Repertoire.query.all()))[0]
-    #La logique des variables de cette route suit celle de la route précédente
     mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août',
             'Septembre', 'Octobre', 'Novembre', 'Décembre']
     corvees = [
@@ -309,7 +308,6 @@ def rec_update(rec_id):
             updated = True
         else:
             print(erreurs)
-
     if updated == False:
         return render_template(
             "pages/update/reconnaissances_update.html",
@@ -697,7 +695,6 @@ def det_pos_create():
 @app.route("/rec/create", methods=["GET", "POST"])
 @login_required
 def rec_create():
-    #La logique des variables de cette route suit celle de la route précédente
     mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août',
             'Septembre', 'Octobre', 'Novembre', 'Décembre']
     corvees = [

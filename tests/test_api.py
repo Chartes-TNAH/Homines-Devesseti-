@@ -77,7 +77,7 @@ class TestApi(Base):
         self.assertEqual(json_parse_rec["links"]["self"], 'http://localhost/rec/162')
         seconde_requete_rec = self.client.get(json_parse_rec["links"]["self"])
         self.assertEqual(seconde_requete_rec.status_code, 200)
-        #Test portant sur la classe recherche
+        #Test portant sur les recherches
         response_search = self.client.get("/api/search?q=Albi")
         content_search = response_search.data.decode()
         self.assertEqual(

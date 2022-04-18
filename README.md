@@ -6,10 +6,7 @@ Il consiste en une visualisation de données collectées dans le cadre d’un tr
 
 Le code a été intégralement travaillé à partir d’un ordinateur personnel sous Windows. Malgré notre vigilance à ce sujet, il est possible que le changement de système d’exploitation nuise à certaines fonctionnalités.
 
-Une des difficultés de ce travail a été de traiter des données qui ont été conçues à partir d’un tableur excel et dont le traitement automatique n’a pas été anticipé. Cela s’est notamment avéré complexe au niveau des identifiant des reconnaissances : ceux-ci constituent une sémantique personnelle et doivent pourtant être utilisés en l’état car c’est ce code qui est repris dans les autres tables pour effectuer des renvois. Nous avons également dû traité l’absence de normalisation des données par une série de conditions imbriquées permettant de les traiter en fonction de leur expression et nous avons dû réduire certaines de nos ambitions faute de pouvoir consacrer un temps conséquent à les retravailler.
-
-De la même manière, la recherche à facette permise par la librairie whoosh n'a pas pu être généralisé en raison de la structure complexe
-des données. Nous avons donc fait le choix de ne l'utiliser que pour une seule table.
+Une des difficultés de ce travail a été de traiter des données qui ont été conçues à partir d’un tableur excel et dont le traitement automatique n’a pas été anticipé. Cela s’est notamment avéré complexe au niveau des identifiant des reconnaissances : ceux-ci constituent une sémantique personnelle et doivent pourtant être utilisés en l’état car c’est ce code qui est repris dans les autres tables pour effectuer des renvois. Nous avons également dû traiter l’absence de normalisation des données par une série de conditions imbriquées permettant de les traiter en fonction de leur expression et nous avons dû réduire certaines de nos ambitions faute de pouvoir consacrer un temps conséquent à les retravailler. Malgré ces difficultés, nous avons souhaité utiliser un certain nombre de librairies afin de nous former à leurs fonctionalités.
 
 #Installation :
 
