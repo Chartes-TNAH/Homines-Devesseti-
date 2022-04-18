@@ -1,0 +1,10 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+{{name}}
+{% endblock %}
+
+{% block corps %}
+<h2 style="margin-bottom: 1em"><center>Localisation de Devesset</center></h2>
+<iframe class="carte_folium" src="{{url_for('carte_native')}}" width=1100, height=400></iframe>
+{% endblock %}

@@ -25,7 +25,6 @@ def index():
     return render_template("pages/index.html", nom="Homines Devesseti",
                            recs=recs, hommes=hommes, dets_pos=dets_pos, dets_red=dets_red, charte_hommes=charte_hommes)
 
-
 # Routes permettant l'affichage des données du terrier :
 @app.route("/name/<int:name_id>")
 def nom(name_id):
@@ -128,7 +127,6 @@ def deconnexion():
 
 # Intégration de la charte de Devesset :
 from bs4 import BeautifulSoup
-
 
 def transfo_charte(path):
     #fonction un peu artisanale permettant de parser le html obtenu par la transfo de la charte utilisé pour le devoir
@@ -311,3 +309,23 @@ def charte_nom(name_id):
             return render_template("pages/charte_homme.html", nom="Homines Devesseti", homme=hommes[name_id - 1], nbr=nbr_hommes)
     else:
         return redirect("/charte_hommes")
+
+#Carte permettant de localiser Devesset
+import folium
+from folium.plugins import MarkerCluster
+from folium import IFrame
+@app.route("/carte_native")
+def carte_native():
+    """Route permettant de faire appel à la carte générée au sein d'une page html"""
+    return render_template("partials/map.html")
+
+@app.route("/carte")
+def carte():
+    coordonnees = [45.06788, 4.391287]
+    map = folium.Map(location=coordonnees)
+    marker_cluster = MarkerCluster(name='Devesset')
+    map.add_child(marker_cluster)
+    folium.Marker(coordonnees, popup="Commanderie de Devesset").add_to(marker_cluster)
+    carte = "Homines_Devesseti/templates/partials/map.html"
+    map.save(carte)
+    return render_template("pages/carte.html", name="Localisation de Devesset")

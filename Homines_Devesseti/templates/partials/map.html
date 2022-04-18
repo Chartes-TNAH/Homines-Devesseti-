@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2b72f9a025b343d5ac9d69c44d8a3062 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_2b72f9a025b343d5ac9d69c44d8a3062" ></div>
+        
+</body>
+<script>    
+    
+            var map_2b72f9a025b343d5ac9d69c44d8a3062 = L.map(
+                "map_2b72f9a025b343d5ac9d69c44d8a3062",
+                {
+                    center: [45.06788, 4.391287],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_26dadf90a2bf4527ad79ac1ff0767076 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_2b72f9a025b343d5ac9d69c44d8a3062);
+        
+    
+            var marker_cluster_f222a78c1b6e4079b2b3074ca7f48db3 = L.markerClusterGroup(
+                {}
+            );
+            map_2b72f9a025b343d5ac9d69c44d8a3062.addLayer(marker_cluster_f222a78c1b6e4079b2b3074ca7f48db3);
+        
+    
+            var marker_28590cf893c841ae90e428213afb4d28 = L.marker(
+                [45.06788, 4.391287],
+                {}
+            ).addTo(marker_cluster_f222a78c1b6e4079b2b3074ca7f48db3);
+        
+    
+        var popup_d976f2df17014922a989826c54edbac3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7842ef4802da4d8dac7041b806f79950 = $(`<div id="html_7842ef4802da4d8dac7041b806f79950" style="width: 100.0%; height: 100.0%;">Commanderie de Devesset</div>`)[0];
+            popup_d976f2df17014922a989826c54edbac3.setContent(html_7842ef4802da4d8dac7041b806f79950);
+        
+
+        marker_28590cf893c841ae90e428213afb4d28.bindPopup(popup_d976f2df17014922a989826c54edbac3)
+        ;
+
+        
+    
+</script>
