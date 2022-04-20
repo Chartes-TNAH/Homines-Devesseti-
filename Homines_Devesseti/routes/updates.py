@@ -301,7 +301,7 @@ def rec_update(rec_id):
                 reco.mandement = request.form["recMandement"]
             #Mise à jour des tables :
             db.session.add(reco)
-            if rec.page:
+            if reco.page:
                 db.session.add(page)
             db.session.add(Authorship(reconnaissances=reco, user=current_user))
             db.session.commit()
@@ -858,7 +858,7 @@ def rec_create():
             )
             db.session.add(reco)
             if ref_du_terrier:
-                db.session.add(page, ref_du_terrier=ref_du_terrier)
+                db.session.add(Repertoire(ref_du_terrier=ref_du_terrier, id_reconnaissance=id_reconnaissance))
             db.session.add(Authorship(reconnaissances=reco, user=current_user))
             db.session.commit()
             updated = True
@@ -913,6 +913,8 @@ def delete(d, n):
         else:
             ligne = table.query.get(n)
         db.session.delete(ligne)
+        if page:
+            db.session.delete(page)
         if d == "rec":
             db.session.add(Authorship(reconnaissances=ligne, user=current_user))
         elif d == "dp":
@@ -923,8 +925,6 @@ def delete(d, n):
             db.session.add(Authorship(personnes=ligne, user=current_user))
         elif d == "charte_homme":
             db.session.add(Authorship(charte=ligne, user=current_user))
-        if page:
-            db.session.delete(page)
         db.session.commit()
         if d == "name":
             return generate_index(updated=True)
