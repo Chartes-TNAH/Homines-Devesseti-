@@ -908,17 +908,26 @@ def delete(d, n):
         table = data[1][data[0].index(d)]
         if d == "rec":
             ligne = list(filter(lambda r: r.id_reconnaissance == n, Reconnaissances.query.all()))[0]
+            #Il faut dans ce cas penser à supprimer tous les éléments utilisant cette table comme clé étrangère
             if ligne.page:
                 page = list(filter(lambda p: p.id_reconnaissance == n, Repertoire.query.all()))[0]
+                db.session.delete(page)
+            rec_nom = list(filter(lambda p: p.id_reconnaissance == n, Personnes.query.all()))
+            for d in rec_nom:
+                db.session.delete(d)
+            rec_dp = list(filter(lambda p: p.id_reconnaissance == n, DetailPossessions.query.all()))
+            for d in rec_dp:
+                db.session.delete(d)
+            rec_dr = list(filter(lambda p: p.id_reconnaissance == n, DetailRedevances.query.all()))
+            for d in rec_dr:
+                db.session.delete(d)
         else:
             ligne = table.query.get(n)
         db.session.delete(ligne)
-        if page:
-            db.session.delete(page)
-        if d == "rec":
-            db.session.add(Authorship(reconnaissances=ligne, user=current_user))
-        elif d == "dp":
+        if d == "dp":
             db.session.add(Authorship(detail_possessions=ligne, user=current_user))
+        elif d == "rec":
+            db.session.add(Authorship(reconnaissances=ligne, user=current_user))
         elif d == "dr":
             db.session.add(Authorship(detail_redevances=ligne, user=current_user))
         elif d == "name":
