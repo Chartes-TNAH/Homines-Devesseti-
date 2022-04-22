@@ -19,6 +19,7 @@ sudo apt install python3 && pip3 install -r requirements.txt && python3 run.py
 Ou depuis Pycharm :
 
 pip install -r requirements.txt
+
 python .\run.py
 
 Il est possible qu’un bug ait lieu au moment de la première utilisation de Flask-SQLAlchemy :
