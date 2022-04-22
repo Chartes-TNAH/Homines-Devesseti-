@@ -10,7 +10,16 @@ Une des difficultés de ce travail a été de traiter des données qui ont été
 
 #Installation :
 
-Pour utiliser cette application, merci de télécharger le présent répertoire git. Le programme se lance à partir d’un interpréteur python et du fichier run.py situé à la racine du dossier déposé sur github. Veillez aussi à disposer des packages listés dans le fichier requirements.txt.
+Pour utiliser cette application, merci de télécharger le présent répertoire git.
+
+Le programme se lance ensuite via la commande suivante :
+
+sudo apt install python3 && pip3 install -r requirements.txt && python3 run.py
+
+Ou depuis Pycharm :
+
+pip install -r requirements.txt
+python .\run.py
 
 Il est possible qu’un bug ait lieu au moment de la première utilisation de Flask-SQLAlchemy :
 
