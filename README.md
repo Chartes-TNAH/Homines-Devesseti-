@@ -1,4 +1,4 @@
-#Contexte :
+# Contexte :
 
 Ce projet est issu du cours Python de M2 TNAH 2021-2022.
 
@@ -8,7 +8,7 @@ Le code a été intégralement travaillé à partir d’un ordinateur personnel 
 
 Une des difficultés de ce travail a été de traiter des données qui ont été conçues à partir d’un tableur excel et dont le traitement automatique n’a pas été anticipé. Cela s’est notamment avéré complexe au niveau des identifiant des reconnaissances : ceux-ci constituent une sémantique personnelle et doivent pourtant être utilisés en l’état car c’est ce code qui est repris dans les autres tables pour effectuer des renvois. Nous avons également dû traiter l’absence de normalisation des données par une série de conditions imbriquées permettant de les traiter en fonction de leur expression et nous avons dû réduire certaines de nos ambitions faute de pouvoir consacrer un temps conséquent à les retravailler. Malgré ces difficultés, nous avons souhaité utiliser un certain nombre de librairies afin de nous former à leurs fonctionalités.
 
-#Installation :
+# Installation :
 
 Pour utiliser cette application, merci de télécharger le présent répertoire git.
 
